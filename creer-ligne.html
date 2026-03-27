@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Création intelligente de ligne - Navette Express Admin - JAEBETS HOLDING">
+    <meta name="theme-color" content="#1B2A4A">
+    <title>Créer une ligne - Navette Express Admin</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/icon-192.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <svg viewBox="0 0 40 40" class="logo-icon">
+                    <rect x="4" y="12" width="32" height="18" rx="4" fill="#2EC4B6"/>
+                    <circle cx="12" cy="30" r="4" fill="#C8A951"/>
+                    <circle cx="28" cy="30" r="4" fill="#C8A951"/>
+                    <rect x="8" y="16" width="8" height="6" rx="1" fill="#1B2A4A"/>
+                    <rect x="18" y="16" width="8" height="6" rx="1" fill="#1B2A4A"/>
+                    <rect x="28" y="16" width="6" height="6" rx="1" fill="#1B2A4A"/>
+                </svg>
+                <span class="logo-text">Navette Express</span>
+            </div>
+            <button class="sidebar-close" id="sidebarClose" aria-label="Fermer menu">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7" rx="1"/>
+                    <rect x="14" y="3" width="7" height="7" rx="1"/>
+                    <rect x="3" y="14" width="7" height="7" rx="1"/>
+                    <rect x="14" y="14" width="7" height="7" rx="1"/>
+                </svg>
+                <span>Dashboard</span>
+            </a>
+            <a href="utilisateurs.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/>
+                    <circle cx="17" cy="11" r="3"/>
+                    <path d="M21 21v-1.5a3 3 0 00-3-3h-1"/>
+                </svg>
+                <span>Utilisateurs</span>
+            </a>
+            <a href="lignes.html" class="nav-link active">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="5" cy="6" r="3"/>
+                    <circle cx="19" cy="18" r="3"/>
+                    <path d="M7 8l10 8"/>
+                    <path d="M12 12h.01"/>
+                </svg>
+                <span>Lignes</span>
+            </a>
+            <a href="flotte.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="8" width="20" height="10" rx="2"/>
+                    <circle cx="7" cy="18" r="2"/>
+                    <circle cx="17" cy="18" r="2"/>
+                    <path d="M5 8V6a2 2 0 012-2h10a2 2 0 012 2v2"/>
+                </svg>
+                <span>Flotte</span>
+            </a>
+            <a href="chauffeurs.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="8"/>
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M12 4v1M12 19v1M4 12h1M19 12h1"/>
+                </svg>
+                <span>Chauffeurs</span>
+            </a>
+            <a href="dispatch.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="6" height="6" rx="1"/>
+                    <rect x="15" y="15" width="6" height="6" rx="1"/>
+                    <path d="M9 6h6l-3 6 6-3v6"/>
+                </svg>
+                <span>Dispatch</span>
+            </a>
+            <a href="reservations.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/>
+                    <path d="M16 2v4M8 2v4M3 10h18"/>
+                </svg>
+                <span>Réservations</span>
+            </a>
+            <a href="paiements.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="4" width="20" height="16" rx="2"/>
+                    <path d="M12 10v6M9 13h6"/>
+                </svg>
+                <span>Paiements</span>
+            </a>
+            <a href="facturation.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                    <path d="M14 2v6h6M8 13h8M8 17h8"/>
+                </svg>
+                <span>Facturation</span>
+            </a>
+            <a href="gps.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
+                </svg>
+                <span>GPS</span>
+            </a>
+            <a href="notifications.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                    <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+                <span>Notifications</span>
+            </a>
+            <a href="rapports.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 3v18h18"/>
+                    <path d="M7 16l4-4 4 4 5-6"/>
+                </svg>
+                <span>Rapports</span>
+            </a>
+            <a href="parametres.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+                </svg>
+                <span>Paramètres</span>
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <a href="#" class="nav-link logout" id="logoutBtn">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/>
+                    <polyline points="16,17 21,12 16,7"/>
+                    <line x1="21" y1="12" x2="9" y2="12"/>
+                </svg>
+                <span>Déconnexion</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="main-header">
+            <button class="hamburger" id="hamburgerBtn" aria-label="Ouvrir menu">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 12h18M3 6h18M3 18h18"/>
+                </svg>
+            </button>
+            
+            <div class="header-title">
+                <h1>Création intelligente de ligne</h1>
+                <p class="breadcrumb">Accueil / Lignes / Créer</p>
+            </div>
+            
+            <div class="header-actions">
+                <a href="lignes.html" class="btn btn-secondary">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    <span>Retour</span>
+                </a>
+                <div class="user-menu">
+                    <div class="user-avatar">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="8" r="4"/>
+                            <path d="M4 20v-1a6 6 0 0112 0v1"/>
+                        </svg>
+                    </div>
+                    <span class="user-name">Admin JAEBETS</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Create Line Content -->
+        <div class="content-area">
+            <!-- Algorithme explication -->
+            <div class="info-banner highlight">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                </svg>
+                <div class="info-content">
+                    <strong>Activation intelligente</strong>
+                    <p>La ligne sera automatiquement marquée comme <strong>Active</strong> si le nombre de passagers prévisionnels atteint ou dépasse la capacité du bus. Sinon, le statut sera <strong>En attente</strong> jusqu'à validation manuelle.</p>
+                    <div class="algorithm-formula">
+                        <span class="formula-label">Seuil d'activation :</span>
+                        <span class="formula">Nombre de passagers ≥ Capacité du bus assigné</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-layout">
+                <!-- Formulaire -->
+                <div class="form-card">
+                    <form id="createLineForm" class="admin-form">
+                        <!-- Informations trajet -->
+                        <div class="form-section">
+                            <h3 class="form-section-title">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="5" cy="6" r="3"/>
+                                    <circle cx="19" cy="18" r="3"/>
+                                    <path d="M7 8l10 8"/>
+                                </svg>
+                                Informations du trajet
+                            </h3>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="lineName">Nom de la ligne *</label>
+                                    <input type="text" id="lineName" name="lineName" placeholder="Ex: Abidjan–Bassam matin" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row cols-2">
+                                <div class="form-group">
+                                    <label for="departure">Point de départ *</label>
+                                    <div class="input-with-icon">
+                                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <circle cx="12" cy="12" r="3" fill="#2EC4B6"/>
+                                        </svg>
+                                        <input type="text" id="departure" name="departure" placeholder="Ex: Cocody Saint-Jean" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="destination">Point d'arrivée *</label>
+                                    <div class="input-with-icon">
+                                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <circle cx="12" cy="12" r="3" fill="#C8A951"/>
+                                        </svg>
+                                        <input type="text" id="destination" name="destination" placeholder="Ex: Grand-Bassam Centre" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row cols-2">
+                                <div class="form-group">
+                                    <label for="departureTime">Horaire de départ *</label>
+                                    <input type="time" id="departureTime" name="departureTime" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="arrivalTime">Horaire d'arrivée estimé</label>
+                                    <input type="time" id="arrivalTime" name="arrivalTime">
+                                </div>
+                            </div>
+
+                            <div class="form-row cols-2">
+                                <div class="form-group">
+                                    <label for="distance">Distance estimée (km)</label>
+                                    <input type="number" id="distance" name="distance" placeholder="Ex: 42" min="1" max="500">
+                                </div>
+                                <div class="form-group">
+                                    <label for="frequency">Fréquence</label>
+                                    <select id="frequency" name="frequency">
+                                        <option value="quotidien">Quotidien</option>
+                                        <option value="lundi-vendredi">Lundi - Vendredi</option>
+                                        <option value="weekend">Week-end uniquement</option>
+                                        <option value="ponctuel">Ponctuel</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Véhicule et capacité -->
+                        <div class="form-section">
+                            <h3 class="form-section-title">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="8" width="20" height="10" rx="2"/>
+                                    <circle cx="7" cy="18" r="2"/>
+                                    <circle cx="17" cy="18" r="2"/>
+                                </svg>
+                                Véhicule et capacité
+                            </h3>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Type de bus *</label>
+                                    <div class="radio-cards">
+                                        <label class="radio-card">
+                                            <input type="radio" name="busType" value="30" checked>
+                                            <div class="radio-card-content">
+                                                <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <rect x="2" y="8" width="20" height="10" rx="2"/>
+                                                    <circle cx="7" cy="18" r="2"/>
+                                                    <circle cx="17" cy="18" r="2"/>
+                                                </svg>
+                                                <span class="radio-title">Bus 30 places</span>
+                                                <span class="radio-desc">Standard</span>
+                                            </div>
+                                        </label>
+                                        <label class="radio-card">
+                                            <input type="radio" name="busType" value="60">
+                                            <div class="radio-card-content">
+                                                <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <rect x="1" y="8" width="22" height="10" rx="2"/>
+                                                    <circle cx="6" cy="18" r="2"/>
+                                                    <circle cx="12" cy="18" r="2"/>
+                                                    <circle cx="18" cy="18" r="2"/>
+                                                </svg>
+                                                <span class="radio-title">Bus 60 places</span>
+                                                <span class="radio-desc">Grande capacité</span>
+                                            </div>
+                                        </label>
+                                        <label class="radio-card vip">
+                                            <input type="radio" name="busType" value="vip">
+                                            <div class="radio-card-content">
+                                                <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/>
+                                                </svg>
+                                                <span class="radio-title">VIP</span>
+                                                <span class="radio-desc">20 places premium</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row cols-2">
+                                <div class="form-group">
+                                    <label for="busSelect">Bus disponible</label>
+                                    <select id="busSelect" name="busSelect">
+                                        <option value="">Sélectionner un bus</option>
+                                        <option value="AB-1234-CI">AB-1234-CI (30 places) - Disponible</option>
+                                        <option value="CD-5678-CI">CD-5678-CI (60 places) - Disponible</option>
+                                        <option value="EF-9012-CI">EF-9012-CI (30 places) - Disponible</option>
+                                        <option value="VIP-001-CI">VIP-001-CI (20 places VIP) - Disponible</option>
+                                    </select>
+                                    <button type="button" class="btn btn-text" id="checkAvailability">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+                                            <polyline points="22,4 12,14.01 9,11.01"/>
+                                        </svg>
+                                        Vérifier disponibilité
+                                    </button>
+                                </div>
+                                <div class="form-group">
+                                    <label for="capacity">Capacité réelle</label>
+                                    <input type="number" id="capacity" name="capacity" value="30" readonly>
+                                    <span class="form-hint">Automatiquement défini selon le type de bus</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Passagers prévisionnels -->
+                        <div class="form-section">
+                            <h3 class="form-section-title">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="9" cy="7" r="4"/>
+                                    <path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/>
+                                    <circle cx="17" cy="11" r="3"/>
+                                    <path d="M21 21v-1.5a3 3 0 00-3-3"/>
+                                </svg>
+                                Estimation des passagers
+                            </h3>
+                            
+                            <div class="form-row cols-2">
+                                <div class="form-group">
+                                    <label for="estimatedPassengers">Passagers prévisionnels *</label>
+                                    <input type="number" id="estimatedPassengers" name="estimatedPassengers" placeholder="Estimation du nombre de passagers" min="0" required>
+                                    <span class="form-hint">Basé sur les demandes reçues ou études de marché</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Statut prévu</label>
+                                    <div class="status-preview" id="statusPreview">
+                                        <div class="status-indicator waiting">
+                                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                                                <circle cx="12" cy="12" r="10"/>
+                                                <path d="M12 6v6l4 2"/>
+                                            </svg>
+                                            <span>En attente</span>
+                                        </div>
+                                        <p class="status-message">Renseignez le nombre de passagers prévisionnels</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Barre de progression activation -->
+                            <div class="activation-progress" id="activationProgress">
+                                <div class="progress-header">
+                                    <span>Progression vers l'activation</span>
+                                    <span class="progress-value" id="progressValue">0 / 30</span>
+                                </div>
+                                <div class="progress-bar large">
+                                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                                </div>
+                                <div class="progress-labels">
+                                    <span>0%</span>
+                                    <span class="threshold-label">Seuil: 100%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tarification -->
+                        <div class="form-section">
+                            <h3 class="form-section-title">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="4" width="20" height="16" rx="2"/>
+                                    <path d="M12 10v6M9 13h6"/>
+                                </svg>
+                                Tarification
+                            </h3>
+                            
+                            <div class="form-row cols-3">
+                                <div class="form-group">
+                                    <label for="tarif">Tarif standard (FCFA) *</label>
+                                    <div class="input-with-suffix">
+                                        <input type="number" id="tarif" name="tarif" placeholder="500" min="0" step="50" required>
+                                        <span class="suffix">FCFA</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tarifAbonnement">Tarif abonnement mensuel</label>
+                                    <div class="input-with-suffix">
+                                        <input type="number" id="tarifAbonnement" name="tarifAbonnement" placeholder="18000" min="0" step="500">
+                                        <span class="suffix">FCFA</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tarifEntreprise">Tarif entreprise / mois</label>
+                                    <div class="input-with-suffix">
+                                        <input type="number" id="tarifEntreprise" name="tarifEntreprise" placeholder="150000" min="0" step="5000">
+                                        <span class="suffix">FCFA</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" id="previewMapBtn">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                    <path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
+                                </svg>
+                                Prévisualiser sur la carte
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 6L9 17l-5-5"/>
+                                </svg>
+                                Créer la ligne
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Aperçu carte -->
+                <div class="preview-card">
+                    <h3 class="preview-title">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
+                        </svg>
+                        Prévisualisation du trajet
+                    </h3>
+                    
+                    <div class="map-placeholder" id="mapPreview">
+                        <div class="map-placeholder-content">
+                            <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1118 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                            <p>Renseignez les points de départ et d'arrivée pour visualiser le trajet</p>
+                        </div>
+                    </div>
+
+                    <!-- Résumé ligne -->
+                    <div class="line-summary" id="lineSummary">
+                        <h4>Résumé de la ligne</h4>
+                        <div class="summary-item">
+                            <span class="summary-label">Nom</span>
+                            <span class="summary-value" id="summaryName">—</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Trajet</span>
+                            <span class="summary-value" id="summaryRoute">—</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Horaire</span>
+                            <span class="summary-value" id="summaryTime">—</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Bus</span>
+                            <span class="summary-value" id="summaryBus">—</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Capacité</span>
+                            <span class="summary-value" id="summaryCapacity">—</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Tarif</span>
+                            <span class="summary-value currency" id="summaryTarif">—</span>
+                        </div>
+                        <div class="summary-item highlight">
+                            <span class="summary-label">Statut prévu</span>
+                            <span class="summary-value" id="summaryStatus">
+                                <span class="status status-warning">En attente</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/admin.js"></script>
+    <script>
+        // Variables globales
+        let capacity = 30;
+
+        // Mise à jour capacité selon type de bus
+        document.querySelectorAll('input[name="busType"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.value === '30') capacity = 30;
+                else if (this.value === '60') capacity = 60;
+                else if (this.value === 'vip') capacity = 20;
+                
+                document.getElementById('capacity').value = capacity;
+                updateActivationStatus();
+                updateSummary();
+            });
+        });
+
+        // Calcul statut activation
+        function updateActivationStatus() {
+            const passengers = parseInt(document.getElementById('estimatedPassengers').value) || 0;
+            const percentage = Math.min((passengers / capacity) * 100, 100);
+            
+            // Mise à jour barre de progression
+            document.getElementById('progressFill').style.width = percentage + '%';
+            document.getElementById('progressValue').textContent = passengers + ' / ' + capacity;
+            
+            // Couleur selon pourcentage
+            const progressFill = document.getElementById('progressFill');
+            progressFill.classList.remove('low', 'medium', 'high');
+            if (percentage < 50) progressFill.classList.add('low');
+            else if (percentage < 100) progressFill.classList.add('medium');
+            else progressFill.classList.add('high');
+            
+            // Mise à jour statut
+            const statusPreview = document.getElementById('statusPreview');
+            if (passengers >= capacity) {
+                statusPreview.innerHTML = `
+                    <div class="status-indicator active">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 6L9 17l-5-5"/>
+                        </svg>
+                        <span>Active</span>
+                    </div>
+                    <p class="status-message success">La ligne sera automatiquement activée (${passengers} ≥ ${capacity})</p>
+                `;
+                document.getElementById('summaryStatus').innerHTML = '<span class="status status-success">Active</span>';
+            } else if (passengers > 0) {
+                const remaining = capacity - passengers;
+                statusPreview.innerHTML = `
+                    <div class="status-indicator waiting">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                        <span>En attente</span>
+                    </div>
+                    <p class="status-message">Il manque ${remaining} passager(s) pour l'activation automatique</p>
+                `;
+                document.getElementById('summaryStatus').innerHTML = '<span class="status status-warning">En attente</span>';
+            } else {
+                statusPreview.innerHTML = `
+                    <div class="status-indicator waiting">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                        <span>En attente</span>
+                    </div>
+                    <p class="status-message">Renseignez le nombre de passagers prévisionnels</p>
+                `;
+                document.getElementById('summaryStatus').innerHTML = '<span class="status status-warning">En attente</span>';
+            }
+        }
+
+        // Mise à jour résumé
+        function updateSummary() {
+            const name = document.getElementById('lineName').value;
+            const departure = document.getElementById('departure').value;
+            const destination = document.getElementById('destination').value;
+            const departureTime = document.getElementById('departureTime').value;
+            const arrivalTime = document.getElementById('arrivalTime').value;
+            const busSelect = document.getElementById('busSelect');
+            const tarif = document.getElementById('tarif').value;
+            
+            document.getElementById('summaryName').textContent = name || '—';
+            document.getElementById('summaryRoute').textContent = 
+                (departure && destination) ? `${departure} → ${destination}` : '—';
+            document.getElementById('summaryTime').textContent = 
+                departureTime ? `${departureTime}${arrivalTime ? ' – ' + arrivalTime : ''}` : '—';
+            document.getElementById('summaryBus').textContent = 
+                busSelect.value ? busSelect.options[busSelect.selectedIndex].text : '—';
+            document.getElementById('summaryCapacity').textContent = capacity + ' places';
+            document.getElementById('summaryTarif').textContent = 
+                tarif ? NXUtils.formatCurrency(parseInt(tarif)) : '—';
+        }
+
+        // Événements formulaire
+        document.getElementById('estimatedPassengers').addEventListener('input', updateActivationStatus);
+        
+        ['lineName', 'departure', 'destination', 'departureTime', 'arrivalTime', 'busSelect', 'tarif'].forEach(id => {
+            document.getElementById(id).addEventListener('input', updateSummary);
+            document.getElementById(id).addEventListener('change', updateSummary);
+        });
+
+        // Vérifier disponibilité
+        document.getElementById('checkAvailability').addEventListener('click', function() {
+            NXToast.info('Vérification...', 'Recherche des bus disponibles en cours.');
+            setTimeout(() => {
+                NXToast.success('Bus disponibles', '4 bus correspondent à votre sélection.');
+            }, 1000);
+        });
+
+        // Prévisualiser carte
+        document.getElementById('previewMapBtn').addEventListener('click', function() {
+            const departure = document.getElementById('departure').value;
+            const destination = document.getElementById('destination').value;
+            
+            if (!departure || !destination) {
+                NXToast.warning('Champs requis', 'Veuillez renseigner les points de départ et d\'arrivée.');
+                return;
+            }
+            
+            const mapPlaceholder = document.getElementById('mapPreview');
+            mapPlaceholder.innerHTML = `
+                <div class="map-loading">
+                    <div class="spinner"></div>
+                    <p>Chargement de la carte...</p>
+                </div>
+            `;
+            
+            setTimeout(() => {
+                mapPlaceholder.innerHTML = `
+                    <div class="map-preview-content">
+                        <div class="map-route">
+                            <div class="route-point start">
+                                <div class="point-marker"></div>
+                                <span>${departure}</span>
+                            </div>
+                            <div class="route-line-visual"></div>
+                            <div class="route-point end">
+                                <div class="point-marker gold"></div>
+                                <span>${destination}</span>
+                            </div>
+                        </div>
+                        <p class="map-note">Carte interactive disponible après création</p>
+                    </div>
+                `;
+                NXToast.success('Trajet prévisualisé', 'Le trajet a été calculé avec succès.');
+            }, 1500);
+        });
+
+        // Soumission formulaire
+        document.getElementById('createLineForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const passengers = parseInt(document.getElementById('estimatedPassengers').value) || 0;
+            const isActive = passengers >= capacity;
+            
+            NXToast.success(
+                'Ligne créée avec succès',
+                `La ligne a été créée avec le statut "${isActive ? 'Active' : 'En attente'}".`
+            );
+            
+            setTimeout(() => {
+                window.location.href = 'lignes.html';
+            }, 2000);
+        });
+
+        // Init
+        updateSummary();
+    </script>
+</body>
+</html>
