@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gestion des utilisateurs - Navette Express Admin - JAEBETS HOLDING">
+    <meta name="theme-color" content="#1B2A4A">
+    <title>Utilisateurs - Navette Express Admin</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/icon-192.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <svg viewBox="0 0 40 40" class="logo-icon">
+                    <rect x="4" y="12" width="32" height="18" rx="4" fill="#2EC4B6"/>
+                    <circle cx="12" cy="30" r="4" fill="#C8A951"/>
+                    <circle cx="28" cy="30" r="4" fill="#C8A951"/>
+                    <rect x="8" y="16" width="8" height="6" rx="1" fill="#1B2A4A"/>
+                    <rect x="18" y="16" width="8" height="6" rx="1" fill="#1B2A4A"/>
+                    <rect x="28" y="16" width="6" height="6" rx="1" fill="#1B2A4A"/>
+                </svg>
+                <span class="logo-text">Navette Express</span>
+            </div>
+            <button class="sidebar-close" id="sidebarClose" aria-label="Fermer menu">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7" rx="1"/>
+                    <rect x="14" y="3" width="7" height="7" rx="1"/>
+                    <rect x="3" y="14" width="7" height="7" rx="1"/>
+                    <rect x="14" y="14" width="7" height="7" rx="1"/>
+                </svg>
+                <span>Dashboard</span>
+            </a>
+            <a href="utilisateurs.html" class="nav-link active">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/>
+                    <circle cx="17" cy="11" r="3"/>
+                    <path d="M21 21v-1.5a3 3 0 00-3-3h-1"/>
+                </svg>
+                <span>Utilisateurs</span>
+            </a>
+            <a href="lignes.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="5" cy="6" r="3"/>
+                    <circle cx="19" cy="18" r="3"/>
+                    <path d="M7 8l10 8"/>
+                    <path d="M12 12h.01"/>
+                </svg>
+                <span>Lignes</span>
+            </a>
+            <a href="flotte.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="8" width="20" height="10" rx="2"/>
+                    <circle cx="7" cy="18" r="2"/>
+                    <circle cx="17" cy="18" r="2"/>
+                    <path d="M5 8V6a2 2 0 012-2h10a2 2 0 012 2v2"/>
+                    <rect x="5" y="11" width="4" height="3" rx="0.5"/>
+                    <rect x="10" y="11" width="4" height="3" rx="0.5"/>
+                    <rect x="15" y="11" width="4" height="3" rx="0.5"/>
+                </svg>
+                <span>Flotte</span>
+            </a>
+            <a href="chauffeurs.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="8"/>
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M12 4v1M12 19v1M4 12h1M19 12h1"/>
+                </svg>
+                <span>Chauffeurs</span>
+            </a>
+            <a href="dispatch.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="6" height="6" rx="1"/>
+                    <rect x="15" y="15" width="6" height="6" rx="1"/>
+                    <path d="M9 6h6l-3 6 6-3v6"/>
+                </svg>
+                <span>Dispatch</span>
+            </a>
+            <a href="reservations.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/>
+                    <path d="M16 2v4M8 2v4M3 10h18"/>
+                    <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/>
+                </svg>
+                <span>Réservations</span>
+            </a>
+            <a href="paiements.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="4" width="20" height="16" rx="2"/>
+                    <path d="M12 10v6M9 13h6"/>
+                    <path d="M6 8h.01M10 8h.01"/>
+                </svg>
+                <span>Paiements</span>
+            </a>
+            <a href="facturation.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                    <path d="M14 2v6h6M8 13h8M8 17h8M8 9h2"/>
+                </svg>
+                <span>Facturation</span>
+            </a>
+            <a href="gps.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
+                </svg>
+                <span>GPS</span>
+            </a>
+            <a href="notifications.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                    <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+                <span>Notifications</span>
+            </a>
+            <a href="rapports.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 3v18h18"/>
+                    <path d="M7 16l4-4 4 4 5-6"/>
+                </svg>
+                <span>Rapports</span>
+            </a>
+            <a href="parametres.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+                </svg>
+                <span>Paramètres</span>
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <a href="#" class="nav-link logout" id="logoutBtn">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/>
+                    <polyline points="16,17 21,12 16,7"/>
+                    <line x1="21" y1="12" x2="9" y2="12"/>
+                </svg>
+                <span>Déconnexion</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="main-header">
+            <button class="hamburger" id="hamburgerBtn" aria-label="Ouvrir menu">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 12h18M3 6h18M3 18h18"/>
+                </svg>
+            </button>
+            
+            <div class="header-title">
+                <h1>Gestion des utilisateurs</h1>
+                <p class="breadcrumb">Accueil / Utilisateurs</p>
+            </div>
+            
+            <div class="header-actions">
+                <button class="btn btn-primary" id="addUserBtn">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 8v8M8 12h8"/>
+                    </svg>
+                    <span>Ajouter</span>
+                </button>
+                <div class="user-menu">
+                    <div class="user-avatar">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="8" r="4"/>
+                            <path d="M4 20v-1a6 6 0 0112 0v1"/>
+                        </svg>
+                    </div>
+                    <span class="user-name">Admin JAEBETS</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Users Content -->
+        <div class="content-area">
+            <!-- Info -->
+            <div class="info-banner">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 16v-4M12 8h.01"/>
+                </svg>
+                <p>Cliquez sur « Activer » ou « Désactiver » pour contrôler l'accès utilisateur. La suppression est définitive : uniquement pour les comptes obsolètes.</p>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs-container">
+                <div class="tabs">
+                    <button class="tab active" data-tab="passagers">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="8" r="4"/>
+                            <path d="M4 20v-1a6 6 0 0112 0v1"/>
+                        </svg>
+                        Passagers
+                        <span class="tab-count">9 850</span>
+                    </button>
+                    <button class="tab" data-tab="entreprises">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2"/>
+                            <path d="M9 3v18M15 3v18M3 9h18M3 15h18"/>
+                        </svg>
+                        Entreprises
+                        <span class="tab-count">156</span>
+                    </button>
+                    <button class="tab" data-tab="chauffeurs">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="8"/>
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M12 4v1M12 19v1"/>
+                        </svg>
+                        Chauffeurs
+                        <span class="tab-count">89</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filtres et recherche -->
+            <div class="table-controls">
+                <div class="search-box">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="M21 21l-4.35-4.35"/>
+                    </svg>
+                    <input type="text" id="searchUsers" placeholder="Rechercher par nom, téléphone ou email">
+                </div>
+                <div class="filters">
+                    <select id="filterStatus" class="filter-select">
+                        <option value="">Tous les statuts</option>
+                        <option value="actif">Actif</option>
+                        <option value="inactif">Inactif</option>
+                    </select>
+                    <select id="filterType" class="filter-select">
+                        <option value="">Tous les types</option>
+                        <option value="standard">Standard</option>
+                        <option value="premium">Premium</option>
+                        <option value="abonnement">Abonnement</option>
+                    </select>
+                    <button class="btn btn-secondary" id="exportCsvBtn">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+                            <polyline points="7,10 12,15 17,10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        Exporter CSV
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tab Passagers -->
+            <div class="tab-content active" id="tab-passagers">
+                <div class="table-wrapper">
+                    <table class="data-table" id="passagersTable">
+                        <thead>
+                            <tr>
+                                <th data-sort="nom">
+                                    Nom complet
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M7 10l5 5 5-5"/>
+                                    </svg>
+                                </th>
+                                <th data-sort="type">Type de compte</th>
+                                <th data-sort="telephone">Téléphone</th>
+                                <th data-sort="email">Email</th>
+                                <th data-sort="statut">Statut</th>
+                                <th data-sort="date">Date d'inscription</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="user-cell">
+                                        <div class="avatar">KJ</div>
+                                        <span>Kouamé Jean-Baptiste</span>
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-info">Premium</span></td>
+                                <td>+225 07 12 34 56 78</td>
+                                <td>kouame.jb@email.ci</td>
+                                <td><span class="status status-success">Actif</span></td>
+                                <td>15/01/2024</td>
+                                <td class="actions-cell">
+                                    <button class="action-icon" title="Détails" data-action="details">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <path d="M12 16v-4M12 8h.01"/>
+                                        </svg>
+                                    </button>
+                                    <button class="action-icon warning" title="Désactiver" data-action="deactivate">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <path d="M4.93 4.93l14.14 14.14"/>
+                                        </svg>
+                                    </button>
+                                    <button class="action-icon danger" title="Supprimer" data-action="delete">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="3,6 5,6 21,6"/>
+                                            <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="user-cell">
+                                        <div class="avatar">AT</div>
+                                        <span>Adjoua Thérèse</span>
+                                    </div>
+                                </td>
+                                <td><span class="badge">Standard</span></td>
+                                <td>+225 05 98 76 54 32</td>
+                                <td>adjoua.t@gmail.com</td>
+                                <td><span class="status status-success">Actif</span></td>
+                                <td>22/02/2024</td>
+                                <td class="actions-cell">
+                                    <button class="action-icon" title="Détails" data-action="details">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <path d="M12 16v-4M12 8h.01"/>
+                                        </svg>
+                                    </button>
+                                    <button class="action-icon warning" title="Désactiver" data-action="deactivate">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <path d="M4.93 4.93l14.14 14.14"/>
+                                        </svg>
+                                    </button>
+                                    <button class="action-icon danger" title="Supprimer" data-action="delete">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="3,6 5,6 21,6"/>
+                                            <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="user-cell">
+                                        <div class="avatar">TM</div>
+                                        <span>Traoré Mamadou</span>
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-gold">Abonnement</span></td>
+                                <td>+225 07 45 67 89 01</td>
+                                <td>traore.m@outlook.com</td>
+                                <td><span class="status status-success">Actif</span></td>
+                                <td>08/03/2024</td>
+                                <td class="actions-cell">
+                                    <button class="action-icon" title="Détails" data-action="details">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <path d="M12 16v-4M12 8h.01"/>
+                                        </svg>
+                                    </button>
+                                    <button class="action-icon warning" title="Désactiver" data-action="deactivate">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <path d="M4.93 4.93l14.14 14.14"/>
+                                        </svg>
+                                    </button>
+                                    <button class="action-icon danger" title="Supprimer" data-action="delete">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="3,6 5,6 21,6"/>
+                                            <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="user-cell">
+                                        <div class="avatar">DK</div>
+                                        <span>Diallo Kadiatou</span>
+                                    </div>
+                                </td>
+                                <td><span class="badge">Standard</span></td>
+                                <td>+225 05 23 45 67 89</td>
+                                <td>diallo.k@yahoo.fr</td>
+                                <td><span class="status status-error">Inactif</span></td>
+                                <td>14/04/2024</td>
+                                <td class="actions-cell">
+                                    <button class="action-icon" title="Détails" data-action="details">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <path d="M12 16v-4M12 8h.01"/>
+                                        </svg>
+                                    </button>
+                                    <button class="action-icon success" title="Activer" data-action="activate">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M20 6L9 17l-5-5"/>
+                                        </svg>
+                                    </button>
+                                    <button class="action-icon danger" title="Supprimer" data-action="delete">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="3,6 5,6 21,6"/>
+                                            <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="user-cell">
+                                        <div class="avatar">KA</div>
+                                        <span>Koné Aminata</span>
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-info">Premium</span></td>
+                                <td>+225 07 89 01 23 45</td>
+                                <td>kone.aminata@email.ci</td>
+                                <td><span class="status status-success">Actif</span></td>
+                                <td>25/05/2024</td>
+                                <td class="actions-cell">
+                                    <button class="action-icon" title="Détails" data-action="details">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <path d="M12 16v-4M12 8h.01"/>
+                                        </svg>
+                                    </button>
+                                    <button class="action-icon warning" title="Désactiver" data-action="deactivate">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <path d="M4.93 4.93l14.14 14.14"/>
+                                        </svg>
+                                    </button>
+                                    <button class="action-icon danger" title="Supprimer" data-action="delete">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="3,6 5,6 21,6"/>
+                                            <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <span class="pagination-info">Affichage 1-5 sur 9 850 utilisateurs</span>
+                    <div class="pagination-controls">
+                        <button class="pagination-btn" disabled>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="15,18 9,12 15,6"/>
+                            </svg>
+                        </button>
+                        <button class="pagination-btn active">1</button>
+                        <button class="pagination-btn">2</button>
+                        <button class="pagination-btn">3</button>
+                        <span class="pagination-ellipsis">...</span>
+                        <button class="pagination-btn">1970</button>
+                        <button class="pagination-btn">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="9,18 15,12 9,6"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Entreprises -->
+            <div class="tab-content" id="tab-entreprises">
+                <div class="table-wrapper">
+                    <table class="data-table" id="entreprisesTable">
+                        <thead>
+                            <tr>
+                                <th data-sort="nom">Nom entreprise</th>
+                                <th data-sort="contact">Contact principal</th>
+                                <th data-sort="telephone">Téléphone</th>
+                                <th data-sort="email">Email</th>
+                                <th data-sort="employes">Employés</th>
+                                <th data-sort="contrat">Type contrat</th>
+                                <th data-sort="statut">Statut</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="company-cell">
+                                        <div class="company-icon">
+                                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                                                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                                <path d="M9 3v18M15 3v18M3 9h18M3 15h18"/>
+                                            </svg>
+                                        </div>
+                                        <span>SODECI</span>
+                                    </div>
+                                </td>
+                                <td>Kouassi Pierre</td>
+                                <td>+225 27 20 30 40 50</td>
+                                <td>transport@sodeci.ci</td>
+                                <td><span class="badge badge-info">245</span></td>
+                                <td><span class="badge badge-gold">30 km</span></td>
+                                <td><span class="status status-success">Actif</span></td>
+                                <td class="actions-cell">
+                                    <button class="action-icon" title="Détails" data-action="details">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <path d="M12 16v-4M12 8h.01"/>
+                                        </svg>
+                                    </button>
+                                    <button class="action-icon warning" title="Désactiver" data-action="deactivate">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <path d="M4.93 4.93l14.14 14.14"/>
+                                        </svg>
+                                    </button>
+                                    <button class="action-icon danger" title="Supprimer" data-action="delete">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="3,6 5,6 21,6"/>
+                                            <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="company-cell">
+                                        <div class="company-icon">
+                                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                                                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                                <path d="M9 3v18M15 3v18M3 9h18M3 15h18"/>
+                                            </svg>
+                                        </div>
+                                        <span>Orange Côte d'Ivoire</span>
+                                    </div>
+                                </td>
+                                <td>Diaby Fatou</td>
+                                <td>+225 21 23 90 00</td>
+                                <td>rh.transport@orange.ci</td>
+                                <td><span class="badge badge-info">380</span></td>
+                                <td><span class="badge badge-gold">20 km</span></td>
+                                <td><span class="status status-success">Actif</span></td>
+                                <td class="actions-cell">
+                                    <button class="action-icon" title="Détails" data-action="details">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <path d="M12 16v-4M12 8h.01"/>
+                                        </svg>
+                                    </button>
+                                    <button class="action-icon warning" title="Désactiver" data-action="deactivate">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <path d="M4.93 4.93l14.14 14.14"/>
+                                        </svg>
+                                    </button>
+                                    <button class="action-icon danger" title="Supprimer" data-action="delete">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="3,6 5,6 21,6"/>
+                                            <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="company-cell">
+                                        <div class="company-icon">
+                                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                                                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                                <path d="M9 3v18M15 3v18M3 9h18M3 15h18"/>
+                                            </svg>
+                                        </div>
+                                        <span>Banque Atlantique</span>
+                                    </div>
+                                </td>
+                                <td>Bamba Seydou</td>
+                                <td>+225 20 31 88 88</td>
+                                <td>logistique@banqueatlantique.net</td>
+                                <td><span class="badge badge-info">156</span></td>
+                                <td><span class="badge badge-gold">10 km</span></td>
+                                <td><span class="status status-success">Actif</span></td>
+                                <td class="actions-cell">
+                                    <button class="action-icon" title="Détails" data-action="details">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <path d="M12 16v-4M12 8h.01"/>
+                                        </svg>
+                                    </button>
+                                    <button class="action-icon warning" title="Désactiver" data-action="deactivate">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <path d="M4.93 4.93l14.14 14.14"/>
+                                        </svg>
+                                    </button>
+                                    <button class="action-icon danger" title="Supprimer" data-action="delete">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="3,6 5,6 21,6"/>
+                                            <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <span class="pagination-info">Affichage 1-3 sur 156 entreprises</span>
+                    <div class="pagination-controls">
+                        <button class="pagination-btn" disabled>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="15,18 9,12 15,6"/>
+                            </svg>
+                        </button>
+                        <button class="pagination-btn active">1</button>
+                        <button class="pagination-btn">2</button>
+                        <button class="pagination-btn">3</button>
+                        <span class="pagination-ellipsis">...</span>
+                        <button class="pagination-btn">32</button>
+                        <button class="pagination-btn">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="9,18 15,12 9,6"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Chauffeurs -->
+            <div class="tab-content" id="tab-chauffeurs">
+                <div class="table-wrapper">
+                    <table class="data-table" id="chauffeursTable">
+                        <thead>
+                            <tr>
+                                <th data-sort="nom">Nom complet</th>
+                                <th data-sort="id">ID Chauffeur</th>
+                                <th data-sort="permis">Permis</th>
+                                <th data-sort="telephone">Téléphone</th>
+                                <th data-sort="bus">Bus assigné</th>
+                                <th data-sort="note">Note</th>
+                                <th data-sort="statut">Statut</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="user-cell">
+                                        <div class="avatar driver">TK</div>
+                                        <span>Touré Karim</span>
+                                    </div>
+                                </td>
+                                <td><span class="badge">NX-CH-001</span></td>
+                                <td>Catégorie D</td>
+                                <td>+225 07 56 78 90 12</td>
+                                <td><span class="badge badge-info">AB-1234-CI</span></td>
+                                <td>
+                                    <div class="rating">
+                                        <svg viewBox="0 0 24 24" width="14" height="14" fill="#C8A951" stroke="#C8A951" stroke-width="1">
+                                            <polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/>
+                                        </svg>
+                                        <span>4.8</span>
+                                    </div>
+                                </td>
+                                <td><span class="status status-success">Actif</span></td>
+                                <td class="actions-cell">
+                                    <button class="action-icon" title="Détails" data-action="details">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <path d="M12 16v-4M12 8h.01"/>
+                                        </svg>
+                                    </button>
+                                    <button class="action-icon warning" title="Désactiver" data-action="deactivate">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <path d="M4.93 4.93l14.14 14.14"/>
+                                        </svg>
+                                    </button>
+                                    <button class="action-icon danger" title="Supprimer" data-action="delete">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="3,6 5,6 21,6"/>
+                                            <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="user-cell">
+                                        <div class="avatar driver">KI</div>
+                                        <span>Konaté Ibrahim</span>
+                                    </div>
+                                </td>
+                                <td><span class="badge">NX-CH-002</span></td>
+                                <td>Catégorie D</td>
+                                <td>+225 05 34 56 78 90</td>
+                                <td><span class="badge badge-info">CD-5678-CI</span></td>
+                                <td>
+                                    <div class="rating">
+                                        <svg viewBox="0 0 24 24" width="14" height="14" fill="#C8A951" stroke="#C8A951" stroke-width="1">
+                                            <polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/>
+                                        </svg>
+                                        <span>4.5</span>
+                                    </div>
+                                </td>
+                                <td><span class="status status-success">Actif</span></td>
+                                <td class="actions-cell">
+                                    <button class="action-icon" title="Détails" data-action="details">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <path d="M12 16v-4M12 8h.01"/>
+                                        </svg>
+                                    </button>
+                                    <button class="action-icon warning" title="Désactiver" data-action="deactivate">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <path d="M4.93 4.93l14.14 14.14"/>
+                                        </svg>
+                                    </button>
+                                    <button class="action-icon danger" title="Supprimer" data-action="delete">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="3,6 5,6 21,6"/>
+                                            <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="user-cell">
+                                        <div class="avatar driver">YS</div>
+                                        <span>Yao Serge</span>
+                                    </div>
+                                </td>
+                                <td><span class="badge">NX-CH-003</span></td>
+                                <td>Catégorie D</td>
+                                <td>+225 07 12 34 56 78</td>
+                                <td><span class="badge">Non assigné</span></td>
+                                <td>
+                                    <div class="rating">
+                                        <svg viewBox="0 0 24 24" width="14" height="14" fill="#C8A951" stroke="#C8A951" stroke-width="1">
+                                            <polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/>
+                                        </svg>
+                                        <span>4.2</span>
+                                    </div>
+                                </td>
+                                <td><span class="status status-warning">Repos</span></td>
+                                <td class="actions-cell">
+                                    <button class="action-icon" title="Détails" data-action="details">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <path d="M12 16v-4M12 8h.01"/>
+                                        </svg>
+                                    </button>
+                                    <button class="action-icon success" title="Activer" data-action="activate">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M20 6L9 17l-5-5"/>
+                                        </svg>
+                                    </button>
+                                    <button class="action-icon danger" title="Supprimer" data-action="delete">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="3,6 5,6 21,6"/>
+                                            <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <span class="pagination-info">Affichage 1-3 sur 89 chauffeurs</span>
+                    <div class="pagination-controls">
+                        <button class="pagination-btn" disabled>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="15,18 9,12 15,6"/>
+                            </svg>
+                        </button>
+                        <button class="pagination-btn active">1</button>
+                        <button class="pagination-btn">2</button>
+                        <button class="pagination-btn">3</button>
+                        <span class="pagination-ellipsis">...</span>
+                        <button class="pagination-btn">18</button>
+                        <button class="pagination-btn">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="9,18 15,12 9,6"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Détails Utilisateur -->
+    <div class="modal" id="userDetailsModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Détails utilisateur</h3>
+                <button class="modal-close" data-close>
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="user-detail-card">
+                    <div class="user-detail-avatar">KJ</div>
+                    <div class="user-detail-info">
+                        <h4>Kouamé Jean-Baptiste</h4>
+                        <span class="badge badge-info">Premium</span>
+                        <span class="status status-success">Actif</span>
+                    </div>
+                </div>
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <span class="detail-label">Téléphone</span>
+                        <span class="detail-value">+225 07 12 34 56 78</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Email</span>
+                        <span class="detail-value">kouame.jb@email.ci</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Date inscription</span>
+                        <span class="detail-value">15 janvier 2024</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Trajets effectués</span>
+                        <span class="detail-value">47 trajets</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Montant total dépensé</span>
+                        <span class="detail-value currency">125 000 FCFA</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Dernière connexion</span>
+                        <span class="detail-value">Il y a 2 heures</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-close>Fermer</button>
+                <button class="btn btn-warning">Désactiver</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Confirmation Suppression -->
+    <div class="modal" id="deleteConfirmModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content small">
+            <div class="modal-header">
+                <h3>Confirmer la suppression</h3>
+                <button class="modal-close" data-close>
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="confirm-icon danger">
+                    <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                        <line x1="12" y1="9" x2="12" y2="13"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
+                </div>
+                <p>Êtes-vous sûr de vouloir supprimer cet utilisateur ? Cette action est irréversible.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-close>Annuler</button>
+                <button class="btn btn-danger" id="confirmDeleteBtn">Supprimer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/admin.js"></script>
+    <script>
+        // Gestion des onglets
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const tabId = this.dataset.tab;
+                
+                // Désactiver tous les onglets
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Activer l'onglet cliqué
+                this.classList.add('active');
+                document.getElementById('tab-' + tabId).classList.add('active');
+            });
+        });
+
+        // Export CSV
+        document.getElementById('exportCsvBtn').addEventListener('click', function() {
+            NXToast.success('Export CSV lancé', 'Le fichier sera téléchargé dans quelques instants.');
+        });
+
+        // Actions sur les boutons
+        document.querySelectorAll('.action-icon').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const action = this.dataset.action;
+                
+                if (action === 'details') {
+                    NXModal.open('userDetailsModal');
+                } else if (action === 'delete') {
+                    NXModal.open('deleteConfirmModal');
+                } else if (action === 'deactivate') {
+                    NXToast.warning('Utilisateur désactivé', 'L\'accès a été temporairement suspendu.');
+                } else if (action === 'activate') {
+                    NXToast.success('Utilisateur activé', 'L\'accès a été rétabli avec succès.');
+                }
+            });
+        });
+
+        // Confirmation suppression
+        document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
+            NXModal.close('deleteConfirmModal');
+            NXToast.success('Utilisateur supprimé', 'Le compte a été définitivement supprimé.');
+        });
+
+        // Recherche
+        document.getElementById('searchUsers').addEventListener('input', NXUtils.debounce(function(e) {
+            console.log('Recherche:', e.target.value);
+            // Logique de filtrage du tableau
+        }, 300));
+    </script>
+</body>
+</html>
