@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dashboard administration Navette Express - JAEBETS HOLDING - Gestion flotte transport Abidjan">
+    <meta name="theme-color" content="#1B2A4A">
+    <title>Dashboard - Navette Express Admin</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/icon-192.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <svg viewBox="0 0 40 40" class="logo-icon">
+                    <rect x="4" y="12" width="32" height="18" rx="4" fill="#2EC4B6"/>
+                    <circle cx="12" cy="30" r="4" fill="#C8A951"/>
+                    <circle cx="28" cy="30" r="4" fill="#C8A951"/>
+                    <rect x="8" y="16" width="8" height="6" rx="1" fill="#1B2A4A"/>
+                    <rect x="18" y="16" width="8" height="6" rx="1" fill="#1B2A4A"/>
+                    <rect x="28" y="16" width="6" height="6" rx="1" fill="#1B2A4A"/>
+                </svg>
+                <span class="logo-text">Navette Express</span>
+            </div>
+            <button class="sidebar-close" id="sidebarClose" aria-label="Fermer menu">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-link active">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7" rx="1"/>
+                    <rect x="14" y="3" width="7" height="7" rx="1"/>
+                    <rect x="3" y="14" width="7" height="7" rx="1"/>
+                    <rect x="14" y="14" width="7" height="7" rx="1"/>
+                </svg>
+                <span>Dashboard</span>
+            </a>
+            <a href="utilisateurs.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/>
+                    <circle cx="17" cy="11" r="3"/>
+                    <path d="M21 21v-1.5a3 3 0 00-3-3h-1"/>
+                </svg>
+                <span>Utilisateurs</span>
+            </a>
+            <a href="lignes.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="5" cy="6" r="3"/>
+                    <circle cx="19" cy="18" r="3"/>
+                    <path d="M7 8l10 8"/>
+                    <path d="M12 12h.01"/>
+                </svg>
+                <span>Lignes</span>
+            </a>
+            <a href="flotte.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="8" width="20" height="10" rx="2"/>
+                    <circle cx="7" cy="18" r="2"/>
+                    <circle cx="17" cy="18" r="2"/>
+                    <path d="M5 8V6a2 2 0 012-2h10a2 2 0 012 2v2"/>
+                    <rect x="5" y="11" width="4" height="3" rx="0.5"/>
+                    <rect x="10" y="11" width="4" height="3" rx="0.5"/>
+                    <rect x="15" y="11" width="4" height="3" rx="0.5"/>
+                </svg>
+                <span>Flotte</span>
+            </a>
+            <a href="chauffeurs.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="8"/>
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M12 4v1M12 19v1M4 12h1M19 12h1"/>
+                </svg>
+                <span>Chauffeurs</span>
+            </a>
+            <a href="dispatch.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="6" height="6" rx="1"/>
+                    <rect x="15" y="15" width="6" height="6" rx="1"/>
+                    <path d="M9 6h6l-3 6 6-3v6"/>
+                </svg>
+                <span>Dispatch</span>
+            </a>
+            <a href="reservations.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/>
+                    <path d="M16 2v4M8 2v4M3 10h18"/>
+                    <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/>
+                </svg>
+                <span>Réservations</span>
+            </a>
+            <a href="paiements.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="4" width="20" height="16" rx="2"/>
+                    <path d="M12 10v6M9 13h6"/>
+                    <path d="M6 8h.01M10 8h.01"/>
+                </svg>
+                <span>Paiements</span>
+            </a>
+            <a href="facturation.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                    <path d="M14 2v6h6M8 13h8M8 17h8M8 9h2"/>
+                </svg>
+                <span>Facturation</span>
+            </a>
+            <a href="gps.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
+                </svg>
+                <span>GPS</span>
+            </a>
+            <a href="notifications.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                    <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+                <span>Notifications</span>
+            </a>
+            <a href="rapports.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 3v18h18"/>
+                    <path d="M7 16l4-4 4 4 5-6"/>
+                </svg>
+                <span>Rapports</span>
+            </a>
+            <a href="parametres.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+                </svg>
+                <span>Paramètres</span>
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <a href="#" class="nav-link logout" id="logoutBtn">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/>
+                    <polyline points="16,17 21,12 16,7"/>
+                    <line x1="21" y1="12" x2="9" y2="12"/>
+                </svg>
+                <span>Déconnexion</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="main-header">
+            <button class="hamburger" id="hamburgerBtn" aria-label="Ouvrir menu">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 12h18M3 6h18M3 18h18"/>
+                </svg>
+            </button>
+            
+            <div class="header-title">
+                <h1>Dashboard</h1>
+                <p class="breadcrumb">Accueil / Dashboard</p>
+            </div>
+            
+            <div class="header-actions">
+                <div class="header-date">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2"/>
+                        <path d="M16 2v4M8 2v4M3 10h18"/>
+                    </svg>
+                    <span id="currentDate"></span>
+                </div>
+                <div class="user-menu">
+                    <div class="user-avatar">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="8" r="4"/>
+                            <path d="M4 20v-1a6 6 0 0112 0v1"/>
+                        </svg>
+                    </div>
+                    <span class="user-name">Admin JAEBETS</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="content-area">
+            <!-- Bienvenue -->
+            <section class="welcome-section">
+                <h2>Dashboard administration Navette Express – JAEBETS HOLDING</h2>
+                <p>Bienvenue sur la plateforme de gestion de transport Navette Express. Suivez en temps réel votre flotte, vos lignes et vos revenus mensuels en FCFA.</p>
+            </section>
+
+            <!-- KPIs -->
+            <section class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-icon users">
+                        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/>
+                            <circle cx="17" cy="11" r="3"/>
+                            <path d="M21 21v-1.5a3 3 0 00-3-3h-1"/>
+                        </svg>
+                    </div>
+                    <div class="kpi-content">
+                        <span class="kpi-value" data-value="12450">12 450</span>
+                        <span class="kpi-label">Utilisateurs totaux</span>
+                    </div>
+                    <div class="kpi-trend positive">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17l5-5 5 5"/>
+                            <path d="M7 7l5 5 5-5"/>
+                        </svg>
+                        <span>+8.5%</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon lines">
+                        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="5" cy="6" r="3"/>
+                            <circle cx="19" cy="18" r="3"/>
+                            <path d="M7 8l10 8"/>
+                        </svg>
+                    </div>
+                    <div class="kpi-content">
+                        <span class="kpi-value" data-value="42">42</span>
+                        <span class="kpi-label">Lignes actives</span>
+                    </div>
+                    <div class="kpi-trend positive">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17l5-5 5 5"/>
+                        </svg>
+                        <span>+3</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon buses">
+                        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="8" width="20" height="10" rx="2"/>
+                            <circle cx="7" cy="18" r="2"/>
+                            <circle cx="17" cy="18" r="2"/>
+                            <path d="M5 8V6a2 2 0 012-2h10a2 2 0 012 2v2"/>
+                        </svg>
+                    </div>
+                    <div class="kpi-content">
+                        <span class="kpi-value" data-value="28">28</span>
+                        <span class="kpi-label">Bus en circulation</span>
+                    </div>
+                    <div class="kpi-trend neutral">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14"/>
+                        </svg>
+                        <span>stable</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card highlight">
+                    <div class="kpi-icon revenue">
+                        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="4" width="20" height="16" rx="2"/>
+                            <path d="M12 10v6M9 13h6"/>
+                        </svg>
+                    </div>
+                    <div class="kpi-content">
+                        <span class="kpi-value currency" data-value="8750000">8 750 000</span>
+                        <span class="kpi-label">Revenus du mois (FCFA)</span>
+                    </div>
+                    <div class="kpi-trend positive">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17l5-5 5 5"/>
+                        </svg>
+                        <span>+12.3%</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon reservations">
+                        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2"/>
+                            <path d="M16 2v4M8 2v4M3 10h18"/>
+                            <path d="M9 16l2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <div class="kpi-content">
+                        <span class="kpi-value" data-value="231">231</span>
+                        <span class="kpi-label">Réservations aujourd'hui</span>
+                    </div>
+                    <div class="kpi-trend positive">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17l5-5 5 5"/>
+                        </svg>
+                        <span>+15%</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Alertes système -->
+            <section class="alerts-section">
+                <h3 class="section-title">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                        <line x1="12" y1="9" x2="12" y2="13"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
+                    Alertes système
+                </h3>
+                <div class="alerts-grid">
+                    <div class="alert-card warning">
+                        <div class="alert-icon">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="5" cy="6" r="3"/>
+                                <circle cx="19" cy="18" r="3"/>
+                                <path d="M7 8l10 8"/>
+                            </svg>
+                        </div>
+                        <div class="alert-content">
+                            <span class="alert-title">Remplissage critique</span>
+                            <p>Ligne Abidjan–Bassam : 98% de remplissage aujourd'hui.</p>
+                        </div>
+                        <span class="alert-time">Il y a 15 min</span>
+                    </div>
+
+                    <div class="alert-card danger">
+                        <div class="alert-icon">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
+                            </svg>
+                        </div>
+                        <div class="alert-content">
+                            <span class="alert-title">Maintenance retard</span>
+                            <p>3 bus en retard de maintenance prévue.</p>
+                        </div>
+                        <span class="alert-time">Il y a 1h</span>
+                    </div>
+
+                    <div class="alert-card info">
+                        <div class="alert-icon">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                                <path d="M12 10v6M9 13h6"/>
+                            </svg>
+                        </div>
+                        <div class="alert-content">
+                            <span class="alert-title">Paiements en attente</span>
+                            <p>Paiements FineoPay en attente de réconciliation : 12 transactions.</p>
+                        </div>
+                        <span class="alert-time">Il y a 2h</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Actions rapides + Graphique -->
+            <section class="dashboard-grid">
+                <!-- Actions rapides -->
+                <div class="quick-actions-card">
+                    <h3 class="section-title">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                        </svg>
+                        Actions rapides
+                    </h3>
+                    <div class="actions-grid">
+                        <a href="creer-ligne.html" class="action-btn">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 8v8M8 12h8"/>
+                            </svg>
+                            <span>Créer une nouvelle ligne</span>
+                        </a>
+                        <a href="dispatch.html" class="action-btn">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="6" height="6" rx="1"/>
+                                <rect x="15" y="15" width="6" height="6" rx="1"/>
+                                <path d="M9 6h6l-3 6 6-3v6"/>
+                            </svg>
+                            <span>Lancer un dispatch immédiat</span>
+                        </a>
+                        <a href="facturation.html" class="action-btn">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                                <path d="M14 2v6h6M8 13h8M8 17h8"/>
+                            </svg>
+                            <span>Générer les factures mensuelles</span>
+                        </a>
+                        <a href="gps.html" class="action-btn primary">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <circle cx="12" cy="12" r="3"/>
+                                <path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
+                            </svg>
+                            <span>Voir le GPS temps réel</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Graphique revenus -->
+                <div class="chart-card">
+                    <h3 class="section-title">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 3v18h18"/>
+                            <path d="M7 16l4-4 4 4 5-6"/>
+                        </svg>
+                        Évolution des revenus (FCFA)
+                    </h3>
+                    <div class="chart-container">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Activité récente + Stats lignes -->
+            <section class="dashboard-grid">
+                <!-- Activité récente -->
+                <div class="activity-card">
+                    <h3 class="section-title">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12,6 12,12 16,14"/>
+                        </svg>
+                        Activité récente
+                    </h3>
+                    <ul class="activity-list">
+                        <li class="activity-item">
+                            <div class="activity-icon success">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 6L9 17l-5-5"/>
+                                </svg>
+                            </div>
+                            <div class="activity-content">
+                                <span class="activity-text">Réservation confirmée - <strong>Kouamé Jean</strong></span>
+                                <span class="activity-meta">Ligne Cocody–Plateau • 2 500 FCFA</span>
+                            </div>
+                            <span class="activity-time">Il y a 5 min</span>
+                        </li>
+                        <li class="activity-item">
+                            <div class="activity-icon info">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="8" width="20" height="10" rx="2"/>
+                                    <circle cx="7" cy="18" r="2"/>
+                                    <circle cx="17" cy="18" r="2"/>
+                                </svg>
+                            </div>
+                            <div class="activity-content">
+                                <span class="activity-text">Bus <strong>AB-1234-CI</strong> démarré</span>
+                                <span class="activity-meta">Ligne Yopougon–Adjamé • Chauffeur Traoré</span>
+                            </div>
+                            <span class="activity-time">Il y a 12 min</span>
+                        </li>
+                        <li class="activity-item">
+                            <div class="activity-icon warning">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                                    <line x1="12" y1="9" x2="12" y2="13"/>
+                                </svg>
+                            </div>
+                            <div class="activity-content">
+                                <span class="activity-text">Retard signalé - Bus <strong>CD-5678-CI</strong></span>
+                                <span class="activity-meta">Ligne Bassam–Abidjan • +18 min</span>
+                            </div>
+                            <span class="activity-time">Il y a 25 min</span>
+                        </li>
+                        <li class="activity-item">
+                            <div class="activity-icon success">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="4" width="20" height="16" rx="2"/>
+                                    <path d="M12 10v6M9 13h6"/>
+                                </svg>
+                            </div>
+                            <div class="activity-content">
+                                <span class="activity-text">Paiement reçu - <strong>Orange Money</strong></span>
+                                <span class="activity-meta">Entreprise SODECI • 1 250 000 FCFA</span>
+                            </div>
+                            <span class="activity-time">Il y a 45 min</span>
+                        </li>
+                        <li class="activity-item">
+                            <div class="activity-icon">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="9" cy="7" r="4"/>
+                                    <path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/>
+                                </svg>
+                            </div>
+                            <div class="activity-content">
+                                <span class="activity-text">Nouveau chauffeur inscrit</span>
+                                <span class="activity-meta">Koné Mamadou • Permis D</span>
+                            </div>
+                            <span class="activity-time">Il y a 1h</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Top lignes -->
+                <div class="stats-card">
+                    <h3 class="section-title">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 20V10M12 20V4M6 20v-6"/>
+                        </svg>
+                        Lignes les plus populaires
+                    </h3>
+                    <div class="chart-container small">
+                        <canvas id="linesChart"></canvas>
+                    </div>
+                    <ul class="top-lines-list">
+                        <li class="top-line-item">
+                            <span class="line-rank">1</span>
+                            <span class="line-name">Abidjan–Bassam</span>
+                            <span class="line-value">2 340 passagers</span>
+                        </li>
+                        <li class="top-line-item">
+                            <span class="line-rank">2</span>
+                            <span class="line-name">Cocody–Plateau</span>
+                            <span class="line-value">1 890 passagers</span>
+                        </li>
+                        <li class="top-line-item">
+                            <span class="line-rank">3</span>
+                            <span class="line-name">Yopougon–Adjamé</span>
+                            <span class="line-value">1 567 passagers</span>
+                        </li>
+                        <li class="top-line-item">
+                            <span class="line-rank">4</span>
+                            <span class="line-name">Marcory–Treichville</span>
+                            <span class="line-value">1 234 passagers</span>
+                        </li>
+                        <li class="top-line-item">
+                            <span class="line-rank">5</span>
+                            <span class="line-name">Abobo–Adjamé</span>
+                            <span class="line-value">1 102 passagers</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Distribution paiements -->
+            <section class="dashboard-grid thirds">
+                <div class="chart-card small">
+                    <h3 class="section-title">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 2a10 10 0 0110 10"/>
+                            <path d="M12 12l4-4"/>
+                        </svg>
+                        Méthodes de paiement
+                    </h3>
+                    <div class="chart-container">
+                        <canvas id="paymentMethodsChart"></canvas>
+                    </div>
+                    <ul class="legend-list">
+                        <li><span class="legend-dot orange"></span> Orange Money (45%)</li>
+                        <li><span class="legend-dot yellow"></span> MTN MoMo (32%)</li>
+                        <li><span class="legend-dot blue"></span> Carte bancaire (15%)</li>
+                        <li><span class="legend-dot gray"></span> Espèces (8%)</li>
+                    </ul>
+                </div>
+
+                <div class="chart-card small">
+                    <h3 class="section-title">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="8" width="20" height="10" rx="2"/>
+                            <circle cx="7" cy="18" r="2"/>
+                            <circle cx="17" cy="18" r="2"/>
+                        </svg>
+                        Statut de la flotte
+                    </h3>
+                    <div class="chart-container">
+                        <canvas id="fleetStatusChart"></canvas>
+                    </div>
+                    <ul class="legend-list">
+                        <li><span class="legend-dot green"></span> En service (28)</li>
+                        <li><span class="legend-dot turquoise"></span> Disponibles (8)</li>
+                        <li><span class="legend-dot purple"></span> Maintenance (4)</li>
+                        <li><span class="legend-dot red"></span> Hors service (2)</li>
+                    </ul>
+                </div>
+
+                <div class="chart-card small">
+                    <h3 class="section-title">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                        </svg>
+                        Types d'utilisateurs
+                    </h3>
+                    <div class="chart-container">
+                        <canvas id="userTypesChart"></canvas>
+                    </div>
+                    <ul class="legend-list">
+                        <li><span class="legend-dot turquoise"></span> Passagers (9 850)</li>
+                        <li><span class="legend-dot gold"></span> Entreprises (156)</li>
+                        <li><span class="legend-dot blue"></span> Chauffeurs (89)</li>
+                        <li><span class="legend-dot gray"></span> Admins (12)</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/admin.js"></script>
+    <script src="js/charts.js"></script>
+    <script>
+        // Initialisation Dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            // Date actuelle
+            const dateEl = document.getElementById('currentDate');
+            if (dateEl) {
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                dateEl.textContent = new Date().toLocaleDateString('fr-CI', options);
+            }
+
+            // Graphique revenus mensuels
+            NXCharts.create('line', 'revenueChart', {
+                labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Déc'],
+                datasets: [{
+                    label: 'Revenus (millions FCFA)',
+                    data: [5.2, 5.8, 6.1, 6.5, 7.2, 7.8, 8.1, 7.9, 8.3, 8.5, 8.7, 8.75],
+                    color: '#C8A951'
+                }],
+                showArea: true
+            });
+
+            // Graphique lignes populaires (barres horizontales)
+            NXCharts.create('bar', 'linesChart', {
+                labels: ['Abidjan–Bassam', 'Cocody–Plateau', 'Yopougon–Adjamé', 'Marcory–Treich.', 'Abobo–Adjamé'],
+                datasets: [{
+                    data: [2340, 1890, 1567, 1234, 1102],
+                    color: '#2EC4B6'
+                }],
+                horizontal: true
+            });
+
+            // Graphique méthodes de paiement (donut)
+            NXCharts.create('donut', 'paymentMethodsChart', {
+                labels: ['Orange Money', 'MTN MoMo', 'Carte bancaire', 'Espèces'],
+                data: [45, 32, 15, 8],
+                colors: ['#FF6B00', '#FFCC00', '#3498DB', '#7F8C8D']
+            });
+
+            // Graphique statut flotte (donut)
+            NXCharts.create('donut', 'fleetStatusChart', {
+                labels: ['En service', 'Disponibles', 'Maintenance', 'Hors service'],
+                data: [28, 8, 4, 2],
+                colors: ['#2ECC71', '#2EC4B6', '#9B59B6', '#E74C3C']
+            });
+
+            // Graphique types utilisateurs (donut)
+            NXCharts.create('donut', 'userTypesChart', {
+                labels: ['Passagers', 'Entreprises', 'Chauffeurs', 'Admins'],
+                data: [9850, 156, 89, 12],
+                colors: ['#2EC4B6', '#C8A951', '#3498DB', '#7F8C8D']
+            });
+        });
+    </script>
+</body>
+</html>
