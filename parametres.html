@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Paramètres système - Navette Express Admin - JAEBETS HOLDING">
+    <meta name="theme-color" content="#1B2A4A">
+    <title>Paramètres - Navette Express Admin</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/icon-192.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <svg viewBox="0 0 40 40" class="logo-icon">
+                    <rect x="4" y="12" width="32" height="18" rx="4" fill="#2EC4B6"/>
+                    <circle cx="12" cy="30" r="4" fill="#C8A951"/>
+                    <circle cx="28" cy="30" r="4" fill="#C8A951"/>
+                    <rect x="8" y="16" width="8" height="6" rx="1" fill="#1B2A4A"/>
+                    <rect x="18" y="16" width="8" height="6" rx="1" fill="#1B2A4A"/>
+                    <rect x="28" y="16" width="6" height="6" rx="1" fill="#1B2A4A"/>
+                </svg>
+                <span class="logo-text">Navette Express</span>
+            </div>
+            <button class="sidebar-close" id="sidebarClose" aria-label="Fermer menu">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Dashboard</span></a>
+            <a href="utilisateurs.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><circle cx="17" cy="11" r="3"/><path d="M21 21v-1.5a3 3 0 00-3-3h-1"/></svg><span>Utilisateurs</span></a>
+            <a href="lignes.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="6" r="3"/><circle cx="19" cy="18" r="3"/><path d="M7 8l10 8"/></svg><span>Lignes</span></a>
+            <a href="flotte.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="8" width="20" height="10" rx="2"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/><path d="M5 8V6a2 2 0 012-2h10a2 2 0 012 2v2"/></svg><span>Flotte</span></a>
+            <a href="chauffeurs.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 4v1M12 19v1M4 12h1M19 12h1"/></svg><span>Chauffeurs</span></a>
+            <a href="dispatch.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="15" y="15" width="6" height="6" rx="1"/><path d="M9 6h6l-3 6 6-3v6"/></svg><span>Dispatch</span></a>
+            <a href="reservations.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>Réservations</span></a>
+            <a href="paiements.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M12 10v6M9 13h6"/></svg><span>Paiements</span></a>
+            <a href="facturation.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/></svg><span>Facturation</span></a>
+            <a href="gps.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg><span>GPS</span></a>
+            <a href="notifications.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg><span>Notifications</span></a>
+            <a href="rapports.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 5-6"/></svg><span>Rapports</span></a>
+            <a href="parametres.html" class="nav-link active"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg><span>Paramètres</span></a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <a href="#" class="nav-link logout" id="logoutBtn"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16,17 21,12 16,7"/><line x1="21" y1="12" x2="9" y2="12"/></svg><span>Déconnexion</span></a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="main-header">
+            <button class="hamburger" id="hamburgerBtn" aria-label="Ouvrir menu">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+            </button>
+            
+            <div class="header-title">
+                <h1>Paramètres</h1>
+                <p class="breadcrumb">Accueil / Paramètres</p>
+            </div>
+        </header>
+
+        <!-- Settings Content -->
+        <div class="content-area settings-layout">
+            <!-- Navigation latérale paramètres -->
+            <nav class="settings-nav">
+                <a href="#tarification" class="settings-nav-link active" data-section="tarification">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M12 10v6M9 13h6"/></svg>
+                    Tarification
+                </a>
+                <a href="#paiement" class="settings-nav-link" data-section="paiement">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01"/></svg>
+                    Paiement / FineoPay
+                </a>
+                <a href="#templates" class="settings-nav-link" data-section="templates">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+                    Templates
+                </a>
+                <a href="#roles" class="settings-nav-link" data-section="roles">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                    Rôles & Permissions
+                </a>
+                <a href="#logs" class="settings-nav-link" data-section="logs">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+                    Logs d'activité
+                </a>
+                <a href="#systeme" class="settings-nav-link" data-section="systeme">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+                    Système
+                </a>
+            </nav>
+
+            <!-- Sections paramètres -->
+            <div class="settings-content">
+                <!-- Section Tarification -->
+                <section class="settings-section active" id="section-tarification">
+                    <h2>Tarification</h2>
+                    <p class="section-description">Configurez les tarifs par ligne et les règles de calcul des prix.</p>
+
+                    <div class="settings-card">
+                        <h3>Tarifs par défaut</h3>
+                        <form class="admin-form">
+                            <div class="form-row cols-3">
+                                <div class="form-group">
+                                    <label>Tarif standard (FCFA/km)</label>
+                                    <input type="number" value="100" min="0">
+                                </div>
+                                <div class="form-group">
+                                    <label>Tarif VIP (FCFA/km)</label>
+                                    <input type="number" value="200" min="0">
+                                </div>
+                                <div class="form-group">
+                                    <label>Tarif entreprise (FCFA/km)</label>
+                                    <input type="number" value="150" min="0">
+                                </div>
+                            </div>
+                            <div class="form-row cols-2">
+                                <div class="form-group">
+                                    <label>Prix minimum par trajet (FCFA)</label>
+                                    <input type="number" value="500" min="0">
+                                </div>
+                                <div class="form-group">
+                                    <label>Commission chauffeur (%)</label>
+                                    <input type="number" value="15" min="0" max="100">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>Tarifs par ligne</h3>
+                        <table class="data-table compact">
+                            <thead>
+                                <tr>
+                                    <th>Ligne</th>
+                                    <th>Distance</th>
+                                    <th>Tarif standard</th>
+                                    <th>Tarif VIP</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Abidjan–Bassam</td>
+                                    <td>42 km</td>
+                                    <td><input type="number" value="2500" class="inline-input"></td>
+                                    <td><input type="number" value="5000" class="inline-input"></td>
+                                    <td><button class="btn btn-sm">Sauvegarder</button></td>
+                                </tr>
+                                <tr>
+                                    <td>Cocody–Plateau Express</td>
+                                    <td>15 km</td>
+                                    <td><input type="number" value="1800" class="inline-input"></td>
+                                    <td><input type="number" value="3500" class="inline-input"></td>
+                                    <td><button class="btn btn-sm">Sauvegarder</button></td>
+                                </tr>
+                                <tr>
+                                    <td>Yopougon–Adjamé</td>
+                                    <td>18 km</td>
+                                    <td><input type="number" value="1500" class="inline-input"></td>
+                                    <td><input type="number" value="3000" class="inline-input"></td>
+                                    <td><button class="btn btn-sm">Sauvegarder</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="form-actions">
+                        <button class="btn btn-primary" id="saveTarifsBtn">Enregistrer les modifications</button>
+                    </div>
+                </section>
+
+                <!-- Section Paiement -->
+                <section class="settings-section" id="section-paiement">
+                    <h2>Paiement / FineoPay</h2>
+                    <p class="section-description">Configuration de l'intégration FineoPay et des méthodes de paiement.</p>
+
+                    <div class="settings-card">
+                        <h3>Intégration FineoPay</h3>
+                        <div class="integration-status success">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>
+                            <span>Connecté - API opérationnelle</span>
+                        </div>
+                        <form class="admin-form">
+                            <div class="form-row cols-2">
+                                <div class="form-group">
+                                    <label>Clé API (Production)</label>
+                                    <input type="password" value="sk_live_xxxxxxxxxxxx" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>Clé API (Test)</label>
+                                    <input type="password" value="sk_test_xxxxxxxxxxxx" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Webhook URL</label>
+                                <input type="text" value="https://api.navette-express.ci/webhooks/fineopay" readonly>
+                                <button type="button" class="btn btn-sm btn-secondary" style="margin-top: 8px;">Copier</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>Méthodes de paiement actives</h3>
+                        <div class="payment-methods-settings">
+                            <div class="method-toggle">
+                                <div class="method-info">
+                                    <span class="method-icon orange">OM</span>
+                                    <span class="method-name">Orange Money</span>
+                                </div>
+                                <label class="toggle">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="method-toggle">
+                                <div class="method-info">
+                                    <span class="method-icon yellow">MM</span>
+                                    <span class="method-name">MTN MoMo</span>
+                                </div>
+                                <label class="toggle">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="method-toggle">
+                                <div class="method-info">
+                                    <span class="method-icon blue">CB</span>
+                                    <span class="method-name">Carte bancaire</span>
+                                </div>
+                                <label class="toggle">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="method-toggle">
+                                <div class="method-info">
+                                    <span class="method-icon gray">ES</span>
+                                    <span class="method-name">Espèces (chauffeur)</span>
+                                </div>
+                                <label class="toggle">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section Templates -->
+                <section class="settings-section" id="section-templates">
+                    <h2>Templates</h2>
+                    <p class="section-description">Personnalisez les modèles d'emails, SMS et notifications.</p>
+
+                    <div class="settings-card">
+                        <h3>Templates de notifications</h3>
+                        <div class="templates-list">
+                            <div class="template-item">
+                                <div class="template-info">
+                                    <span class="template-name">Confirmation de réservation</span>
+                                    <span class="template-channels">Push, SMS</span>
+                                </div>
+                                <button class="btn btn-sm btn-secondary">Modifier</button>
+                            </div>
+                            <div class="template-item">
+                                <div class="template-info">
+                                    <span class="template-name">Rappel de trajet</span>
+                                    <span class="template-channels">Push</span>
+                                </div>
+                                <button class="btn btn-sm btn-secondary">Modifier</button>
+                            </div>
+                            <div class="template-item">
+                                <div class="template-info">
+                                    <span class="template-name">Alerte retard</span>
+                                    <span class="template-channels">Push, SMS</span>
+                                </div>
+                                <button class="btn btn-sm btn-secondary">Modifier</button>
+                            </div>
+                            <div class="template-item">
+                                <div class="template-info">
+                                    <span class="template-name">Confirmation de paiement</span>
+                                    <span class="template-channels">Push</span>
+                                </div>
+                                <button class="btn btn-sm btn-secondary">Modifier</button>
+                            </div>
+                            <div class="template-item">
+                                <div class="template-info">
+                                    <span class="template-name">Facture entreprise</span>
+                                    <span class="template-channels">Email</span>
+                                </div>
+                                <button class="btn btn-sm btn-secondary">Modifier</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section Rôles -->
+                <section class="settings-section" id="section-roles">
+                    <h2>Rôles & Permissions</h2>
+                    <p class="section-description">Gérez les rôles utilisateurs et leurs permissions d'accès.</p>
+
+                    <div class="settings-card">
+                        <h3>Rôles définis</h3>
+                        <table class="data-table compact">
+                            <thead>
+                                <tr>
+                                    <th>Rôle</th>
+                                    <th>Utilisateurs</th>
+                                    <th>Permissions</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="role-badge admin">Super Admin</span></td>
+                                    <td>2</td>
+                                    <td>Accès complet</td>
+                                    <td><button class="btn btn-sm btn-secondary">Voir</button></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="role-badge manager">Manager</span></td>
+                                    <td>4</td>
+                                    <td>Dashboard, Utilisateurs, Lignes, Flotte, Chauffeurs, Dispatch, Réservations</td>
+                                    <td><button class="btn btn-sm btn-secondary">Modifier</button></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="role-badge operator">Opérateur</span></td>
+                                    <td>8</td>
+                                    <td>Dashboard, Dispatch, Réservations, GPS</td>
+                                    <td><button class="btn btn-sm btn-secondary">Modifier</button></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="role-badge accountant">Comptable</span></td>
+                                    <td>2</td>
+                                    <td>Dashboard, Paiements, Facturation, Rapports</td>
+                                    <td><button class="btn btn-sm btn-secondary">Modifier</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button class="btn btn-primary" style="margin-top: 16px;">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+                            Créer un nouveau rôle
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Section Logs -->
+                <section class="settings-section" id="section-logs">
+                    <h2>Logs d'activité</h2>
+                    <p class="section-description">Historique des actions effectuées sur la plateforme.</p>
+
+                    <div class="settings-card">
+                        <div class="logs-filters">
+                            <select class="filter-select">
+                                <option value="">Tous les types</option>
+                                <option value="auth">Authentification</option>
+                                <option value="crud">Création/Modification</option>
+                                <option value="payment">Paiement</option>
+                                <option value="system">Système</option>
+                            </select>
+                            <select class="filter-select">
+                                <option value="">Tous les utilisateurs</option>
+                                <option value="admin">Admin Principal</option>
+                                <option value="manager1">Manager Abidjan</option>
+                            </select>
+                            <input type="date" class="filter-input">
+                        </div>
+
+                        <div class="logs-list">
+                            <div class="log-item">
+                                <span class="log-time">14:32:15</span>
+                                <span class="log-type auth">AUTH</span>
+                                <span class="log-user">Admin Principal</span>
+                                <span class="log-action">Connexion réussie depuis 197.149.xxx.xxx</span>
+                            </div>
+                            <div class="log-item">
+                                <span class="log-time">14:28:42</span>
+                                <span class="log-type crud">CRUD</span>
+                                <span class="log-user">Manager Abidjan</span>
+                                <span class="log-action">Création ligne "VIP Plateau–Aéroport"</span>
+                            </div>
+                            <div class="log-item">
+                                <span class="log-time">14:15:33</span>
+                                <span class="log-type payment">PAYMENT</span>
+                                <span class="log-user">Système</span>
+                                <span class="log-action">Réconciliation FineoPay - 1 235 transactions traitées</span>
+                            </div>
+                            <div class="log-item">
+                                <span class="log-time">13:52:18</span>
+                                <span class="log-type crud">CRUD</span>
+                                <span class="log-user">Opérateur Dispatch</span>
+                                <span class="log-action">Assignation chauffeur Touré Karim → Ligne Abidjan–Bassam</span>
+                            </div>
+                            <div class="log-item">
+                                <span class="log-time">13:45:07</span>
+                                <span class="log-type system">SYSTEM</span>
+                                <span class="log-user">Système</span>
+                                <span class="log-action">Backup automatique base de données - Succès</span>
+                            </div>
+                        </div>
+
+                        <div class="pagination" style="margin-top: 16px;">
+                            <span class="pagination-info">Affichage 1-5 sur 2 450 logs</span>
+                            <div class="pagination-controls">
+                                <button class="pagination-btn" disabled>←</button>
+                                <button class="pagination-btn active">1</button>
+                                <button class="pagination-btn">2</button>
+                                <button class="pagination-btn">3</button>
+                                <button class="pagination-btn">→</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section Système -->
+                <section class="settings-section" id="section-systeme">
+                    <h2>Système</h2>
+                    <p class="section-description">Informations et maintenance du système.</p>
+
+                    <div class="settings-card">
+                        <h3>Informations système</h3>
+                        <div class="system-info-grid">
+                            <div class="system-info-item">
+                                <span class="info-label">Version application</span>
+                                <span class="info-value">1.2.4</span>
+                            </div>
+                            <div class="system-info-item">
+                                <span class="info-label">Dernière mise à jour</span>
+                                <span class="info-value">27 Mars 2024</span>
+                            </div>
+                            <div class="system-info-item">
+                                <span class="info-label">Base de données</span>
+                                <span class="info-value">Supabase (PostgreSQL)</span>
+                            </div>
+                            <div class="system-info-item">
+                                <span class="info-label">Stockage utilisé</span>
+                                <span class="info-value">2.4 GB / 10 GB</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>Maintenance</h3>
+                        <div class="maintenance-actions">
+                            <button class="btn btn-secondary">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                Exporter les données
+                            </button>
+                            <button class="btn btn-secondary">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+                                Vider le cache
+                            </button>
+                            <button class="btn btn-danger">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+                                Mode maintenance
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/admin.js"></script>
+    <script>
+        // Navigation paramètres
+        document.querySelectorAll('.settings-nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                document.querySelectorAll('.settings-nav-link').forEach(l => l.classList.remove('active'));
+                document.querySelectorAll('.settings-section').forEach(s => s.classList.remove('active'));
+                
+                this.classList.add('active');
+                document.getElementById('section-' + this.dataset.section).classList.add('active');
+            });
+        });
+
+        // Sauvegarde tarifs
+        document.getElementById('saveTarifsBtn')?.addEventListener('click', function() {
+            NXToast.success('Tarifs enregistrés', 'Les modifications ont été sauvegardées.');
+        });
+    </script>
+</body>
+</html>
