@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dispatch - Assignation bus et chauffeurs - Navette Express Admin - JAEBETS HOLDING">
+    <meta name="theme-color" content="#1B2A4A">
+    <title>Dispatch - Navette Express Admin</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/icon-192.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <svg viewBox="0 0 40 40" class="logo-icon">
+                    <rect x="4" y="12" width="32" height="18" rx="4" fill="#2EC4B6"/>
+                    <circle cx="12" cy="30" r="4" fill="#C8A951"/>
+                    <circle cx="28" cy="30" r="4" fill="#C8A951"/>
+                    <rect x="8" y="16" width="8" height="6" rx="1" fill="#1B2A4A"/>
+                    <rect x="18" y="16" width="8" height="6" rx="1" fill="#1B2A4A"/>
+                    <rect x="28" y="16" width="6" height="6" rx="1" fill="#1B2A4A"/>
+                </svg>
+                <span class="logo-text">Navette Express</span>
+            </div>
+            <button class="sidebar-close" id="sidebarClose" aria-label="Fermer menu">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+                <span>Dashboard</span>
+            </a>
+            <a href="utilisateurs.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><circle cx="17" cy="11" r="3"/><path d="M21 21v-1.5a3 3 0 00-3-3h-1"/></svg>
+                <span>Utilisateurs</span>
+            </a>
+            <a href="lignes.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="6" r="3"/><circle cx="19" cy="18" r="3"/><path d="M7 8l10 8"/></svg>
+                <span>Lignes</span>
+            </a>
+            <a href="flotte.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="8" width="20" height="10" rx="2"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/><path d="M5 8V6a2 2 0 012-2h10a2 2 0 012 2v2"/></svg>
+                <span>Flotte</span>
+            </a>
+            <a href="chauffeurs.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 4v1M12 19v1M4 12h1M19 12h1"/></svg>
+                <span>Chauffeurs</span>
+            </a>
+            <a href="dispatch.html" class="nav-link active">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="15" y="15" width="6" height="6" rx="1"/><path d="M9 6h6l-3 6 6-3v6"/></svg>
+                <span>Dispatch</span>
+            </a>
+            <a href="reservations.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                <span>Réservations</span>
+            </a>
+            <a href="paiements.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M12 10v6M9 13h6"/></svg>
+                <span>Paiements</span>
+            </a>
+            <a href="facturation.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/></svg>
+                <span>Facturation</span>
+            </a>
+            <a href="gps.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+                <span>GPS</span>
+            </a>
+            <a href="notifications.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                <span>Notifications</span>
+            </a>
+            <a href="rapports.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 5-6"/></svg>
+                <span>Rapports</span>
+            </a>
+            <a href="parametres.html" class="nav-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+                <span>Paramètres</span>
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <a href="#" class="nav-link logout" id="logoutBtn">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16,17 21,12 16,7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                <span>Déconnexion</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="main-header">
+            <button class="hamburger" id="hamburgerBtn" aria-label="Ouvrir menu">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+            </button>
+            
+            <div class="header-title">
+                <h1>Dispatch – Assignation bus & chauffeurs</h1>
+                <p class="breadcrumb">Accueil / Dispatch</p>
+            </div>
+            
+            <div class="header-actions">
+                <button class="btn btn-secondary" id="historyBtn">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+                    <span>Historique</span>
+                </button>
+                <button class="btn btn-primary" id="confirmDispatchBtn">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+                    <span>Confirmer le dispatch</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Dispatch Content -->
+        <div class="content-area">
+            <!-- Info banner -->
+            <div class="info-banner">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 16v-4M12 8h.01"/>
+                </svg>
+                <p>Glissez-déposez un chauffeur sur une ligne pour l'assigner automatiquement. Les bus déjà en service restent bloqués tant que le trajet n'est pas terminé.</p>
+            </div>
+
+            <!-- Interface 3 colonnes -->
+            <div class="dispatch-container">
+                <!-- Colonne gauche : Lignes non assignées -->
+                <div class="dispatch-column">
+                    <div class="column-header">
+                        <h3>
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="6" r="3"/><circle cx="19" cy="18" r="3"/><path d="M7 8l10 8"/></svg>
+                            Lignes non assignées
+                        </h3>
+                        <span class="column-count">5</span>
+                    </div>
+                    <div class="dispatch-list" id="unassignedLines">
+                        <div class="dispatch-card line" draggable="true" data-id="line-1">
+                            <div class="card-header">
+                                <span class="line-name">Abidjan–Bassam matin</span>
+                                <span class="time-badge">06:45</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="route-info">
+                                    <span class="route-start">Cocody Saint-Jean</span>
+                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                    <span class="route-end">Bassam Centre</span>
+                                </div>
+                                <div class="card-meta">
+                                    <span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4"/></svg> 42/45</span>
+                                    <span class="status status-warning">En attente</span>
+                                </div>
+                            </div>
+                            <div class="drop-zone" data-target="line-1">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+                                Déposer chauffeur ici
+                            </div>
+                        </div>
+
+                        <div class="dispatch-card line" draggable="true" data-id="line-2">
+                            <div class="card-header">
+                                <span class="line-name">Cocody–Plateau Express</span>
+                                <span class="time-badge">07:00</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="route-info">
+                                    <span class="route-start">Cocody Riviera 2</span>
+                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                    <span class="route-end">Plateau Cité Admin</span>
+                                </div>
+                                <div class="card-meta">
+                                    <span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4"/></svg> 58/60</span>
+                                    <span class="status status-warning">En attente</span>
+                                </div>
+                            </div>
+                            <div class="drop-zone" data-target="line-2">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+                                Déposer chauffeur ici
+                            </div>
+                        </div>
+
+                        <div class="dispatch-card line" draggable="true" data-id="line-3">
+                            <div class="card-header">
+                                <span class="line-name">Yopougon–Adjamé</span>
+                                <span class="time-badge">06:30</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="route-info">
+                                    <span class="route-start">Yopougon Maroc</span>
+                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                    <span class="route-end">Adjamé Gare Nord</span>
+                                </div>
+                                <div class="card-meta">
+                                    <span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4"/></svg> 45/60</span>
+                                    <span class="status status-warning">En attente</span>
+                                </div>
+                            </div>
+                            <div class="drop-zone" data-target="line-3">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+                                Déposer chauffeur ici
+                            </div>
+                        </div>
+
+                        <div class="dispatch-card line vip" draggable="true" data-id="line-4">
+                            <div class="card-header">
+                                <span class="line-name">VIP Plateau–Aéroport</span>
+                                <span class="time-badge vip">08:00</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="route-info">
+                                    <span class="route-start">Plateau Centre</span>
+                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                    <span class="route-end">Aéroport FHB</span>
+                                </div>
+                                <div class="card-meta">
+                                    <span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4"/></svg> 12/20</span>
+                                    <span class="status status-warning">En attente</span>
+                                </div>
+                            </div>
+                            <div class="drop-zone" data-target="line-4">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+                                Déposer chauffeur ici
+                            </div>
+                        </div>
+
+                        <div class="dispatch-card line" draggable="true" data-id="line-5">
+                            <div class="card-header">
+                                <span class="line-name">Abobo–Adjamé Express</span>
+                                <span class="time-badge">06:00</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="route-info">
+                                    <span class="route-start">Abobo Banco</span>
+                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                    <span class="route-end">Adjamé Liberté</span>
+                                </div>
+                                <div class="card-meta">
+                                    <span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4"/></svg> 55/60</span>
+                                    <span class="status status-warning">En attente</span>
+                                </div>
+                            </div>
+                            <div class="drop-zone" data-target="line-5">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+                                Déposer chauffeur ici
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Colonne centre : Carte temps réel -->
+                <div class="dispatch-column map-column">
+                    <div class="column-header">
+                        <h3>
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+                            Carte temps réel
+                        </h3>
+                        <button class="btn btn-sm" id="refreshMapBtn">
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+                            Actualiser
+                        </button>
+                    </div>
+                    <div class="map-container" id="dispatchMap">
+                        <div class="map-placeholder">
+                            <svg viewBox="0 0 24 24" width="64" height="64" fill="none" stroke="currentColor" stroke-width="1">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1118 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                            <p>Carte des positions en temps réel</p>
+                            <span class="map-note">28 bus en circulation</span>
+                        </div>
+                        
+                        <!-- Bus en service (overlay) -->
+                        <div class="map-bus-list">
+                            <div class="map-bus-item active">
+                                <div class="bus-marker"></div>
+                                <div class="bus-info">
+                                    <span class="bus-plate">AB-1234-CI</span>
+                                    <span class="bus-line">Marcory–Treichville</span>
+                                </div>
+                                <span class="bus-speed">45 km/h</span>
+                            </div>
+                            <div class="map-bus-item active">
+                                <div class="bus-marker"></div>
+                                <div class="bus-info">
+                                    <span class="bus-plate">CD-5678-CI</span>
+                                    <span class="bus-line">Port-Bouët–Plateau</span>
+                                </div>
+                                <span class="bus-speed">38 km/h</span>
+                            </div>
+                            <div class="map-bus-item delayed">
+                                <div class="bus-marker warning"></div>
+                                <div class="bus-info">
+                                    <span class="bus-plate">EF-9012-CI</span>
+                                    <span class="bus-line">Koumassi–Adjamé</span>
+                                </div>
+                                <span class="bus-delay">+12 min</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Assignations en cours -->
+                    <div class="pending-assignments">
+                        <h4>Assignations en attente de confirmation</h4>
+                        <div class="assignments-list" id="pendingList">
+                            <div class="assignment-item" data-id="assign-1">
+                                <div class="assignment-info">
+                                    <span class="assignment-line">Abidjan–Bassam matin</span>
+                                    <span class="assignment-arrow">→</span>
+                                    <span class="assignment-driver">Touré Karim</span>
+                                </div>
+                                <button class="btn btn-sm btn-danger" data-action="cancel">
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="empty-message" id="noAssignments">Aucune assignation en attente. Glissez un chauffeur sur une ligne.</p>
+                    </div>
+                </div>
+
+                <!-- Colonne droite : Chauffeurs disponibles -->
+                <div class="dispatch-column">
+                    <div class="column-header">
+                        <h3>
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg>
+                            Chauffeurs disponibles
+                        </h3>
+                        <span class="column-count">8</span>
+                    </div>
+                    <div class="dispatch-list" id="availableDrivers">
+                        <div class="dispatch-card driver" draggable="true" data-id="driver-1">
+                            <div class="driver-avatar">TK</div>
+                            <div class="driver-info">
+                                <span class="driver-name">Touré Karim</span>
+                                <span class="driver-id">NX-CH-001</span>
+                            </div>
+                            <div class="driver-meta">
+                                <div class="driver-rating">
+                                    <svg viewBox="0 0 24 24" width="12" height="12" fill="#C8A951"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg>
+                                    <span>4.8</span>
+                                </div>
+                                <span class="driver-bus">AB-1234-CI</span>
+                            </div>
+                        </div>
+
+                        <div class="dispatch-card driver" draggable="true" data-id="driver-2">
+                            <div class="driver-avatar">KI</div>
+                            <div class="driver-info">
+                                <span class="driver-name">Konaté Ibrahim</span>
+                                <span class="driver-id">NX-CH-002</span>
+                            </div>
+                            <div class="driver-meta">
+                                <div class="driver-rating">
+                                    <svg viewBox="0 0 24 24" width="12" height="12" fill="#C8A951"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg>
+                                    <span>4.5</span>
+                                </div>
+                                <span class="driver-bus">CD-5678-CI</span>
+                            </div>
+                        </div>
+
+                        <div class="dispatch-card driver" draggable="true" data-id="driver-3">
+                            <div class="driver-avatar">YS</div>
+                            <div class="driver-info">
+                                <span class="driver-name">Yao Serge</span>
+                                <span class="driver-id">NX-CH-003</span>
+                            </div>
+                            <div class="driver-meta">
+                                <div class="driver-rating">
+                                    <svg viewBox="0 0 24 24" width="12" height="12" fill="#C8A951"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg>
+                                    <span>4.2</span>
+                                </div>
+                                <span class="driver-bus">EF-9012-CI</span>
+                            </div>
+                        </div>
+
+                        <div class="dispatch-card driver" draggable="true" data-id="driver-4">
+                            <div class="driver-avatar vip">BM</div>
+                            <div class="driver-info">
+                                <span class="driver-name">Bamba Mohamed</span>
+                                <span class="driver-id">NX-CH-008</span>
+                            </div>
+                            <div class="driver-meta">
+                                <div class="driver-rating">
+                                    <svg viewBox="0 0 24 24" width="12" height="12" fill="#C8A951"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg>
+                                    <span>4.9</span>
+                                </div>
+                                <span class="driver-bus vip">VIP-001-CI</span>
+                            </div>
+                        </div>
+
+                        <div class="dispatch-card driver" draggable="true" data-id="driver-5">
+                            <div class="driver-avatar">SD</div>
+                            <div class="driver-info">
+                                <span class="driver-name">Sanogo Drissa</span>
+                                <span class="driver-id">NX-CH-012</span>
+                            </div>
+                            <div class="driver-meta">
+                                <div class="driver-rating">
+                                    <svg viewBox="0 0 24 24" width="12" height="12" fill="#C8A951"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg>
+                                    <span>4.6</span>
+                                </div>
+                                <span class="driver-bus">GH-3456-CI</span>
+                            </div>
+                        </div>
+
+                        <div class="dispatch-card driver" draggable="true" data-id="driver-6">
+                            <div class="driver-avatar">CK</div>
+                            <div class="driver-info">
+                                <span class="driver-name">Coulibaly Kassoum</span>
+                                <span class="driver-id">NX-CH-015</span>
+                            </div>
+                            <div class="driver-meta">
+                                <div class="driver-rating">
+                                    <svg viewBox="0 0 24 24" width="12" height="12" fill="#C8A951"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg>
+                                    <span>4.4</span>
+                                </div>
+                                <span class="driver-bus">IJ-7890-CI</span>
+                            </div>
+                        </div>
+
+                        <div class="dispatch-card driver" draggable="true" data-id="driver-7">
+                            <div class="driver-avatar">OT</div>
+                            <div class="driver-info">
+                                <span class="driver-name">Ouattara Tidiane</span>
+                                <span class="driver-id">NX-CH-018</span>
+                            </div>
+                            <div class="driver-meta">
+                                <div class="driver-rating">
+                                    <svg viewBox="0 0 24 24" width="12" height="12" fill="#C8A951"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg>
+                                    <span>4.7</span>
+                                </div>
+                                <span class="driver-bus">KL-1234-CI</span>
+                            </div>
+                        </div>
+
+                        <div class="dispatch-card driver" draggable="true" data-id="driver-8">
+                            <div class="driver-avatar">DA</div>
+                            <div class="driver-info">
+                                <span class="driver-name">Diomandé Abdoulaye</span>
+                                <span class="driver-id">NX-CH-022</span>
+                            </div>
+                            <div class="driver-meta">
+                                <div class="driver-rating">
+                                    <svg viewBox="0 0 24 24" width="12" height="12" fill="#C8A951"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg>
+                                    <span>4.3</span>
+                                </div>
+                                <span class="driver-bus">MN-5678-CI</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/admin.js"></script>
+    <script>
+        // Drag and drop fonctionnalités
+        const drivers = document.querySelectorAll('.dispatch-card.driver');
+        const dropZones = document.querySelectorAll('.drop-zone');
+        const pendingList = document.getElementById('pendingList');
+        const noAssignments = document.getElementById('noAssignments');
+
+        drivers.forEach(driver => {
+            driver.addEventListener('dragstart', function(e) {
+                e.dataTransfer.setData('text/plain', this.dataset.id);
+                this.classList.add('dragging');
+            });
+
+            driver.addEventListener('dragend', function() {
+                this.classList.remove('dragging');
+            });
+        });
+
+        dropZones.forEach(zone => {
+            zone.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.classList.add('drag-over');
+            });
+
+            zone.addEventListener('dragleave', function() {
+                this.classList.remove('drag-over');
+            });
+
+            zone.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.classList.remove('drag-over');
+                
+                const driverId = e.dataTransfer.getData('text/plain');
+                const driver = document.querySelector(`[data-id="${driverId}"]`);
+                const lineCard = this.closest('.dispatch-card.line');
+                const lineName = lineCard.querySelector('.line-name').textContent;
+                const driverName = driver.querySelector('.driver-name').textContent;
+
+                // Créer l'assignation
+                const assignmentHtml = `
+                    <div class="assignment-item" data-id="assign-${Date.now()}">
+                        <div class="assignment-info">
+                            <span class="assignment-line">${lineName}</span>
+                            <span class="assignment-arrow">→</span>
+                            <span class="assignment-driver">${driverName}</span>
+                        </div>
+                        <button class="btn btn-sm btn-danger" data-action="cancel">
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                        </button>
+                    </div>
+                `;
+                
+                pendingList.insertAdjacentHTML('beforeend', assignmentHtml);
+                noAssignments.style.display = 'none';
+                
+                // Mettre à jour le statut de la ligne
+                lineCard.querySelector('.status').className = 'status status-success';
+                lineCard.querySelector('.status').textContent = 'Assigné';
+                
+                // Désactiver le chauffeur
+                driver.classList.add('assigned');
+                driver.draggable = false;
+
+                NXToast.success('Assignation', `${driverName} assigné à ${lineName}`);
+            });
+        });
+
+        // Annuler assignation
+        pendingList.addEventListener('click', function(e) {
+            const cancelBtn = e.target.closest('[data-action="cancel"]');
+            if (cancelBtn) {
+                const item = cancelBtn.closest('.assignment-item');
+                item.remove();
+                
+                if (pendingList.querySelectorAll('.assignment-item').length === 0) {
+                    noAssignments.style.display = 'block';
+                }
+                
+                NXToast.info('Assignation annulée', 'L\'assignation a été retirée.');
+            }
+        });
+
+        // Confirmer dispatch
+        document.getElementById('confirmDispatchBtn').addEventListener('click', function() {
+            const assignments = pendingList.querySelectorAll('.assignment-item');
+            if (assignments.length === 0) {
+                NXToast.warning('Aucune assignation', 'Veuillez assigner au moins un chauffeur à une ligne.');
+                return;
+            }
+            
+            NXToast.success('Dispatch confirmé', `${assignments.length} assignation(s) confirmée(s). Les trajets peuvent démarrer.`);
+            
+            // Vider la liste
+            assignments.forEach(a => a.remove());
+            noAssignments.style.display = 'block';
+        });
+
+        // Historique
+        document.getElementById('historyBtn').addEventListener('click', function() {
+            NXToast.info('Historique', 'Chargement de l\'historique des assignations...');
+        });
+
+        // Refresh map
+        document.getElementById('refreshMapBtn').addEventListener('click', function() {
+            NXToast.info('Actualisation', 'Positions des bus mises à jour.');
+        });
+    </script>
+</body>
+</html>
