@@ -381,7 +381,7 @@
                     Storage.remove('adminSession');
                     Toast.info('Déconnexion', 'À bientôt sur Navette Express !');
                     setTimeout(() => {
-                        window.location.href = 'login.html';
+                        window.location.href = 'index.html';
                     }, 1000);
                 }
             );
@@ -896,8 +896,8 @@
 
     const Auth = {
         checkSession() {
-            const currentPage = window.location.pathname.split('/').pop() || 'login.html';
-            const publicPages = ['login.html', 'erreur.html'];
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const publicPages = ['index.html', 'erreur.html'];
             
             if (publicPages.includes(currentPage)) return;
 
@@ -906,7 +906,7 @@
             if (!session || !session.token || session.expires < Date.now()) {
                 // Session invalide ou expirée
                 Storage.remove('adminSession');
-                window.location.href = 'login.html';
+                window.location.href = 'index.html';
             }
         },
 
@@ -917,7 +917,7 @@
 
         logout() {
             Storage.remove('adminSession');
-            window.location.href = 'login.html';
+            window.location.href = 'index.html';
         }
     };
 
