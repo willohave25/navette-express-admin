@@ -12,7 +12,7 @@ const API_CACHE = 'nx-api-v1';
 // Fichiers à mettre en cache lors de l'installation
 const STATIC_ASSETS = [
     '/',
-    '/login.html',
+    '/index.html',
     '/dashboard.html',
     '/utilisateurs.html',
     '/lignes.html',
