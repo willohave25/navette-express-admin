@@ -2,7 +2,7 @@
   "name": "Navette Express Admin - JAEBETS HOLDING",
   "short_name": "NX Admin",
   "description": "Plateforme d'administration Navette Express - Gestion complète du réseau de transport urbain Abidjan",
-  "start_url": "/login.html",
+  "start_url": "/index.html",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#0F1A2E",
