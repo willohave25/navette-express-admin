@@ -13,49 +13,13 @@
   "categories": ["business", "productivity", "utilities"],
   "icons": [
     {
-      "src": "images/icons/icon-72x72.png",
-      "sizes": "72x72",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "images/icons/icon-96x96.png",
-      "sizes": "96x96",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "images/icons/icon-128x128.png",
-      "sizes": "128x128",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "images/icons/icon-144x144.png",
-      "sizes": "144x144",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "images/icons/icon-152x152.png",
-      "sizes": "152x152",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "images/icons/icon-192x192.png",
+      "src": "images/logo/logo-jaebets.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "images/icons/icon-384x384.png",
-      "sizes": "384x384",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "images/icons/icon-512x512.png",
+      "src": "images/logo/logo-jaebets.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
@@ -63,18 +27,18 @@
   ],
   "screenshots": [
     {
-      "src": "images/screenshots/dashboard-wide.png",
+      "src": "images/ecrans/admin-dashboard.webp",
       "sizes": "1920x1080",
-      "type": "image/png",
+      "type": "image/webp",
       "form_factor": "wide",
       "label": "Tableau de bord - Vue desktop"
     },
     {
-      "src": "images/screenshots/dashboard-mobile.png",
+      "src": "images/ecrans/admin-login.webp",
       "sizes": "390x844",
-      "type": "image/png",
+      "type": "image/webp",
       "form_factor": "narrow",
-      "label": "Tableau de bord - Vue mobile"
+      "label": "Connexion - Vue mobile"
     }
   ],
   "shortcuts": [
@@ -83,51 +47,35 @@
       "short_name": "Dashboard",
       "description": "Accéder au tableau de bord principal",
       "url": "/dashboard.html",
-      "icons": [{ "src": "images/icons/shortcut-dashboard.png", "sizes": "96x96" }]
+      "icons": [{ "src": "images/logo/logo-jaebets.png", "sizes": "96x96" }]
     },
     {
       "name": "Dispatch",
       "short_name": "Dispatch",
       "description": "Gestion du dispatch en temps réel",
       "url": "/dispatch.html",
-      "icons": [{ "src": "images/icons/shortcut-dispatch.png", "sizes": "96x96" }]
+      "icons": [{ "src": "images/logo/logo-jaebets.png", "sizes": "96x96" }]
     },
     {
       "name": "Réservations",
       "short_name": "Réservations",
       "description": "Gérer les réservations clients",
       "url": "/reservations.html",
-      "icons": [{ "src": "images/icons/shortcut-reservations.png", "sizes": "96x96" }]
+      "icons": [{ "src": "images/logo/logo-jaebets.png", "sizes": "96x96" }]
     },
     {
       "name": "GPS Temps Réel",
       "short_name": "GPS",
       "description": "Suivi GPS de la flotte",
       "url": "/gps.html",
-      "icons": [{ "src": "images/icons/shortcut-gps.png", "sizes": "96x96" }]
+      "icons": [{ "src": "images/logo/logo-jaebets.png", "sizes": "96x96" }]
     }
   ],
   "related_applications": [
     {
       "platform": "webapp",
-      "url": "https://admin.jaebets-holding.com"
+      "url": "https://administrateur.jaebets-holding.com"
     }
   ],
-  "prefer_related_applications": false,
-  "protocol_handlers": [
-    {
-      "protocol": "web+navette",
-      "url": "/dispatch.html?action=%s"
-    }
-  ],
-  "share_target": {
-    "action": "/reservations.html",
-    "method": "POST",
-    "enctype": "multipart/form-data",
-    "params": {
-      "title": "reservation_title",
-      "text": "reservation_details",
-      "url": "reservation_url"
-    }
-  }
+  "prefer_related_applications": false
 }
