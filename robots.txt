@@ -1,0 +1,36 @@
+# Robots.txt - Navette Express Admin
+# JAEBETS HOLDING - administrateur.jaebets-holding.com
+
+User-agent: *
+
+# Pages autorisées (page de connexion publique)
+Allow: /
+Allow: /index.html
+
+# Pages admin protégées - Ne pas indexer
+Disallow: /dashboard.html
+Disallow: /utilisateurs.html
+Disallow: /lignes.html
+Disallow: /creer-ligne.html
+Disallow: /flotte.html
+Disallow: /chauffeurs.html
+Disallow: /dispatch.html
+Disallow: /reservations.html
+Disallow: /paiements.html
+Disallow: /facturation.html
+Disallow: /gps.html
+Disallow: /notifications.html
+Disallow: /rapports.html
+Disallow: /parametres.html
+Disallow: /erreur.html
+
+# Ressources techniques
+Disallow: /js/
+Disallow: /css/
+Disallow: /sw.js
+
+# Sitemap
+Sitemap: https://administrateur.jaebets-holding.com/sitemap.xml
+
+# Délai entre requêtes (politesse)
+Crawl-delay: 10
