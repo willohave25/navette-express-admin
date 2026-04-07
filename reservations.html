@@ -7,8 +7,8 @@
     <meta name="theme-color" content="#1B2A4A">
     <title>Réservations - Navette Express Admin</title>
     <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/png" href="images/favicon.png">
-    <link rel="apple-touch-icon" href="images/icon-192.png">
+    <link rel="icon" type="image/png" href="images/logo/logo-jaebets.png">
+    <link rel="apple-touch-icon" href="images/logo/logo-jaebets.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/admin.css">
 </head>
@@ -369,7 +369,7 @@
                         </div>
                         <div class="detail-row">
                             <span class="detail-label">Email</span>
-                            <span class="detail-value">kouame.jb@email.ci</span>
+                            <span class="detail-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fb90948e9a969ed59199bb9e969a9297d59892">[email&#160;protected]</a></span>
                         </div>
                     </div>
                     <div class="detail-section">
@@ -447,7 +447,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="js/admin.js"></script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/admin.js"></script>
     <script>
         // Actions sur les boutons
         document.querySelectorAll('.action-icon').forEach(btn => {
@@ -483,10 +483,4 @@
             NXToast.success('Remboursement', 'Le remboursement de 2 500 FCFA a été initié.');
         });
 
-        // Export
-        document.getElementById('exportBtn').addEventListener('click', function() {
-            NXToast.success('Export', 'Le fichier CSV sera téléchargé dans quelques instants.');
-        });
-    </script>
-</body>
-</html>
+        // Expo
