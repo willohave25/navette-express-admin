@@ -211,7 +211,7 @@
                         </svg>
                     </div>
                     <div class="kpi-content">
-                        <span class="kpi-value" data-value="12450">12 450</span>
+                        <span class="kpi-value" id="kpi-users">–</span>
                         <span class="kpi-label">Utilisateurs totaux</span>
                     </div>
                     <div class="kpi-trend positive">
@@ -232,7 +232,7 @@
                         </svg>
                     </div>
                     <div class="kpi-content">
-                        <span class="kpi-value" data-value="42">42</span>
+                        <span class="kpi-value" id="kpi-lines">–</span>
                         <span class="kpi-label">Lignes actives</span>
                     </div>
                     <div class="kpi-trend positive">
@@ -253,7 +253,7 @@
                         </svg>
                     </div>
                     <div class="kpi-content">
-                        <span class="kpi-value" data-value="28">28</span>
+                        <span class="kpi-value" id="kpi-vehicles">–</span>
                         <span class="kpi-label">Bus en circulation</span>
                     </div>
                     <div class="kpi-trend neutral">
@@ -272,7 +272,7 @@
                         </svg>
                     </div>
                     <div class="kpi-content">
-                        <span class="kpi-value currency" data-value="8750000">8 750 000</span>
+                        <span class="kpi-value currency" id="kpi-revenue">–</span>
                         <span class="kpi-label">Revenus du mois (FCFA)</span>
                     </div>
                     <div class="kpi-trend positive">
@@ -292,7 +292,7 @@
                         </svg>
                     </div>
                     <div class="kpi-content">
-                        <span class="kpi-value" data-value="231">231</span>
+                        <span class="kpi-value" id="kpi-reservations">–</span>
                         <span class="kpi-label">Réservations aujourd'hui</span>
                     </div>
                     <div class="kpi-trend positive">
@@ -605,11 +605,12 @@
     </main>
 
     <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
     <script src="js/admin.js"></script>
     <script src="js/charts.js"></script>
     <script>
-        // Initialisation Dashboard
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', async function() {
             // Date actuelle
             const dateEl = document.getElementById('currentDate');
             if (dateEl) {
@@ -617,47 +618,149 @@
                 dateEl.textContent = new Date().toLocaleDateString('fr-CI', options);
             }
 
-            // Graphique revenus mensuels
-            NXCharts.create('line', 'revenueChart', {
-                labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Déc'],
-                datasets: [{
-                    label: 'Revenus (millions FCFA)',
-                    data: [5.2, 5.8, 6.1, 6.5, 7.2, 7.8, 8.1, 7.9, 8.3, 8.5, 8.7, 8.75],
-                    color: '#C8A951'
-                }],
-                showArea: true
-            });
+            const fmt = n => new Intl.NumberFormat('fr-FR').format(n || 0);
 
-            // Graphique lignes populaires (barres horizontales)
-            NXCharts.create('bar', 'linesChart', {
-                labels: ['Abidjan–Bassam', 'Cocody–Plateau', 'Yopougon–Adjamé', 'Marcory–Treich.', 'Abobo–Adjamé'],
-                datasets: [{
-                    data: [2340, 1890, 1567, 1234, 1102],
-                    color: '#2EC4B6'
-                }],
-                horizontal: true
-            });
+            // ── KPIs depuis Supabase ──────────────────────────────────
+            try {
+                const kpis = await NXSupabase.getDashboardKPIs();
+                const d = kpis.data || {};
 
-            // Graphique méthodes de paiement (donut)
-            NXCharts.create('donut', 'paymentMethodsChart', {
-                labels: ['Orange Money', 'MTN MoMo', 'Carte bancaire', 'Espèces'],
-                data: [45, 32, 15, 8],
-                colors: ['#FF6B00', '#FFCC00', '#3498DB', '#7F8C8D']
-            });
+                document.getElementById('kpi-users').textContent       = fmt(d.total_passengers);
+                document.getElementById('kpi-lines').textContent        = fmt(d.active_lines);
+                document.getElementById('kpi-vehicles').textContent     = fmt(d.active_vehicles);
+                document.getElementById('kpi-revenue').textContent      = fmt(d.total_revenue_today) + ' FCFA';
+                document.getElementById('kpi-reservations').textContent = fmt(d.total_reservations_today);
+            } catch(e) {
+                console.error('KPIs:', e);
+            }
 
-            // Graphique statut flotte (donut)
-            NXCharts.create('donut', 'fleetStatusChart', {
-                labels: ['En service', 'Disponibles', 'Maintenance', 'Hors service'],
-                data: [28, 8, 4, 2],
-                colors: ['#2ECC71', '#2EC4B6', '#9B59B6', '#E74C3C']
-            });
+            // ── Revenus mensuels ──────────────────────────────────────
+            try {
+                const client = NXSupabase.getClient();
+                const now = new Date();
+                const labels = [], revenues = [];
+                for (let i = 11; i >= 0; i--) {
+                    const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+                    labels.push(d.toLocaleDateString('fr-FR', { month: 'short' }));
+                    const start = d.toISOString().split('T')[0];
+                    const end = new Date(d.getFullYear(), d.getMonth() + 1, 0).toISOString().split('T')[0];
+                    const { data } = await client.from('transactions')
+                        .select('amount')
+                        .eq('status', 'completed')
+                        .gte('created_at', start)
+                        .lte('created_at', end);
+                    const total = (data || []).reduce((s, r) => s + (r.amount || 0), 0);
+                    revenues.push(Math.round(total / 1000000 * 10) / 10);
+                }
+                NXCharts.create('line', 'revenueChart', {
+                    labels,
+                    datasets: [{ label: 'Revenus (millions FCFA)', data: revenues, color: '#C8A951' }],
+                    showArea: true
+                });
+            } catch(e) {
+                NXCharts.create('line', 'revenueChart', {
+                    labels: ['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août','Sep','Oct','Nov','Déc'],
+                    datasets: [{ label: 'Revenus (millions FCFA)', data: [0,0,0,0,0,0,0,0,0,0,0,0], color: '#C8A951' }],
+                    showArea: true
+                });
+            }
 
-            // Graphique types utilisateurs (donut)
-            NXCharts.create('donut', 'userTypesChart', {
-                labels: ['Passagers', 'Entreprises', 'Chauffeurs', 'Admins'],
-                data: [9850, 156, 89, 12],
-                colors: ['#2EC4B6', '#C8A951', '#3498DB', '#7F8C8D']
-            });
+            // ── Lignes populaires (par abonnements) ───────────────────
+            try {
+                const client = NXSupabase.getClient();
+                const { data: subs } = await client.from('subscriptions')
+                    .select('line_id, lines(name)')
+                    .eq('status', 'active');
+                const counts = {};
+                (subs || []).forEach(s => {
+                    const name = s.lines?.name || s.line_id;
+                    counts[name] = (counts[name] || 0) + 1;
+                });
+                const sorted = Object.entries(counts).sort((a,b) => b[1]-a[1]).slice(0,5);
+                NXCharts.create('bar', 'linesChart', {
+                    labels: sorted.map(x => x[0]),
+                    datasets: [{ data: sorted.map(x => x[1]), color: '#2EC4B6' }],
+                    horizontal: true
+                });
+            } catch(e) {
+                NXCharts.create('bar', 'linesChart', {
+                    labels: ['Aucune donnée'],
+                    datasets: [{ data: [0], color: '#2EC4B6' }],
+                    horizontal: true
+                });
+            }
+
+            // ── Méthodes de paiement ──────────────────────────────────
+            try {
+                const client = NXSupabase.getClient();
+                const { data: txs } = await client.from('transactions').select('payment_method');
+                const pm = {};
+                (txs || []).forEach(t => { pm[t.payment_method] = (pm[t.payment_method] || 0) + 1; });
+                const labels = Object.keys(pm);
+                const vals = Object.values(pm);
+                NXCharts.create('donut', 'paymentMethodsChart', {
+                    labels: labels.length ? labels : ['Aucune donnée'],
+                    data: vals.length ? vals : [1],
+                    colors: ['#FF6B00','#FFCC00','#3498DB','#7F8C8D','#2ECC71','#9B59B6']
+                });
+            } catch(e) {
+                NXCharts.create('donut', 'paymentMethodsChart', {
+                    labels: ['Orange Money','MTN MoMo','Wave','Espèces'],
+                    data: [1,1,1,1],
+                    colors: ['#FF6B00','#FFCC00','#3498DB','#7F8C8D']
+                });
+            }
+
+            // ── Statut flotte ─────────────────────────────────────────
+            try {
+                const client = NXSupabase.getClient();
+                const { data: vehs } = await client.from('vehicles').select('status');
+                const vs = { in_service: 0, available: 0, maintenance: 0, inactive: 0 };
+                (vehs || []).forEach(v => { vs[v.status] = (vs[v.status] || 0) + 1; });
+                NXCharts.create('donut', 'fleetStatusChart', {
+                    labels: ['En service','Disponibles','Maintenance','Hors service'],
+                    data: [vs.in_service, vs.available, vs.maintenance, vs.inactive],
+                    colors: ['#2ECC71','#2EC4B6','#9B59B6','#E74C3C']
+                });
+                // Mettre à jour la légende
+                const leg = document.querySelector('#fleetStatusChart').closest('.chart-card').querySelector('.legend-list');
+                if (leg) leg.innerHTML = `
+                    <li><span class="legend-dot green"></span> En service (${vs.in_service})</li>
+                    <li><span class="legend-dot turquoise"></span> Disponibles (${vs.available})</li>
+                    <li><span class="legend-dot purple"></span> Maintenance (${vs.maintenance})</li>
+                    <li><span class="legend-dot red"></span> Hors service (${vs.inactive})</li>`;
+            } catch(e) {
+                NXCharts.create('donut', 'fleetStatusChart', {
+                    labels: ['Aucun véhicule'],
+                    data: [1],
+                    colors: ['#95A5A6']
+                });
+            }
+
+            // ── Types utilisateurs ────────────────────────────────────
+            try {
+                const client = NXSupabase.getClient();
+                const { data: usrs } = await client.from('users').select('role');
+                const ur = { passenger: 0, enterprise: 0, driver: 0, admin: 0 };
+                (usrs || []).forEach(u => { ur[u.role] = (ur[u.role] || 0) + 1; });
+                NXCharts.create('donut', 'userTypesChart', {
+                    labels: ['Passagers','Entreprises','Chauffeurs','Admins'],
+                    data: [ur.passenger, ur.enterprise, ur.driver, ur.admin],
+                    colors: ['#2EC4B6','#C8A951','#3498DB','#7F8C8D']
+                });
+                const leg2 = document.querySelector('#userTypesChart').closest('.chart-card').querySelector('.legend-list');
+                if (leg2) leg2.innerHTML = `
+                    <li><span class="legend-dot turquoise"></span> Passagers (${ur.passenger})</li>
+                    <li><span class="legend-dot gold"></span> Entreprises (${ur.enterprise})</li>
+                    <li><span class="legend-dot blue"></span> Chauffeurs (${ur.driver})</li>
+                    <li><span class="legend-dot gray"></span> Admins (${ur.admin})</li>`;
+            } catch(e) {
+                NXCharts.create('donut', 'userTypesChart', {
+                    labels: ['Passagers','Entreprises','Chauffeurs','Admins'],
+                    data: [1,1,1,1],
+                    colors: ['#2EC4B6','#C8A951','#3498DB','#7F8C8D']
+                });
+            }
         });
     </script>
 </body>
