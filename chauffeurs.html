@@ -514,6 +514,16 @@
                     </div>
                     <div class="form-row cols-2">
                         <div class="form-group">
+                            <label for="driverEmail">Email *</label>
+                            <input type="email" id="driverEmail" placeholder="chauffeur@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="driverPassword">Mot de passe *</label>
+                            <input type="text" id="driverPassword" placeholder="Mot de passe initial" required>
+                        </div>
+                    </div>
+                    <div class="form-row cols-2">
+                        <div class="form-group">
                             <label for="driverPhone">Téléphone *</label>
                             <input type="tel" id="driverPhone" placeholder="+225 XX XX XX XX XX" required>
                         </div>
@@ -532,11 +542,8 @@
                         </div>
                         <div class="form-group">
                             <label for="driverBus">Bus assigné</label>
-                            <select id="driverBus">
+                            <select id="driverBus" id="driverBusSelect">
                                 <option value="">Non assigné</option>
-                                <option value="AB-1234-CI">AB-1234-CI (30 places)</option>
-                                <option value="CD-5678-CI">CD-5678-CI (60 places)</option>
-                                <option value="VIP-001-CI">VIP-001-CI (VIP)</option>
                             </select>
                         </div>
                     </div>
@@ -560,22 +567,130 @@
     <script src="js/supabase-config.js"></script>
     <script src="js/admin.js"></script>
     <script>
+        NXSupabase.init();
+
+        // Charger les véhicules disponibles dans le select
+        async function loadVehicles() {
+            const result = await NXSupabase.getVehicles({ status: 'available' });
+            const select = document.getElementById('driverBus');
+            if (result.success && result.data.length > 0) {
+                select.innerHTML = '<option value="">Non assigné</option>';
+                result.data.forEach(v => {
+                    select.innerHTML += `<option value="${v.id}">${v.plate_number} — ${v.brand || ''} ${v.model || ''} (${v.capacity} places)</option>`;
+                });
+            }
+        }
+
+        // Charger les chauffeurs existants
+        async function loadDrivers() {
+            const result = await NXSupabase.getDrivers();
+            const tbody = document.querySelector('#driversTable tbody');
+            if (!tbody) return;
+            if (!result.success || !result.data || result.data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:2rem;color:#888;">Aucun chauffeur enregistré</td></tr>';
+                return;
+            }
+            tbody.innerHTML = result.data.map(d => `
+                <tr>
+                    <td>${d.user?.full_name || '–'}</td>
+                    <td>${d.user?.phone || '–'}</td>
+                    <td>${d.license_number || '–'}</td>
+                    <td>${d.vehicle?.plate_number || 'Non assigné'}</td>
+                    <td>${d.rating || 5.0}/5</td>
+                    <td><span class="badge badge-${d.status === 'available' ? 'success' : d.status === 'on_trip' ? 'warning' : 'secondary'}">${d.status}</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-secondary">Voir</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
         document.getElementById('addDriverBtn').addEventListener('click', function() {
+            loadVehicles();
             NXModal.open('addDriverModal');
         });
-        
-        document.getElementById('saveDriverBtn').addEventListener('click', function() {
-            NXModal.close('addDriverModal');
-            NXToast.success('Chauffeur ajouté', 'Le chauffeur a été enregistré avec succès.');
+
+        document.getElementById('saveDriverBtn').addEventListener('click', async function() {
+            const firstName   = document.getElementById('driverFirstName').value.trim();
+            const lastName    = document.getElementById('driverLastName').value.trim();
+            const email       = document.getElementById('driverEmail').value.trim();
+            const password    = document.getElementById('driverPassword').value.trim();
+            const phone       = document.getElementById('driverPhone').value.trim();
+            const license     = document.getElementById('driverLicense').value;
+            const licenseNum  = document.getElementById('driverLicenseNumber').value.trim();
+            const vehicleId   = document.getElementById('driverBus').value;
+
+            if (!firstName || !lastName || !email || !password || !phone) {
+                NXToast.error('Champs manquants', 'Remplissez tous les champs obligatoires.');
+                return;
+            }
+
+            const btn = this;
+            btn.disabled = true;
+            btn.textContent = 'Enregistrement...';
+
+            try {
+                const client = NXSupabase.getClient();
+
+                // 1. Créer le profil dans public.users
+                const { data: userRow, error: userErr } = await client
+                    .from('users')
+                    .insert({
+                        email: email,
+                        phone: phone,
+                        full_name: `${firstName} ${lastName}`,
+                        role: 'driver',
+                        password_hash: password,
+                        is_active: true
+                    })
+                    .select()
+                    .single();
+
+                if (userErr) throw new Error(userErr.message);
+
+                // 2. Créer l'entrée chauffeur
+                const { error: driverErr } = await client
+                    .from('drivers')
+                    .insert({
+                        user_id: userRow.id,
+                        license_number: licenseNum || null,
+                        vehicle_id: vehicleId || null,
+                        status: 'available'
+                    });
+
+                if (driverErr) throw new Error(driverErr.message);
+
+                NXModal.close('addDriverModal');
+                NXToast.success('Chauffeur ajouté', `${firstName} ${lastName} a été enregistré.`);
+
+                // Réinitialiser le formulaire
+                document.getElementById('driverFirstName').value = '';
+                document.getElementById('driverLastName').value = '';
+                document.getElementById('driverEmail').value = '';
+                document.getElementById('driverPassword').value = '';
+                document.getElementById('driverPhone').value = '';
+
+                // Recharger la liste
+                loadDrivers();
+
+            } catch(e) {
+                NXToast.error('Erreur', e.message);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Ajouter';
+            }
         });
-        
+
         document.getElementById('planningBtn').addEventListener('click', function() {
-            NXToast.info('Planning', 'Fonctionnalité de planning en cours de développement.');
+            NXToast.info('Planning', 'Fonctionnalité en cours de développement.');
         });
-        
+
         document.getElementById('assignBusBtn').addEventListener('click', function() {
             NXToast.info('Attribution', 'Sélectionnez un chauffeur pour lui attribuer un bus.');
         });
+
+        // Charger les données au démarrage
+        loadDrivers();
     </script>
 </body>
 </html>
