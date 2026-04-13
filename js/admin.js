@@ -247,22 +247,32 @@
             const emailInput = document.getElementById('email');
             const passwordInput = document.getElementById('password');
             const btn = document.getElementById('btnLogin');
-            
-            // Validation
+
             const emailValid = this.validateEmail(emailInput);
             const passwordValid = this.validatePassword(passwordInput);
-            
             if (!emailValid || !passwordValid) return;
 
-            // État de chargement
             btn.classList.add('loading');
             btn.disabled = true;
 
             try {
-                // Simulation connexion (remplacer par Supabase Auth)
-                await this.simulateLogin(emailInput.value, passwordInput.value);
-                
-                // Sauvegarder "Se souvenir de moi"
+                NXSupabase.init();
+                const result = await NXSupabase.signIn(emailInput.value, passwordInput.value);
+                if (!result.success) throw new Error(result.error || 'Identifiants incorrects');
+
+                // Vérifier que c'est bien un admin
+                const client = NXSupabase.getClient();
+                const { data: userRow } = await client
+                    .from('users')
+                    .select('role, full_name')
+                    .eq('auth_id', result.user.id)
+                    .single();
+
+                if (userRow && userRow.role !== 'admin') {
+                    await NXSupabase.signOut();
+                    throw new Error('Accès réservé aux administrateurs');
+                }
+
                 const rememberMe = document.getElementById('rememberMe');
                 if (rememberMe && rememberMe.checked) {
                     Storage.set('rememberedEmail', emailInput.value);
@@ -271,11 +281,7 @@
                 }
 
                 Toast.success('Connexion réussie', 'Redirection vers le tableau de bord...');
-                
-                // Redirection
-                setTimeout(() => {
-                    window.location.href = 'dashboard.html';
-                }, 1000);
+                setTimeout(() => { window.location.href = 'dashboard.html'; }, 1000);
 
             } catch (error) {
                 Toast.error('Erreur de connexion', error.message);
@@ -283,29 +289,6 @@
                 btn.classList.remove('loading');
                 btn.disabled = false;
             }
-        },
-
-        simulateLogin(email, password) {
-            return new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    // Simulation - accepter tout pour le développement
-                    if (email && password.length >= 8) {
-                        // Stocker session simulée
-                        Storage.set('adminSession', {
-                            user: {
-                                email: email,
-                                name: 'Administrateur',
-                                role: 'Super Admin'
-                            },
-                            token: 'demo_token_' + Date.now(),
-                            expires: Date.now() + (24 * 60 * 60 * 1000)
-                        });
-                        resolve({ success: true });
-                    } else {
-                        reject(new Error('Identifiants incorrects'));
-                    }
-                }, 1500);
-            });
         },
 
         restoreRememberMe() {
@@ -377,7 +360,8 @@
             Modal.confirm(
                 'Déconnexion',
                 'Êtes-vous sûr de vouloir vous déconnecter de la plateforme ?',
-                () => {
+                async () => {
+                    await NXSupabase.signOut();
                     Storage.remove('adminSession');
                     Toast.info('Déconnexion', 'À bientôt sur Navette Express !');
                     setTimeout(() => {
