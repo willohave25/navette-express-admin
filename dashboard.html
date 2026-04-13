@@ -620,6 +620,9 @@
 
             const fmt = n => new Intl.NumberFormat('fr-FR').format(n || 0);
 
+            // S'assurer que Supabase est initialisé
+            NXSupabase.init();
+
             // ── KPIs depuis Supabase ──────────────────────────────────
             try {
                 const kpis = await NXSupabase.getDashboardKPIs();
