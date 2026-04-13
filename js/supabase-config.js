@@ -202,10 +202,7 @@ const NXSupabase = (function() {
         try {
             let query = getClient()
                 .from('lines')
-                .select(`
-                    *,
-                    stops:line_stops(*)
-                `)
+                .select('*')
                 .order('name');
 
             if (options.status) query = query.eq('status', options.status);
