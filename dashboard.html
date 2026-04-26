@@ -605,55 +605,69 @@
     </main>
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/supabase-config.js"></script>
-    <script src="js/admin.js"></script>
-    <script src="js/charts.js"></script>
+    <script src="api-config.js"></script>
+    <script src="auth-api.js"></script>
+    <script src="admin.js"></script>
+    <script src="charts.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', async function() {
+
             // Date actuelle
             const dateEl = document.getElementById('currentDate');
             if (dateEl) {
-                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-                dateEl.textContent = new Date().toLocaleDateString('fr-CI', options);
+                dateEl.textContent = new Date().toLocaleDateString('fr-CI', {
+                    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+                });
             }
 
             const fmt = n => new Intl.NumberFormat('fr-FR').format(n || 0);
+            const API = window.NavetteAuth;
 
-            // S'assurer que Supabase est initialisé
-            NXSupabase.init();
-
-            // ── KPIs depuis Supabase ──────────────────────────────────
+            // ── KPIs depuis l'API ─────────────────────────────────────
             try {
-                const kpis = await NXSupabase.getDashboardKPIs();
-                const d = kpis.data || {};
+                const kpis = await API.apiFetch('/api/dashboard/kpis');
+                if (kpis && kpis.data) {
+                    const d = kpis.data;
+                    document.getElementById('kpi-users').textContent       = fmt(d.passengers);
+                    document.getElementById('kpi-lines').textContent        = fmt(d.active_lines);
+                    document.getElementById('kpi-vehicles').textContent     = fmt(d.vehicles);
+                    document.getElementById('kpi-revenue').textContent      = fmt(d.month_revenue) + ' FCFA';
+                    document.getElementById('kpi-reservations').textContent = fmt(d.today_trips);
+                }
+            } catch(e) { console.error('KPIs:', e); }
 
-                document.getElementById('kpi-users').textContent       = fmt(d.total_passengers);
-                document.getElementById('kpi-lines').textContent        = fmt(d.active_lines);
-                document.getElementById('kpi-vehicles').textContent     = fmt(d.active_vehicles);
-                document.getElementById('kpi-revenue').textContent      = fmt(d.total_revenue_today) + ' FCFA';
-                document.getElementById('kpi-reservations').textContent = fmt(d.total_reservations_today);
-            } catch(e) {
-                console.error('KPIs:', e);
-            }
-
-            // ── Revenus mensuels ──────────────────────────────────────
+            // ── Alertes système (API réelles) ─────────────────────────
             try {
-                const client = NXSupabase.getClient();
+                const alertsRes = await API.apiFetch('/api/dashboard/alerts');
+                const alertsGrid = document.querySelector('.alerts-grid');
+                if (alertsGrid && alertsRes && alertsRes.data) {
+                    const alerts = alertsRes.data;
+                    if (alerts.length === 0) {
+                        alertsGrid.innerHTML = '<div class="alert-card info"><div class="alert-content"><span class="alert-title">Aucune alerte</span><p>Tout fonctionne normalement.</p></div></div>';
+                    } else {
+                        const typeClass = { warning: 'warning', alert: 'danger', info: 'info' };
+                        alertsGrid.innerHTML = alerts.map(a => `
+                            <div class="alert-card ${typeClass[a.type] || 'info'}">
+                                <div class="alert-content">
+                                    <span class="alert-title">${a.category.charAt(0).toUpperCase() + a.category.slice(1)}</span>
+                                    <p>${a.message}</p>
+                                </div>
+                            </div>`).join('');
+                    }
+                }
+            } catch(e) { console.error('Alertes:', e); }
+
+            // ── Revenus 12 derniers mois ──────────────────────────────
+            try {
+                const revRes = await API.apiFetch('/api/dashboard/revenue?period=year');
                 const now = new Date();
                 const labels = [], revenues = [];
                 for (let i = 11; i >= 0; i--) {
                     const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
                     labels.push(d.toLocaleDateString('fr-FR', { month: 'short' }));
-                    const start = d.toISOString().split('T')[0];
-                    const end = new Date(d.getFullYear(), d.getMonth() + 1, 0).toISOString().split('T')[0];
-                    const { data } = await client.from('transactions')
-                        .select('amount')
-                        .eq('status', 'completed')
-                        .gte('created_at', start)
-                        .lte('created_at', end);
-                    const total = (data || []).reduce((s, r) => s + (r.amount || 0), 0);
-                    revenues.push(Math.round(total / 1000000 * 10) / 10);
+                    const key = d.toISOString().substring(0, 7);
+                    const row = (revRes?.data || []).find(r => r.period && r.period.startsWith(key));
+                    revenues.push(row ? Math.round((row.total || 0) / 1000000 * 10) / 10 : 0);
                 }
                 NXCharts.create('line', 'revenueChart', {
                     labels,
@@ -668,23 +682,23 @@
                 });
             }
 
-            // ── Lignes populaires (par abonnements) ───────────────────
+            // ── Lignes populaires ─────────────────────────────────────
             try {
-                const client = NXSupabase.getClient();
-                const { data: subs } = await client.from('subscriptions')
-                    .select('line_id, lines(name)')
-                    .eq('status', 'active');
-                const counts = {};
-                (subs || []).forEach(s => {
-                    const name = s.lines?.name || s.line_id;
-                    counts[name] = (counts[name] || 0) + 1;
-                });
-                const sorted = Object.entries(counts).sort((a,b) => b[1]-a[1]).slice(0,5);
-                NXCharts.create('bar', 'linesChart', {
-                    labels: sorted.map(x => x[0]),
-                    datasets: [{ data: sorted.map(x => x[1]), color: '#2EC4B6' }],
-                    horizontal: true
-                });
+                const lineStats = await API.apiFetch('/api/dashboard/lines');
+                const rows = (lineStats?.data || []).slice(0, 5);
+                if (rows.length) {
+                    NXCharts.create('bar', 'linesChart', {
+                        labels: rows.map(r => r.name.length > 20 ? r.name.substring(0,18)+'…' : r.name),
+                        datasets: [{ data: rows.map(r => parseInt(r.subscriptions) || 0), color: '#2EC4B6' }],
+                        horizontal: true
+                    });
+                } else {
+                    NXCharts.create('bar', 'linesChart', {
+                        labels: ['Aucun abonnement'],
+                        datasets: [{ data: [0], color: '#2EC4B6' }],
+                        horizontal: true
+                    });
+                }
             } catch(e) {
                 NXCharts.create('bar', 'linesChart', {
                     labels: ['Aucune donnée'],
@@ -695,14 +709,15 @@
 
             // ── Méthodes de paiement ──────────────────────────────────
             try {
-                const client = NXSupabase.getClient();
-                const { data: txs } = await client.from('transactions').select('payment_method');
+                const txRes = await API.apiFetch('/api/payments/history');
+                const txs = txRes?.data || [];
                 const pm = {};
-                (txs || []).forEach(t => { pm[t.payment_method] = (pm[t.payment_method] || 0) + 1; });
-                const labels = Object.keys(pm);
+                txs.forEach(t => { if (t.payment_method) pm[t.payment_method] = (pm[t.payment_method] || 0) + 1; });
+                const pmLabels = { orange_money: 'Orange Money', mtn_momo: 'MTN MoMo', moov_money: 'Moov Money', wave: 'Wave', card: 'Carte', cash: 'Espèces', company_credit: 'Crédit entreprise' };
+                const labels = Object.keys(pm).map(k => pmLabels[k] || k);
                 const vals = Object.values(pm);
                 NXCharts.create('donut', 'paymentMethodsChart', {
-                    labels: labels.length ? labels : ['Aucune donnée'],
+                    labels: labels.length ? labels : ['Aucune transaction'],
                     data: vals.length ? vals : [1],
                     colors: ['#FF6B00','#FFCC00','#3498DB','#7F8C8D','#2ECC71','#9B59B6']
                 });
@@ -716,17 +731,16 @@
 
             // ── Statut flotte ─────────────────────────────────────────
             try {
-                const client = NXSupabase.getClient();
-                const { data: vehs } = await client.from('vehicles').select('status');
+                const vehRes = await API.apiFetch('/api/vehicles?limit=100');
+                const vehs = vehRes?.data || [];
                 const vs = { in_service: 0, available: 0, maintenance: 0, inactive: 0 };
-                (vehs || []).forEach(v => { vs[v.status] = (vs[v.status] || 0) + 1; });
+                vehs.forEach(v => { if (vs[v.status] !== undefined) vs[v.status]++; });
                 NXCharts.create('donut', 'fleetStatusChart', {
                     labels: ['En service','Disponibles','Maintenance','Hors service'],
                     data: [vs.in_service, vs.available, vs.maintenance, vs.inactive],
                     colors: ['#2ECC71','#2EC4B6','#9B59B6','#E74C3C']
                 });
-                // Mettre à jour la légende
-                const leg = document.querySelector('#fleetStatusChart').closest('.chart-card').querySelector('.legend-list');
+                const leg = document.querySelector('#fleetStatusChart') && document.querySelector('#fleetStatusChart').closest('.chart-card')?.querySelector('.legend-list');
                 if (leg) leg.innerHTML = `
                     <li><span class="legend-dot green"></span> En service (${vs.in_service})</li>
                     <li><span class="legend-dot turquoise"></span> Disponibles (${vs.available})</li>
@@ -734,29 +748,31 @@
                     <li><span class="legend-dot red"></span> Hors service (${vs.inactive})</li>`;
             } catch(e) {
                 NXCharts.create('donut', 'fleetStatusChart', {
-                    labels: ['Aucun véhicule'],
-                    data: [1],
-                    colors: ['#95A5A6']
+                    labels: ['Aucun véhicule'], data: [1], colors: ['#95A5A6']
                 });
             }
 
             // ── Types utilisateurs ────────────────────────────────────
             try {
-                const client = NXSupabase.getClient();
-                const { data: usrs } = await client.from('users').select('role');
-                const ur = { passenger: 0, enterprise: 0, driver: 0, admin: 0 };
-                (usrs || []).forEach(u => { ur[u.role] = (ur[u.role] || 0) + 1; });
+                const usrRes = await API.apiFetch('/api/users?limit=1000');
+                const usrs = usrRes?.data || [];
+                const ur = { passenger: 0, enterprise_admin: 0, employee: 0, driver: 0, admin: 0, super_admin: 0 };
+                usrs.forEach(u => { if (ur[u.role] !== undefined) ur[u.role]++; });
+                const passagers = ur.passenger;
+                const entreprises = ur.enterprise_admin + ur.employee;
+                const chauffeurs = ur.driver;
+                const admins = ur.admin + ur.super_admin;
                 NXCharts.create('donut', 'userTypesChart', {
                     labels: ['Passagers','Entreprises','Chauffeurs','Admins'],
-                    data: [ur.passenger, ur.enterprise, ur.driver, ur.admin],
+                    data: [passagers, entreprises, chauffeurs, admins],
                     colors: ['#2EC4B6','#C8A951','#3498DB','#7F8C8D']
                 });
-                const leg2 = document.querySelector('#userTypesChart').closest('.chart-card').querySelector('.legend-list');
+                const leg2 = document.querySelector('#userTypesChart') && document.querySelector('#userTypesChart').closest('.chart-card')?.querySelector('.legend-list');
                 if (leg2) leg2.innerHTML = `
-                    <li><span class="legend-dot turquoise"></span> Passagers (${ur.passenger})</li>
-                    <li><span class="legend-dot gold"></span> Entreprises (${ur.enterprise})</li>
-                    <li><span class="legend-dot blue"></span> Chauffeurs (${ur.driver})</li>
-                    <li><span class="legend-dot gray"></span> Admins (${ur.admin})</li>`;
+                    <li><span class="legend-dot turquoise"></span> Passagers (${passagers})</li>
+                    <li><span class="legend-dot gold"></span> Entreprises (${entreprises})</li>
+                    <li><span class="legend-dot blue"></span> Chauffeurs (${chauffeurs})</li>
+                    <li><span class="legend-dot gray"></span> Admins (${admins})</li>`;
             } catch(e) {
                 NXCharts.create('donut', 'userTypesChart', {
                     labels: ['Passagers','Entreprises','Chauffeurs','Admins'],
