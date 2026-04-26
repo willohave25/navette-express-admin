@@ -334,10 +334,6 @@
                                     <label for="busSelect">Bus disponible</label>
                                     <select id="busSelect" name="busSelect">
                                         <option value="">Sélectionner un bus</option>
-                                        <option value="AB-1234-CI">AB-1234-CI (30 places) - Disponible</option>
-                                        <option value="CD-5678-CI">CD-5678-CI (60 places) - Disponible</option>
-                                        <option value="EF-9012-CI">EF-9012-CI (30 places) - Disponible</option>
-                                        <option value="VIP-001-CI">VIP-001-CI (20 places VIP) - Disponible</option>
                                     </select>
                                     <button type="button" class="btn btn-text" id="checkAvailability">
                                         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
@@ -520,9 +516,13 @@
     </main>
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/supabase-config.js"></script>
-    <script src="js/admin.js"></script>
+    
+    
+    <script src="api-config.js"></script>
+    <script src="auth-api.js"></script>
+    <script src="api-config.js"></script>
+    <script src="auth-api.js"></script>
+    <script src="admin.js"></script>
     <script>
         // Variables globales
         let capacity = 30;
@@ -674,21 +674,72 @@
             }, 1500);
         });
 
-        // Soumission formulaire
-        document.getElementById('createLineForm').addEventListener('submit', function(e) {
+        // Load real vehicles
+        async function loadVehicles() {
+            NXSupabase.init();
+            const client = NXSupabase.getClient();
+            const { data } = await client.from('vehicles').select('id,plate_number,capacity,type,status').eq('status','available').order('plate_number');
+            const sel = document.getElementById('busSelect');
+            (data || []).forEach(v => {
+                const opt = document.createElement('option');
+                opt.value = v.id;
+                opt.textContent = `${v.plate_number} (${v.capacity || '?'} places${v.type === 'vip' ? ' VIP' : ''}) - Disponible`;
+                sel.appendChild(opt);
+            });
+            if (!data || data.length === 0) {
+                // Also load all vehicles if none are available
+                const { data: allV } = await client.from('vehicles').select('id,plate_number,capacity,type').order('plate_number');
+                (allV || []).forEach(v => {
+                    const opt = document.createElement('option');
+                    opt.value = v.id;
+                    opt.textContent = `${v.plate_number} (${v.capacity || '?'} places${v.type === 'vip' ? ' VIP' : ''})`;
+                    sel.appendChild(opt);
+                });
+            }
+        }
+        loadVehicles();
+
+        // Soumission formulaire - sauvegarde réelle dans Supabase
+        document.getElementById('createLineForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            
+
+            const btn = this.querySelector('button[type="submit"]');
+            btn.disabled = true;
+            btn.textContent = 'Enregistrement...';
+
             const passengers = parseInt(document.getElementById('estimatedPassengers').value) || 0;
             const isActive = passengers >= capacity;
-            
-            NXToast.success(
-                'Ligne créée avec succès',
-                `La ligne a été créée avec le statut "${isActive ? 'Active' : 'En attente'}".`
-            );
-            
-            setTimeout(() => {
-                window.location.href = 'lignes.html';
-            }, 2000);
+
+            const payload = {
+                name: document.getElementById('lineName').value.trim(),
+                origin: document.getElementById('departure').value.trim(),
+                destination: document.getElementById('destination').value.trim(),
+                departure_time: document.getElementById('departureTime').value || null,
+                arrival_time: document.getElementById('arrivalTime').value || null,
+                distance_km: parseInt(document.getElementById('distance').value) || null,
+                frequency: document.getElementById('frequency').value,
+                type: document.querySelector('input[name="busType"]:checked')?.value === 'vip' ? 'vip' : 'standard',
+                capacity: capacity,
+                price_monthly: parseInt(document.getElementById('tarifAbonnement').value) || null,
+                price_per_trip: parseInt(document.getElementById('tarif').value) || null,
+                status: isActive ? 'active' : 'pending',
+                created_at: new Date().toISOString(),
+                updated_at: new Date().toISOString()
+            };
+
+            const client = NXSupabase.getClient();
+            const { error } = await client.from('lines').insert(payload);
+
+            btn.disabled = false;
+            btn.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Créer la ligne';
+
+            if (error) {
+                NXToast.error('Erreur', error.message);
+                return;
+            }
+
+            NXToast.success('Ligne créée', `La ligne a été enregistrée avec le statut "${isActive ? 'Active' : 'En attente'}".`);
+            setTimeout(() => { window.location.href = 'lignes.html'; }, 1500);
         });
 
         // Init
