@@ -563,65 +563,76 @@
     </div>
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/supabase-config.js"></script>
-    <script src="js/admin.js"></script>
+    
+    
+    <script src="api-config.js"></script>
+    <script src="auth-api.js"></script>
+    <script src="admin.js"></script>
     <script>
-        NXSupabase.init();
+        const API = window.NavetteAuth;
+        const statusLabel = { available: 'Disponible', on_trip: 'En trajet', off_duty: 'Repos', break: 'Pause', suspended: 'Suspendu' };
+        const statusColor = { available: 'success', on_trip: 'warning', off_duty: 'secondary', break: 'secondary', suspended: 'danger' };
 
-        // Charger les véhicules disponibles dans le select
         async function loadVehicles() {
-            const result = await NXSupabase.getVehicles({ status: 'available' });
+            const result = await API.apiFetch('/api/vehicles?status=available&limit=100');
             const select = document.getElementById('driverBus');
-            if (result.success && result.data.length > 0) {
-                select.innerHTML = '<option value="">Non assigné</option>';
-                result.data.forEach(v => {
-                    select.innerHTML += `<option value="${v.id}">${v.plate_number} — ${v.brand || ''} ${v.model || ''} (${v.capacity} places)</option>`;
-                });
-            }
+            if (!select) return;
+            select.innerHTML = '<option value="">Non assigné</option>';
+            (result?.data || []).forEach(v => {
+                select.innerHTML += `<option value="${v.id}">${v.plate_number} — ${v.brand || ''} ${v.model || ''} (${v.capacity} places)</option>`;
+            });
         }
 
-        // Charger les chauffeurs existants
         async function loadDrivers() {
-            const result = await NXSupabase.getDrivers();
             const tbody = document.querySelector('#driversTable tbody');
             if (!tbody) return;
-            if (!result.success || !result.data || result.data.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:2rem;">Chargement...</td></tr>';
+            const result = await API.apiFetch('/api/drivers?limit=100');
+            if (!result?.success || !result.data?.length) {
                 tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:2rem;color:#888;">Aucun chauffeur enregistré</td></tr>';
                 return;
             }
             tbody.innerHTML = result.data.map(d => `
                 <tr>
-                    <td>${d.user?.full_name || '–'}</td>
-                    <td>${d.user?.phone || '–'}</td>
+                    <td><strong>${d.full_name || '–'}</strong></td>
+                    <td>${d.phone || '–'}</td>
                     <td>${d.license_number || '–'}</td>
-                    <td>${d.vehicle?.plate_number || 'Non assigné'}</td>
-                    <td>${d.rating || 5.0}/5</td>
-                    <td><span class="badge badge-${d.status === 'available' ? 'success' : d.status === 'on_trip' ? 'warning' : 'secondary'}">${d.status}</span></td>
+                    <td>${d.plate_number || 'Non assigné'}</td>
+                    <td>⭐ ${d.rating || 5.0}/5</td>
+                    <td><span class="badge badge-${statusColor[d.status] || 'secondary'}">${statusLabel[d.status] || d.status}</span></td>
                     <td>
-                        <button class="btn btn-sm btn-secondary">Voir</button>
+                        <button class="btn btn-sm btn-secondary" onclick="viewDriver('${d.id}')">Voir</button>
                     </td>
                 </tr>
             `).join('');
         }
 
-        document.getElementById('addDriverBtn').addEventListener('click', function() {
+        function viewDriver(id) {
+            if (window.Toast) window.Toast.info('Chauffeur', 'Détail chauffeur — fonctionnalité à venir.');
+        }
+
+        const addBtn = document.getElementById('addDriverBtn');
+        const saveBtn = document.getElementById('saveDriverBtn');
+        const planningBtn = document.getElementById('planningBtn');
+        const assignBusBtn = document.getElementById('assignBusBtn');
+
+        if (addBtn) addBtn.addEventListener('click', function() {
             loadVehicles();
-            NXModal.open('addDriverModal');
+            if (window.Modal) Modal.open('addDriverModal');
+            else document.getElementById('addDriverModal')?.classList.add('active');
         });
 
-        document.getElementById('saveDriverBtn').addEventListener('click', async function() {
-            const firstName   = document.getElementById('driverFirstName').value.trim();
-            const lastName    = document.getElementById('driverLastName').value.trim();
-            const email       = document.getElementById('driverEmail').value.trim();
-            const password    = document.getElementById('driverPassword').value.trim();
-            const phone       = document.getElementById('driverPhone').value.trim();
-            const license     = document.getElementById('driverLicense').value;
-            const licenseNum  = document.getElementById('driverLicenseNumber').value.trim();
-            const vehicleId   = document.getElementById('driverBus').value;
+        if (saveBtn) saveBtn.addEventListener('click', async function() {
+            const firstName  = document.getElementById('driverFirstName')?.value.trim();
+            const lastName   = document.getElementById('driverLastName')?.value.trim();
+            const email      = document.getElementById('driverEmail')?.value.trim();
+            const password   = document.getElementById('driverPassword')?.value.trim() || 'Navette@2026!';
+            const phone      = document.getElementById('driverPhone')?.value.trim();
+            const licenseNum = document.getElementById('driverLicenseNumber')?.value.trim();
+            const vehicleId  = document.getElementById('driverBus')?.value;
 
-            if (!firstName || !lastName || !email || !password || !phone) {
-                NXToast.error('Champs manquants', 'Remplissez tous les champs obligatoires.');
+            if (!firstName || !lastName || !email || !phone) {
+                if (window.Toast) Toast.error('Champs manquants', 'Remplissez tous les champs obligatoires.');
                 return;
             }
 
@@ -630,66 +641,36 @@
             btn.textContent = 'Enregistrement...';
 
             try {
-                const client = NXSupabase.getClient();
-
-                // 1. Créer le profil dans public.users
-                const { data: userRow, error: userErr } = await client
-                    .from('users')
-                    .insert({
-                        email: email,
-                        phone: phone,
+                const result = await API.apiFetch('/api/drivers', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        email, password,
                         full_name: `${firstName} ${lastName}`,
-                        role: 'driver',
-                        password_hash: password,
-                        is_active: true
+                        phone,
+                        license_number: licenseNum || 'A-RENSEIGNER',
+                        vehicle_id: vehicleId || undefined
                     })
-                    .select()
-                    .single();
+                });
 
-                if (userErr) throw new Error(userErr.message);
+                if (!result?.success) throw new Error(result?.error?.message || 'Erreur création');
 
-                // 2. Créer l'entrée chauffeur
-                const { error: driverErr } = await client
-                    .from('drivers')
-                    .insert({
-                        user_id: userRow.id,
-                        license_number: licenseNum || null,
-                        vehicle_id: vehicleId || null,
-                        status: 'available'
-                    });
-
-                if (driverErr) throw new Error(driverErr.message);
-
-                NXModal.close('addDriverModal');
-                NXToast.success('Chauffeur ajouté', `${firstName} ${lastName} a été enregistré.`);
-
-                // Réinitialiser le formulaire
-                document.getElementById('driverFirstName').value = '';
-                document.getElementById('driverLastName').value = '';
-                document.getElementById('driverEmail').value = '';
-                document.getElementById('driverPassword').value = '';
-                document.getElementById('driverPhone').value = '';
-
-                // Recharger la liste
+                if (window.Modal) Modal.close('addDriverModal');
+                if (window.Toast) Toast.success('Chauffeur ajouté', `${firstName} ${lastName} a été enregistré.`);
+                ['driverFirstName','driverLastName','driverEmail','driverPassword','driverPhone','driverLicenseNumber'].forEach(id => {
+                    const el = document.getElementById(id); if (el) el.value = '';
+                });
                 loadDrivers();
-
             } catch(e) {
-                NXToast.error('Erreur', e.message);
+                if (window.Toast) Toast.error('Erreur', e.message);
             } finally {
                 btn.disabled = false;
                 btn.textContent = 'Ajouter';
             }
         });
 
-        document.getElementById('planningBtn').addEventListener('click', function() {
-            NXToast.info('Planning', 'Fonctionnalité en cours de développement.');
-        });
+        if (planningBtn) planningBtn.addEventListener('click', () => { if (window.Toast) Toast.info('Planning', 'Fonctionnalité en cours de développement.'); });
+        if (assignBusBtn) assignBusBtn.addEventListener('click', () => { if (window.Toast) Toast.info('Attribution', 'Sélectionnez un chauffeur pour lui attribuer un bus.'); });
 
-        document.getElementById('assignBusBtn').addEventListener('click', function() {
-            NXToast.info('Attribution', 'Sélectionnez un chauffeur pour lui attribuer un bus.');
-        });
-
-        // Charger les données au démarrage
         loadDrivers();
     </script>
 </body>
