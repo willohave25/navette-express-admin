@@ -561,9 +561,39 @@
         </div>
     </div>
 
+    <!-- Modal Assigner un bus -->
+    <div class="modal-overlay" id="assignBusModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Assigner un bus à un chauffeur</h3>
+                <button class="modal-close"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+            </div>
+            <div class="modal-body">
+                <div class="admin-form">
+                    <div class="form-group">
+                        <label>Chauffeur</label>
+                        <select id="assignDriverSelect" class="form-control">
+                            <option value="">Chargement...</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin-top:14px;">
+                        <label>Bus disponible</label>
+                        <select id="assignVehicleSelect" class="form-control">
+                            <option value="">Chargement...</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary modal-close">Annuler</button>
+                <button class="btn btn-primary" id="confirmAssignBtn">Confirmer</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
-    
-    
+
+
     <script src="js/api-config.js"></script>
     <script src="js/auth-api.js"></script>
     <script src="js/admin.js"></script>
@@ -668,7 +698,54 @@
         });
 
         if (planningBtn) planningBtn.addEventListener('click', () => { if (window.Toast) Toast.info('Planning', 'Fonctionnalité en cours de développement.'); });
-        if (assignBusBtn) assignBusBtn.addEventListener('click', () => { if (window.Toast) Toast.info('Attribution', 'Sélectionnez un chauffeur pour lui attribuer un bus.'); });
+
+        /* ── Assigner un bus à un chauffeur ── */
+        async function openAssignBusModal() {
+            // Charger chauffeurs et bus disponibles en parallèle
+            const [driversRes, vehiclesRes] = await Promise.all([
+                API.apiFetch('/api/drivers?limit=100'),
+                API.apiFetch('/api/vehicles?status=available&limit=100')
+            ]);
+            const drivers  = driversRes?.data  || [];
+            const vehicles = vehiclesRes?.data || [];
+
+            const selDriver = document.getElementById('assignDriverSelect');
+            const selVeh    = document.getElementById('assignVehicleSelect');
+            selDriver.innerHTML = '<option value="">— Choisir un chauffeur —</option>' +
+                drivers.map(d => `<option value="${d.id}">${d.full_name} (${d.phone || '–'})</option>`).join('');
+            selVeh.innerHTML = '<option value="">— Choisir un bus —</option>' +
+                vehicles.map(v => `<option value="${v.id}">${v.plate_number} — ${v.type} — ${v.capacity} places</option>`).join('');
+
+            if (window.Modal) Modal.open('assignBusModal');
+            else document.getElementById('assignBusModal')?.classList.add('active');
+        }
+
+        if (assignBusBtn) assignBusBtn.addEventListener('click', openAssignBusModal);
+
+        const confirmAssignBtn = document.getElementById('confirmAssignBtn');
+        if (confirmAssignBtn) confirmAssignBtn.addEventListener('click', async function() {
+            const driverId  = document.getElementById('assignDriverSelect')?.value;
+            const vehicleId = document.getElementById('assignVehicleSelect')?.value;
+            if (!driverId || !vehicleId) {
+                if (window.Toast) Toast.error('Champs manquants', 'Sélectionnez un chauffeur et un bus.');
+                return;
+            }
+            this.disabled = true; this.textContent = 'Enregistrement...';
+            try {
+                const result = await API.apiFetch('/api/drivers/' + driverId, {
+                    method: 'PATCH',
+                    body: JSON.stringify({ vehicle_id: vehicleId })
+                });
+                if (!result?.success) throw new Error(result?.error?.message || 'Erreur');
+                if (window.Modal) Modal.close('assignBusModal');
+                if (window.Toast) Toast.success('Bus assigné', 'Le chauffeur a été associé au véhicule.');
+                loadDrivers();
+            } catch(e) {
+                if (window.Toast) Toast.error('Erreur', e.message);
+            } finally {
+                this.disabled = false; this.textContent = 'Confirmer';
+            }
+        });
 
         loadDrivers();
     </script>

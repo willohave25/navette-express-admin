@@ -232,10 +232,12 @@
         let selectedDriver = null;
 
         function doAssign(lineCard, driverCard) {
-            const lineName = lineCard.querySelector('.line-name').textContent;
+            const lineName  = lineCard.querySelector('.line-name').textContent;
             const driverName = driverCard.querySelector('.driver-name').textContent;
+            const lineId    = (lineCard.dataset.id || '').replace('line-', '');
+            const driverId  = (driverCard.dataset.id || '').replace('driver-', '');
             pendingList.insertAdjacentHTML('beforeend', `
-                <div class="assignment-item" data-id="assign-${Date.now()}">
+                <div class="assignment-item" data-id="assign-${Date.now()}" data-line-id="${lineId}" data-driver-id="${driverId}">
                     <div class="assignment-info">
                         <span class="assignment-line">${lineName}</span>
                         <span class="assignment-arrow">→</span>
@@ -416,19 +418,59 @@
             }
         });
 
-        // Confirmer dispatch
-        document.getElementById('confirmDispatchBtn').addEventListener('click', function() {
+        // Confirmer dispatch — sauvegarde en BDD + mise à jour carte
+        document.getElementById('confirmDispatchBtn').addEventListener('click', async function() {
             const assignments = pendingList.querySelectorAll('.assignment-item');
             if (assignments.length === 0) {
                 window.Toast && window.Toast.warning('Aucune assignation', 'Veuillez assigner au moins un chauffeur à une ligne.');
                 return;
             }
-            
-            window.Toast && window.Toast.success('Dispatch confirmé', `${assignments.length} assignation(s) confirmée(s). Les trajets peuvent démarrer.`);
-            
-            // Vider la liste
+
+            const btn = this;
+            btn.disabled = true;
+            btn.textContent = 'Confirmation...';
+
+            const confirmed = [];
+            const today = new Date().toISOString().split('T')[0];
+
+            for (const item of assignments) {
+                const driverId = item.dataset.driverId;
+                const lineId   = item.dataset.lineId;
+                const lineName  = item.querySelector('.assignment-line')?.textContent || '–';
+                const driverName = item.querySelector('.assignment-driver')?.textContent || '–';
+                if (!driverId || !lineId) continue;
+                try {
+                    await API.apiFetch('/api/dispatches', {
+                        method: 'POST',
+                        body: JSON.stringify({ driver_id: driverId, line_id: lineId, trip_date: today })
+                    });
+                    confirmed.push({ driverId, lineId, lineName, driverName });
+                } catch(_) {}
+            }
+
+            // Mettre à jour la carte avec les bus assignés
+            if (confirmed.length > 0) {
+                const mapBusList = document.getElementById('mapBusList');
+                const activeBusCount = document.getElementById('activeBusCount');
+                confirmed.forEach(c => {
+                    mapBusList.insertAdjacentHTML('beforeend', `
+                        <div class="map-bus-item active">
+                            <div class="bus-marker" style="background:#C8A951;"></div>
+                            <div class="bus-info">
+                                <span class="bus-plate">${c.driverName}</span>
+                                <span class="bus-line">${c.lineName} — Assigné</span>
+                            </div>
+                        </div>`);
+                });
+                const current = parseInt(activeBusCount?.textContent) || 0;
+                if (activeBusCount) activeBusCount.textContent = `${current + confirmed.length} bus en circulation`;
+            }
+
+            window.Toast && window.Toast.success('Dispatch confirmé', `${confirmed.length} assignation(s) enregistrée(s).`);
             assignments.forEach(a => a.remove());
             noAssignments.style.display = 'block';
+            btn.disabled = false;
+            btn.textContent = 'Confirmer le dispatch';
         });
 
         // Historique
