@@ -493,12 +493,11 @@
     </main>
 
     <!-- Modal Ajouter Chauffeur -->
-    <div class="modal" id="addDriverModal">
-        <div class="modal-overlay"></div>
-        <div class="modal-content">
+    <div class="modal-overlay" id="addDriverModal">
+        <div class="modal">
             <div class="modal-header">
                 <h3>Ajouter un chauffeur</h3>
-                <button class="modal-close" data-close><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+                <button class="modal-close"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
             </div>
             <div class="modal-body">
                 <form id="addDriverForm" class="admin-form">
@@ -542,7 +541,7 @@
                         </div>
                         <div class="form-group">
                             <label for="driverBus">Bus assigné</label>
-                            <select id="driverBus" id="driverBusSelect">
+                            <select id="driverBus">
                                 <option value="">Non assigné</option>
                             </select>
                         </div>
@@ -556,7 +555,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" data-close>Annuler</button>
+                <button class="btn btn-secondary modal-close">Annuler</button>
                 <button class="btn btn-primary" id="saveDriverBtn">Ajouter</button>
             </div>
         </div>
