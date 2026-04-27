@@ -1,590 +1,176 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Centre de notifications - Navette Express Admin - JAEBETS HOLDING">
-    <meta name="theme-color" content="#1B2A4A">
-    <title>Notifications - Navette Express Admin</title>
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/png" href="images/logo/logo-jaebets.png">
-    <link rel="apple-touch-icon" href="images/logo/logo-jaebets.png">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/admin.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#1B2A4A">
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css">
+  <title>Notifications - Navette Express</title>
+  <style>
+    .hero-banner { position: relative; height: 140px; margin: 16px; border-radius: 16px; overflow: hidden; }
+    .hero-banner img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 0%, rgba(15,26,46,0.95) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; }
+    .hero-title { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+    .hero-subtitle { font-size: 14px; color: rgba(255,255,255,0.7); }
+    .notif-section { padding: 0 16px 100px; }
+    .notif-card { display: flex; gap: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px; margin-bottom: 10px; }
+    .notif-card.unread { border-left: 3px solid #2EC4B6; background: rgba(46,196,182,0.05); }
+    .notif-icon { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(46,196,182,0.15); border-radius: 10px; flex-shrink: 0; }
+    .notif-icon svg { width: 22px; height: 22px; color: #2EC4B6; }
+    .notif-icon.gold { background: rgba(200,169,81,0.15); }
+    .notif-icon.gold svg { color: #C8A951; }
+    .notif-content { flex: 1; }
+    .notif-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+    .notif-text { font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 6px; line-height: 1.4; }
+    .notif-time { font-size: 12px; color: rgba(255,255,255,0.4); }
+  </style>
 </head>
-<body>
-    <!-- Sidebar Navigation -->
-    <aside class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <div class="logo">
-                <svg viewBox="0 0 40 40" class="logo-icon">
-                    <rect x="4" y="12" width="32" height="18" rx="4" fill="#2EC4B6"/>
-                    <circle cx="12" cy="30" r="4" fill="#C8A951"/>
-                    <circle cx="28" cy="30" r="4" fill="#C8A951"/>
-                    <rect x="8" y="16" width="8" height="6" rx="1" fill="#1B2A4A"/>
-                    <rect x="18" y="16" width="8" height="6" rx="1" fill="#1B2A4A"/>
-                    <rect x="28" y="16" width="6" height="6" rx="1" fill="#1B2A4A"/>
-                </svg>
-                <span class="logo-text">Navette Express</span>
-            </div>
-            <button class="sidebar-close" id="sidebarClose" aria-label="Fermer menu">
-                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-            </button>
+<body class="with-nav">
+  <header class="header">
+    <button class="header-btn" onclick="history.back()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <h1 class="header-title">Notifications</h1>
+    <button class="header-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg></button>
+  </header>
+  
+  <main class="page-with-header">
+    <div class="hero-banner">
+      <picture>
+        <source srcset="images/ecrans/passagers-notification.webp" type="image/webp">
+        <img src="images/ecrans/passagers-notification.jpg" alt="Notifications" loading="eager">
+      </picture>
+      <div class="hero-overlay">
+        <h2 class="hero-title">Notifications</h2>
+        <p class="hero-subtitle">3 nouvelles</p>
+      </div>
+    </div>
+    
+    <div class="notif-section">
+      <div class="notif-card unread">
+        <div class="notif-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg></div>
+        <div class="notif-content">
+          <p class="notif-title">Navette en approche</p>
+          <p class="notif-text">Votre bus arrive dans 8 minutes à Carrefour Wassakara.</p>
+          <p class="notif-time">Il y a 2 min</p>
         </div>
-        
-        <nav class="sidebar-nav">
-            <a href="dashboard.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Dashboard</span></a>
-            <a href="utilisateurs.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><circle cx="17" cy="11" r="3"/><path d="M21 21v-1.5a3 3 0 00-3-3h-1"/></svg><span>Utilisateurs</span></a>
-            <a href="lignes.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="6" r="3"/><circle cx="19" cy="18" r="3"/><path d="M7 8l10 8"/></svg><span>Lignes</span></a>
-            <a href="flotte.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="8" width="20" height="10" rx="2"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/><path d="M5 8V6a2 2 0 012-2h10a2 2 0 012 2v2"/></svg><span>Flotte</span></a>
-            <a href="chauffeurs.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 4v1M12 19v1M4 12h1M19 12h1"/></svg><span>Chauffeurs</span></a>
-            <a href="dispatch.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="15" y="15" width="6" height="6" rx="1"/><path d="M9 6h6l-3 6 6-3v6"/></svg><span>Dispatch</span></a>
-            <a href="reservations.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>Réservations</span></a>
-            <a href="paiements.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M12 10v6M9 13h6"/></svg><span>Paiements</span></a>
-            <a href="facturation.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/></svg><span>Facturation</span></a>
-            <a href="gps.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg><span>GPS</span></a>
-            <a href="notifications.html" class="nav-link active"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg><span>Notifications</span></a>
-            <a href="rapports.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 5-6"/></svg><span>Rapports</span></a>
-            <a href="parametres.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg><span>Paramètres</span></a>
-        </nav>
-        
-        <div class="sidebar-footer">
-            <a href="#" class="nav-link logout" id="logoutBtn"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16,17 21,12 16,7"/><line x1="21" y1="12" x2="9" y2="12"/></svg><span>Déconnexion</span></a>
+      </div>
+      
+      <div class="notif-card unread">
+        <div class="notif-icon gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <div class="notif-content">
+          <p class="notif-title">Offre spéciale</p>
+          <p class="notif-text">-20% sur les abonnements premium jusqu'au 15 avril !</p>
+          <p class="notif-time">Il y a 1h</p>
         </div>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- Header -->
-        <header class="main-header">
-            <button class="hamburger" id="hamburgerBtn" aria-label="Ouvrir menu">
-                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
-            </button>
-            
-            <div class="header-title">
-                <h1>Centre de notifications</h1>
-                <p class="breadcrumb">Accueil / Notifications</p>
-            </div>
-            
-            <div class="header-actions">
-                <button class="btn btn-secondary" id="templatesBtn">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
-                    <span>Templates</span>
-                </button>
-                <button class="btn btn-primary" id="newBroadcastBtn">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg>
-                    <span>Nouveau broadcast</span>
-                </button>
-            </div>
-        </header>
-
-        <!-- Notifications Content -->
-        <div class="content-area">
-            <!-- KPIs -->
-            <section class="kpi-grid small">
-                <div class="kpi-card compact">
-                    <div class="kpi-icon notifications">
-                        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
-                    </div>
-                    <div class="kpi-content">
-                        <span class="kpi-value">1 247</span>
-                        <span class="kpi-label">Envoyées (mois)</span>
-                    </div>
-                </div>
-                <div class="kpi-card compact">
-                    <div class="kpi-icon success">
-                        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>
-                    </div>
-                    <div class="kpi-content">
-                        <span class="kpi-value">98.2%</span>
-                        <span class="kpi-label">Taux de livraison</span>
-                    </div>
-                </div>
-                <div class="kpi-card compact">
-                    <div class="kpi-icon info">
-                        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                    </div>
-                    <div class="kpi-content">
-                        <span class="kpi-value">67.5%</span>
-                        <span class="kpi-label">Taux d'ouverture</span>
-                    </div>
-                </div>
-                <div class="kpi-card compact">
-                    <div class="kpi-icon warning">
-                        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-                    </div>
-                    <div class="kpi-content">
-                        <span class="kpi-value">3</span>
-                        <span class="kpi-label">Programmées</span>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Onglets -->
-            <div class="tabs-container">
-                <div class="tabs">
-                    <button class="tab active" data-tab="broadcast">
-                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg>
-                        Broadcast
-                    </button>
-                    <button class="tab" data-tab="historique">
-                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
-                        Historique
-                    </button>
-                    <button class="tab" data-tab="automatiques">
-                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
-                        Automatiques
-                    </button>
-                </div>
-            </div>
-
-            <!-- Tab Broadcast -->
-            <div class="tab-content active" id="tab-broadcast">
-                <div class="broadcast-form-container">
-                    <form id="broadcastForm" class="admin-form">
-                        <div class="form-section">
-                            <h3>Composer le message</h3>
-                            
-                            <div class="form-group">
-                                <label for="broadcastTitle">Titre du message *</label>
-                                <input type="text" id="broadcastTitle" placeholder="Ex: Nouveau trajet disponible !" maxlength="50" required>
-                                <span class="char-count"><span id="titleCount">0</span>/50</span>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="broadcastMessage">Contenu du message *</label>
-                                <textarea id="broadcastMessage" rows="4" placeholder="Rédigez votre message..." maxlength="300" required></textarea>
-                                <span class="char-count"><span id="messageCount">0</span>/300</span>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Canaux de diffusion *</label>
-                                <div class="channel-options">
-                                    <label class="channel-option">
-                                        <input type="checkbox" name="channel" value="push" checked>
-                                        <div class="channel-card">
-                                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
-                                            <span>Push</span>
-                                            <span class="channel-info">Gratuit</span>
-                                        </div>
-                                    </label>
-                                    <label class="channel-option">
-                                        <input type="checkbox" name="channel" value="sms">
-                                        <div class="channel-card">
-                                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-                                            <span>SMS</span>
-                                            <span class="channel-info">15 FCFA/msg</span>
-                                        </div>
-                                    </label>
-                                    <label class="channel-option">
-                                        <input type="checkbox" name="channel" value="whatsapp">
-                                        <div class="channel-card">
-                                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
-                                            <span>WhatsApp</span>
-                                            <span class="channel-info">25 FCFA/msg</span>
-                                        </div>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-section">
-                            <h3>Audience cible</h3>
-                            
-                            <div class="form-group">
-                                <label for="broadcastAudience">Destinataires *</label>
-                                <select id="broadcastAudience" required>
-                                    <option value="all">Tous les utilisateurs (12 450)</option>
-                                    <option value="passengers">Passagers uniquement (11 200)</option>
-                                    <option value="drivers">Chauffeurs uniquement (89)</option>
-                                    <option value="enterprise">Employés entreprises (1 050)</option>
-                                    <option value="line">Passagers d'une ligne spécifique</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group" id="lineSelectGroup" style="display: none;">
-                                <label for="broadcastLine">Sélectionner la ligne</label>
-                                <select id="broadcastLine">
-                                    <option value="">Choisir une ligne...</option>
-                                    <option value="abidjan-bassam">Abidjan–Bassam (2 340 passagers)</option>
-                                    <option value="cocody-plateau">Cocody–Plateau (1 850 passagers)</option>
-                                    <option value="yopougon-adjame">Yopougon–Adjamé (3 100 passagers)</option>
-                                </select>
-                            </div>
-
-                            <div class="audience-preview">
-                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><circle cx="17" cy="11" r="3"/><path d="M21 21v-1.5a3 3 0 00-3-3h-1"/></svg>
-                                <span id="audienceCount">12 450 destinataires sélectionnés</span>
-                            </div>
-                        </div>
-
-                        <div class="form-section">
-                            <h3>Programmation</h3>
-                            
-                            <div class="form-group">
-                                <div class="radio-options">
-                                    <label class="radio-option">
-                                        <input type="radio" name="schedule" value="now" checked>
-                                        <span>Envoyer immédiatement</span>
-                                    </label>
-                                    <label class="radio-option">
-                                        <input type="radio" name="schedule" value="later">
-                                        <span>Programmer l'envoi</span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="form-row cols-2" id="scheduleInputs" style="display: none;">
-                                <div class="form-group">
-                                    <label for="scheduleDate">Date</label>
-                                    <input type="date" id="scheduleDate">
-                                </div>
-                                <div class="form-group">
-                                    <label for="scheduleTime">Heure</label>
-                                    <input type="time" id="scheduleTime">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-actions">
-                            <div class="cost-preview">
-                                <span class="cost-label">Coût estimé :</span>
-                                <span class="cost-value" id="costPreview">0 FCFA</span>
-                                <span class="cost-detail">(Push gratuit)</span>
-                            </div>
-                            <div class="buttons">
-                                <button type="button" class="btn btn-secondary" id="previewBtn">Aperçu</button>
-                                <button type="submit" class="btn btn-primary" id="sendBtn">
-                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22,2 15,22 11,13 2,9 22,2"/></svg>
-                                    Envoyer maintenant
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Tab Historique -->
-            <div class="tab-content" id="tab-historique">
-                <div class="table-wrapper">
-                    <table class="data-table" id="historyTable">
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Message</th>
-                                <th>Canal</th>
-                                <th>Destinataires</th>
-                                <th>Livrés</th>
-                                <th>Ouverts</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="historyTableBody">
-                            <tr><td colspan="7" style="text-align:center;padding:3rem;color:var(--text-secondary);">Chargement des notifications...</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Tab Automatiques -->
-            <div class="tab-content" id="tab-automatiques">
-                <div class="info-banner">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-                    <p>Les notifications automatiques sont déclenchées par des événements système. Modifiez les templates dans Paramètres.</p>
-                </div>
-
-                <div class="auto-notifications-grid">
-                    <div class="auto-notif-card">
-                        <div class="notif-header">
-                            <div class="notif-icon success">
-                                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-                            </div>
-                            <div class="notif-info">
-                                <h4>Confirmation de réservation</h4>
-                                <span class="notif-trigger">À chaque nouvelle réservation</span>
-                            </div>
-                            <label class="toggle">
-                                <input type="checkbox" checked>
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                        <div class="notif-channels">
-                            <span class="channel-badge push small">Push</span>
-                            <span class="channel-badge sms small">SMS</span>
-                        </div>
-                        <div class="notif-stats">
-                            <span>845 envois ce mois</span>
-                        </div>
-                    </div>
-
-                    <div class="auto-notif-card">
-                        <div class="notif-header">
-                            <div class="notif-icon info">
-                                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-                            </div>
-                            <div class="notif-info">
-                                <h4>Rappel de trajet</h4>
-                                <span class="notif-trigger">30 min avant le départ</span>
-                            </div>
-                            <label class="toggle">
-                                <input type="checkbox" checked>
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                        <div class="notif-channels">
-                            <span class="channel-badge push small">Push</span>
-                        </div>
-                        <div class="notif-stats">
-                            <span>723 envois ce mois</span>
-                        </div>
-                    </div>
-
-                    <div class="auto-notif-card">
-                        <div class="notif-header">
-                            <div class="notif-icon warning">
-                                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
-                            </div>
-                            <div class="notif-info">
-                                <h4>Alerte retard</h4>
-                                <span class="notif-trigger">Quand retard > 10 min</span>
-                            </div>
-                            <label class="toggle">
-                                <input type="checkbox" checked>
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                        <div class="notif-channels">
-                            <span class="channel-badge push small">Push</span>
-                            <span class="channel-badge sms small">SMS</span>
-                        </div>
-                        <div class="notif-stats">
-                            <span>45 envois ce mois</span>
-                        </div>
-                    </div>
-
-                    <div class="auto-notif-card">
-                        <div class="notif-header">
-                            <div class="notif-icon danger">
-                                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M4.93 4.93l14.14 14.14"/></svg>
-                            </div>
-                            <div class="notif-info">
-                                <h4>Annulation de trajet</h4>
-                                <span class="notif-trigger">Quand trajet annulé</span>
-                            </div>
-                            <label class="toggle">
-                                <input type="checkbox" checked>
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                        <div class="notif-channels">
-                            <span class="channel-badge push small">Push</span>
-                            <span class="channel-badge sms small">SMS</span>
-                            <span class="channel-badge whatsapp small">WhatsApp</span>
-                        </div>
-                        <div class="notif-stats">
-                            <span>12 envois ce mois</span>
-                        </div>
-                    </div>
-
-                    <div class="auto-notif-card">
-                        <div class="notif-header">
-                            <div class="notif-icon revenue">
-                                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M12 10v6M9 13h6"/></svg>
-                            </div>
-                            <div class="notif-info">
-                                <h4>Confirmation de paiement</h4>
-                                <span class="notif-trigger">Après paiement réussi</span>
-                            </div>
-                            <label class="toggle">
-                                <input type="checkbox" checked>
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                        <div class="notif-channels">
-                            <span class="channel-badge push small">Push</span>
-                        </div>
-                        <div class="notif-stats">
-                            <span>1 124 envois ce mois</span>
-                        </div>
-                    </div>
-
-                    <div class="auto-notif-card">
-                        <div class="notif-header">
-                            <div class="notif-icon info">
-                                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                            </div>
-                            <div class="notif-info">
-                                <h4>Bus en approche</h4>
-                                <span class="notif-trigger">5 min avant l'arrêt</span>
-                            </div>
-                            <label class="toggle">
-                                <input type="checkbox" checked>
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                        <div class="notif-channels">
-                            <span class="channel-badge push small">Push</span>
-                        </div>
-                        <div class="notif-stats">
-                            <span>2 890 envois ce mois</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      </div>
+      
+      <div class="notif-card unread">
+        <div class="notif-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <div class="notif-content">
+          <p class="notif-title">Paiement confirmé</p>
+          <p class="notif-text">Votre réservation pour demain 06:30 est confirmée.</p>
+          <p class="notif-time">Il y a 3h</p>
         </div>
-    </main>
+      </div>
+      
+      <div class="notif-card">
+        <div class="notif-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></div>
+        <div class="notif-content">
+          <p class="notif-title">Nouvelle ligne disponible</p>
+          <p class="notif-text">La ligne Bingerville → Zone 4 est maintenant active.</p>
+          <p class="notif-time">Hier</p>
+        </div>
+      </div>
+      
+      <div class="notif-card">
+        <div class="notif-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <div class="notif-content">
+          <p class="notif-title">Profil complété</p>
+          <p class="notif-text">Merci d'avoir complété votre profil ! Profitez de toutes les fonctionnalités.</p>
+          <p class="notif-time">Lun. 30 Mars</p>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <nav class="bottom-nav">
+    <a href="accueil.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Accueil</span></a>
+    <a href="lignes.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg><span>Lignes</span></a>
+    <a href="suivi.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg><span>Suivi</span></a>
+    <a href="notifications.html" class="nav-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg><span>Notifs</span></a>
+    <a href="profil.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Profil</span></a>
+  </nav>
+  
+  
+  <script src="js/app.js"></script>
+  <script src="supabase-config.js"></script>
+  <script>
+    /* Icônes par type de notification */
+    const ICONES = {
+      rappel:        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>`,
+      confirmation:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`,
+      paiement:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>`,
+      changement:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>`,
+      nouvelle_ligne:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>`,
+      promo:         `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+      info:          `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`
+    };
 
-    <!-- Scripts -->
-    <script src="js/api-config.js"></script>
-    <script src="js/auth-api.js"></script>
-    <script src="js/admin.js"></script>
-    <script>
-        const API = window.NavetteAuth;
+    const TYPES_OR = ['promo', 'paiement'];
 
-        // Gestion des onglets
-        document.querySelectorAll('.tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-                this.classList.add('active');
-                document.getElementById('tab-' + this.dataset.tab).classList.add('active');
-                if (this.dataset.tab === 'historique') loadHistory();
-            });
-        });
+    function tempsRelatif(dateStr) {
+      const diff = Date.now() - new Date(dateStr).getTime();
+      const min = Math.floor(diff / 60000);
+      if (min < 60) return `Il y a ${min} min`;
+      const h = Math.floor(min / 60);
+      if (h < 24) return `Il y a ${h}h`;
+      return new Date(dateStr).toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'short' });
+    }
 
-        // Compteur caractères
-        document.getElementById('broadcastTitle').addEventListener('input', function() {
-            document.getElementById('titleCount').textContent = this.value.length;
-        });
+    function construireNotifs(notifs) {
+      if (!notifs.length) {
+        return '<p style="text-align:center;color:rgba(255,255,255,0.5);padding:40px 0;">Aucune notification.</p>';
+      }
+      return notifs.map(n => {
+        const icone = ICONES[n.type] || ICONES.info;
+        const classeOr = TYPES_OR.includes(n.type) ? ' gold' : '';
+        const classeUnread = !n.lu ? ' unread' : '';
+        return `
+          <div class="notif-card${classeUnread}" onclick="lireNotif('${n.id}', this)">
+            <div class="notif-icon${classeOr}">${icone}</div>
+            <div class="notif-content">
+              <p class="notif-title">${n.titre}</p>
+              <p class="notif-text">${n.message}</p>
+              <p class="notif-time">${tempsRelatif(n.created_at)}</p>
+            </div>
+          </div>`;
+      }).join('');
+    }
 
-        document.getElementById('broadcastMessage').addEventListener('input', function() {
-            document.getElementById('messageCount').textContent = this.value.length;
-        });
+    async function lireNotif(id, element) {
+      if (element.classList.contains('unread')) {
+        element.classList.remove('unread');
+        try { await marquerNotificationLue(id); } catch (_) {}
+      }
+    }
 
-        // Afficher sélection ligne
-        document.getElementById('broadcastAudience').addEventListener('change', function() {
-            const lineGroup = document.getElementById('lineSelectGroup');
-            lineGroup.style.display = this.value === 'line' ? 'block' : 'none';
-            
-            // Mettre à jour le compteur
-            const counts = {
-                'all': '12 450',
-                'passengers': '11 200',
-                'drivers': '89',
-                'enterprise': '1 050',
-                'line': 'Sélectionnez une ligne'
-            };
-            document.getElementById('audienceCount').textContent = counts[this.value] + ' destinataires sélectionnés';
-        });
+    document.addEventListener('DOMContentLoaded', async function() {
+      const container = document.querySelector('.notif-section');
+      container.innerHTML = '<p style="text-align:center;color:rgba(255,255,255,0.5);padding:40px 0;">Chargement...</p>';
 
-        // Programmation
-        document.querySelectorAll('input[name="schedule"]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                const scheduleInputs = document.getElementById('scheduleInputs');
-                const sendBtn = document.getElementById('sendBtn');
-                
-                if (this.value === 'later') {
-                    scheduleInputs.style.display = 'flex';
-                    sendBtn.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Programmer';
-                } else {
-                    scheduleInputs.style.display = 'none';
-                    sendBtn.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22,2 15,22 11,13 2,9 22,2"/></svg> Envoyer maintenant';
-                }
-            });
-        });
-
-        // Calcul coût
-        document.querySelectorAll('input[name="channel"]').forEach(checkbox => {
-            checkbox.addEventListener('change', calculateCost);
-        });
-
-        function calculateCost() {
-            const channels = Array.from(document.querySelectorAll('input[name="channel"]:checked')).map(c => c.value);
-            const audience = 12450;
-            
-            let cost = 0;
-            let details = [];
-            
-            if (channels.includes('push')) details.push('Push gratuit');
-            if (channels.includes('sms')) {
-                cost += audience * 15;
-                details.push('SMS: ' + (audience * 15).toLocaleString() + ' FCFA');
-            }
-            if (channels.includes('whatsapp')) {
-                cost += audience * 25;
-                details.push('WhatsApp: ' + (audience * 25).toLocaleString() + ' FCFA');
-            }
-            
-            document.getElementById('costPreview').textContent = cost.toLocaleString() + ' FCFA';
-            document.querySelector('.cost-detail').textContent = '(' + details.join(' + ') + ')';
-        }
-
-        // Soumission formulaire
-        document.getElementById('broadcastForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const title = document.getElementById('broadcastTitle').value.trim();
-            const message = document.getElementById('broadcastMessage').value.trim();
-            const audience = document.getElementById('broadcastAudience').value;
-            const scheduled = document.querySelector('input[name="schedule"]:checked').value === 'later';
-
-            const sendBtn = document.getElementById('sendBtn');
-            sendBtn.disabled = true;
-
-            const result = await API.apiFetch('/api/notifications/broadcast', {
-                method: 'POST',
-                body: JSON.stringify({ title, message, audience, scheduled })
-            });
-
-            sendBtn.disabled = false;
-
-            if (result && result.success) {
-                if (window.Toast) window.Toast.success(
-                    scheduled ? 'Programmé' : 'Envoyé',
-                    scheduled ? 'Le broadcast a été programmé avec succès.' : `Le broadcast est en cours d'envoi.`
-                );
-                this.reset();
-                document.getElementById('titleCount').textContent = '0';
-                document.getElementById('messageCount').textContent = '0';
-            } else {
-                if (window.Toast) window.Toast.error('Erreur', result?.error?.message || 'Échec de l\'envoi');
-            }
-        });
-
-        async function loadHistory() {
-            const tbody = document.getElementById('historyTableBody');
-            if (!tbody) return;
-            tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:2rem;">Chargement...</td></tr>';
-            const result = await API.apiFetch('/api/notifications?limit=50');
-            if (!result || !result.success || !(result.data || []).length) {
-                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--text-secondary);">Aucune notification envoyée</td></tr>';
-                return;
-            }
-            const notifications = result.data;
-            tbody.innerHTML = notifications.map(n => {
-                const dt = n.created_at ? new Date(n.created_at) : null;
-                const dateStr = dt ? dt.toLocaleDateString('fr-FR') : '–';
-                return `<tr>
-                    <td>${dateStr}</td>
-                    <td><strong>${n.title || '–'}</strong><br><small style="color:var(--text-secondary)">${(n.message || '').substring(0,60)}${n.message?.length > 60 ? '…' : ''}</small></td>
-                    <td><span class="channel-badge push small">Push</span></td>
-                    <td>${n.recipients_count || '–'}</td>
-                    <td>${n.delivered_count || '–'}</td>
-                    <td>${n.read_count || '–'}</td>
-                    <td class="actions-cell"><button class="action-icon" title="Détails"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></button></td>
-                </tr>`;
-            }).join('');
-        }
-
-        // Templates
-        document.getElementById('templatesBtn').addEventListener('click', function() {
-            if (window.Toast) window.Toast.info('Templates', 'Gestion des templates de notification...');
-        });
-
-        // Nouveau broadcast
-        document.getElementById('newBroadcastBtn').addEventListener('click', function() {
-            document.querySelector('[data-tab="broadcast"]').click();
-            document.getElementById('broadcastTitle').focus();
-        });
-    </script>
+      try {
+        const notifs = await getNotifications();
+        const nonLues = notifs.filter(n => !n.lu).length;
+        document.querySelector('.hero-subtitle').textContent =
+          nonLues > 0 ? `${nonLues} nouvelle${nonLues > 1 ? 's' : ''}` : 'Toutes lues';
+        container.innerHTML = construireNotifs(notifs);
+      } catch (err) {
+        container.innerHTML = '<p style="text-align:center;color:#E74C3C;padding:40px 0;">Erreur lors du chargement.</p>';
+      }
+    });
+  </script>
 </body>
 </html>
