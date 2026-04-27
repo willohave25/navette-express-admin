@@ -891,30 +891,141 @@
     </div>
 
     <!-- Scripts -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/supabase-config.js"></script>
-    <script src="js/admin.js"></script>
+    <script src="api-config.js"></script>
+    <script src="auth-api.js"></script>
+    <script src="admin.js"></script>
     <script>
+        const API = window.NavetteAuth;
+        const fmt = n => new Intl.NumberFormat('fr-FR').format(n || 0);
+
+        function initials(name) {
+            if (!name) return '?';
+            return name.split(' ').map(w => w[0]).join('').substring(0,2).toUpperCase();
+        }
+
         // Gestion des onglets
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', function() {
                 const tabId = this.dataset.tab;
-                
-                // Désactiver tous les onglets
                 document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
                 document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-                
-                // Activer l'onglet cliqué
                 this.classList.add('active');
                 document.getElementById('tab-' + tabId).classList.add('active');
+                if (tabId === 'passagers') loadPassagers();
+                else if (tabId === 'entreprises') loadEntreprises();
+                else if (tabId === 'chauffeurs') loadChauffeurs();
             });
         });
 
-        // Export CSV
         document.getElementById('exportCsvBtn').addEventListener('click', function() {
-            NXToast.success('Export CSV lancé', 'Le fichier sera téléchargé dans quelques instants.');
+            if (window.Toast) window.Toast.success('Export CSV lancé', 'Le fichier sera téléchargé dans quelques instants.');
         });
 
-        // Actions sur les boutons
-        document.querySelectorAll('.action-icon').forEach(btn => {
-            btn.addEventListener('click',
+        async function loadPassagers() {
+            const tbody = document.querySelector('#passagersTable tbody');
+            if (!tbody) return;
+            tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:2rem;">Chargement...</td></tr>';
+            const result = await API.apiFetch('/api/users?role=passenger&limit=100');
+            if (!result || !result.success || !(result.data || []).length) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--text-secondary);">Aucun passager enregistré</td></tr>';
+                return;
+            }
+            const users = result.data;
+            const tabCount = document.querySelector('[data-tab="passagers"] .tab-count');
+            if (tabCount) tabCount.textContent = fmt(users.length);
+            tbody.innerHTML = users.map(u => `
+                <tr>
+                    <td><div class="user-cell"><div class="avatar">${initials(u.full_name)}</div><span>${u.full_name || '–'}</span></div></td>
+                    <td><span class="badge">Standard</span></td>
+                    <td>${u.phone || '–'}</td>
+                    <td>${u.email || '–'}</td>
+                    <td><span class="status ${u.is_active ? 'status-success' : 'status-error'}">${u.is_active ? 'Actif' : 'Inactif'}</span></td>
+                    <td>${u.created_at ? new Date(u.created_at).toLocaleDateString('fr-FR') : '–'}</td>
+                    <td class="actions-cell">
+                        <button class="action-icon ${u.is_active ? 'warning' : 'success'}" title="${u.is_active ? 'Désactiver' : 'Activer'}" onclick="toggleUser('${u.id}',${u.is_active})">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="${u.is_active ? 'M4.93 4.93l14.14 14.14' : 'M20 6L9 17l-5-5'}"/></svg>
+                        </button>
+                    </td>
+                </tr>`).join('');
+        }
+
+        async function loadEntreprises() {
+            const tbody = document.querySelector('#entreprisesTable tbody');
+            if (!tbody) return;
+            tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:2rem;">Chargement...</td></tr>';
+            const result = await API.apiFetch('/api/companies?limit=100');
+            if (!result || !result.success || !(result.data || []).length) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:2rem;color:var(--text-secondary);">Aucune entreprise enregistrée</td></tr>';
+                return;
+            }
+            const companies = result.data;
+            const tabCount = document.querySelector('[data-tab="entreprises"] .tab-count');
+            if (tabCount) tabCount.textContent = fmt(companies.length);
+            tbody.innerHTML = companies.map(c => `
+                <tr>
+                    <td><div class="company-cell"><div class="company-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg></div><span>${c.name || '–'}</span></div></td>
+                    <td>${c.contact_name || '–'}</td>
+                    <td>${c.phone || '–'}</td>
+                    <td>${c.email || '–'}</td>
+                    <td><span class="badge badge-info">${c.employees_count || 0}</span></td>
+                    <td><span class="badge badge-gold">${c.contract_type || 'Standard'}</span></td>
+                    <td><span class="status ${c.is_active !== false ? 'status-success' : 'status-error'}">${c.is_active !== false ? 'Actif' : 'Inactif'}</span></td>
+                    <td class="actions-cell">
+                        <button class="action-icon" title="Détails"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></button>
+                    </td>
+                </tr>`).join('');
+        }
+
+        async function loadChauffeurs() {
+            const tbody = document.querySelector('#chauffeursTable tbody');
+            if (!tbody) return;
+            tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:2rem;">Chargement...</td></tr>';
+            const result = await API.apiFetch('/api/drivers?limit=100');
+            if (!result || !result.success || !(result.data || []).length) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:2rem;color:var(--text-secondary);">Aucun chauffeur enregistré</td></tr>';
+                return;
+            }
+            const drivers = result.data;
+            const tabCount = document.querySelector('[data-tab="chauffeurs"] .tab-count');
+            if (tabCount) tabCount.textContent = fmt(drivers.length);
+            const statusMap = { active:['status-success','Actif'], inactive:['status-error','Inactif'], on_trip:['status-info','En trajet'], rest:['status-warning','Repos'] };
+            tbody.innerHTML = drivers.map(d => {
+                const [sc, sl] = statusMap[d.status] || ['status-info', d.status || '–'];
+                return `<tr>
+                    <td><div class="user-cell"><div class="avatar driver">${initials(d.full_name)}</div><span>${d.full_name || '–'}</span></div></td>
+                    <td><span class="badge">${d.employee_id || '–'}</span></td>
+                    <td>${d.license_type || 'Catégorie D'}</td>
+                    <td>${d.phone || '–'}</td>
+                    <td><span class="badge badge-info">${d.vehicle_plate || 'Non assigné'}</span></td>
+                    <td><div class="rating"><svg viewBox="0 0 24 24" width="14" height="14" fill="#C8A951" stroke="#C8A951" stroke-width="1"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg><span>${d.rating || '–'}</span></div></td>
+                    <td><span class="status ${sc}">${sl}</span></td>
+                    <td class="actions-cell"><button class="action-icon" title="Détails"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></button></td>
+                </tr>`;
+            }).join('');
+        }
+
+        async function toggleUser(userId, isActive) {
+            const result = await API.apiFetch(`/api/users/${userId}/status`, {
+                method: 'PUT',
+                body: JSON.stringify({ is_active: !isActive })
+            });
+            if (result && result.success) {
+                if (window.Toast) window.Toast.success('Mis à jour', isActive ? 'Utilisateur désactivé.' : 'Utilisateur activé.');
+                loadPassagers();
+            } else {
+                if (window.Toast) window.Toast.error('Erreur', result?.error?.message || 'Échec');
+            }
+        }
+
+        const searchEl = document.getElementById('searchUsers');
+        if (searchEl) searchEl.addEventListener('input', function() {
+            const q = this.value.toLowerCase();
+            document.querySelectorAll('#passagersTable tbody tr, #entreprisesTable tbody tr, #chauffeursTable tbody tr').forEach(row => {
+                row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none';
+            });
+        });
+
+        loadPassagers();
+    </script>
+</body>
+</html>
