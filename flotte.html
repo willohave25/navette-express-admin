@@ -490,22 +490,82 @@
     </div>
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/supabase-config.js"></script>
-    <script src="js/admin.js"></script>
+    
+    
+    <script src="api-config.js"></script>
+    <script src="auth-api.js"></script>
+    <script src="api-config.js"></script>
+    <script src="auth-api.js"></script>
+    <script src="admin.js"></script>
     <script>
-        document.getElementById('addBusBtn').addEventListener('click', function() {
-            NXModal.open('addBusModal');
+        const API = window.NavetteAuth;
+        const vStatusLabel = { available:'Disponible', in_service:'En service', maintenance:'Maintenance', inactive:'Inactif' };
+        const vStatusCls   = { available:'status-success', in_service:'status-info', maintenance:'status-warning', inactive:'status-error' };
+
+        async function loadVehicles() {
+            const tbody = document.querySelector('#fleetTable tbody');
+            if (!tbody) return;
+            tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:2rem;">Chargement...</td></tr>';
+            const result = await API.apiFetch('/api/vehicles?limit=100');
+            if (!result?.success || !result.data?.length) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:2rem;color:var(--text-secondary);">Aucun véhicule enregistré</td></tr>';
+                return;
+            }
+            tbody.innerHTML = result.data.map(v => `<tr>
+                <td><strong>${v.plate_number}</strong></td>
+                <td>${v.brand || '–'} ${v.model || ''}</td>
+                <td><span class="capacity-badge">${v.capacity} places</span></td>
+                <td>${v.type || 'standard'}</td>
+                <td><span class="status ${vStatusCls[v.status] || ''}">${vStatusLabel[v.status] || v.status}</span></td>
+                <td>${v.km_total ? new Intl.NumberFormat('fr-FR').format(v.km_total)+' km' : '–'}</td>
+                <td>${v.next_maintenance ? new Date(v.next_maintenance).toLocaleDateString('fr-FR') : '–'}</td>
+                <td>${v.created_at ? new Date(v.created_at).toLocaleDateString('fr-FR') : '–'}</td>
+            </tr>`).join('');
+        }
+
+        const addBusBtn = document.getElementById('addBusBtn');
+        const saveBusBtn = document.getElementById('saveBusBtn');
+        const maintenanceBtn = document.getElementById('maintenanceBtn');
+
+        if (addBusBtn) addBusBtn.addEventListener('click', () => {
+            if (window.Modal) Modal.open('addBusModal');
+            else document.getElementById('addBusModal')?.classList.add('active');
         });
-        
-        document.getElementById('saveBusBtn').addEventListener('click', function() {
-            NXModal.close('addBusModal');
-            NXToast.success('Bus ajouté', 'Le véhicule a été ajouté à la flotte.');
+
+        if (saveBusBtn) saveBusBtn.addEventListener('click', async function() {
+            const plate    = document.getElementById('busPlate')?.value?.trim();
+            const capacity = parseInt(document.getElementById('busCapacity')?.value || 60);
+            if (!plate) { if (window.Toast) Toast.error('Champ manquant', 'La plaque est obligatoire.'); return; }
+            const btn = this;
+            btn.disabled = true; btn.textContent = 'Enregistrement...';
+            try {
+                const result = await API.apiFetch('/api/vehicles', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        plate_number: plate,
+                        brand: document.getElementById('busBrand')?.value?.trim() || null,
+                        model: document.getElementById('busModel')?.value?.trim() || null,
+                        capacity,
+                        type: document.getElementById('busType')?.value || 'standard',
+                        year: parseInt(document.getElementById('busYear')?.value) || null,
+                    })
+                });
+                if (!result?.success) throw new Error(result?.error?.message || 'Erreur');
+                if (window.Modal) Modal.close('addBusModal');
+                if (window.Toast) Toast.success('Bus ajouté', `Le véhicule ${plate} a été ajouté.`);
+                loadVehicles();
+            } catch(e) {
+                if (window.Toast) Toast.error('Erreur', e.message);
+            } finally {
+                btn.disabled = false; btn.textContent = 'Ajouter';
+            }
         });
-        
-        document.getElementById('maintenanceBtn').addEventListener('click', function() {
-            NXToast.info('Planification', 'Sélectionnez un bus dans la liste pour planifier sa maintenance.');
+
+        if (maintenanceBtn) maintenanceBtn.addEventListener('click', () => {
+            if (window.Toast) Toast.info('Planification', 'Sélectionnez un bus dans la liste.');
         });
+
+        loadVehicles();
     </script>
 </body>
 </html>
