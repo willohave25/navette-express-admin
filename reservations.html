@@ -83,7 +83,7 @@
                         <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
                     </div>
                     <div class="kpi-content">
-                        <span class="kpi-value">231</span>
+                        <span class="kpi-value" id="kpi-res-total">–</span>
                         <span class="kpi-label">Aujourd'hui</span>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
                         <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>
                     </div>
                     <div class="kpi-content">
-                        <span class="kpi-value">198</span>
+                        <span class="kpi-value" id="kpi-res-confirmed">–</span>
                         <span class="kpi-label">Confirmées</span>
                     </div>
                 </div>
@@ -101,7 +101,7 @@
                         <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
                     </div>
                     <div class="kpi-content">
-                        <span class="kpi-value">18</span>
+                        <span class="kpi-value" id="kpi-res-pending">–</span>
                         <span class="kpi-label">En attente</span>
                     </div>
                 </div>
@@ -110,7 +110,7 @@
                         <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M4.93 4.93l14.14 14.14"/></svg>
                     </div>
                     <div class="kpi-content">
-                        <span class="kpi-value">15</span>
+                        <span class="kpi-value" id="kpi-res-cancelled">–</span>
                         <span class="kpi-label">Annulées</span>
                     </div>
                 </div>
@@ -119,7 +119,7 @@
                         <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M12 10v6M9 13h6"/></svg>
                     </div>
                     <div class="kpi-content">
-                        <span class="kpi-value">578 500</span>
+                        <span class="kpi-value" id="kpi-res-revenue">–</span>
                         <span class="kpi-label">FCFA aujourd'hui</span>
                     </div>
                 </div>
@@ -135,10 +135,6 @@
                     <input type="date" id="filterDate" class="filter-input">
                     <select id="filterLine" class="filter-select">
                         <option value="">Toutes les lignes</option>
-                        <option value="abidjan-bassam">Abidjan–Bassam</option>
-                        <option value="cocody-plateau">Cocody–Plateau</option>
-                        <option value="yopougon-adjame">Yopougon–Adjamé</option>
-                        <option value="abobo-adjame">Abobo–Adjamé</option>
                     </select>
                     <select id="filterStatus" class="filter-select">
                         <option value="">Tous les statuts</option>
@@ -165,184 +161,18 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="date-cell">
-                                    <span class="date-day">27</span>
-                                    <span class="date-month">Mar 2024</span>
-                                    <span class="date-time">06:45</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="user-cell">
-                                    <div class="avatar">KJ</div>
-                                    <div class="user-info">
-                                        <span class="user-name">Kouamé Jean-Baptiste</span>
-                                        <span class="user-phone">+225 07 12 34 56 78</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>Abidjan–Bassam matin</td>
-                            <td><span class="badge badge-info">AB-1234-CI</span></td>
-                            <td><span class="seat-badge">12A</span></td>
-                            <td><span class="status status-success">Confirmé</span></td>
-                            <td>
-                                <div class="payment-cell">
-                                    <span class="payment-amount">2 500 FCFA</span>
-                                    <span class="payment-method">Orange Money</span>
-                                </div>
-                            </td>
-                            <td class="actions-cell">
-                                <button class="action-icon" title="Détails" data-action="details"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></button>
-                                <button class="action-icon" title="Modifier" data-action="edit"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
-                                <button class="action-icon warning" title="Annuler" data-action="cancel"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M4.93 4.93l14.14 14.14"/></svg></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="date-cell">
-                                    <span class="date-day">27</span>
-                                    <span class="date-month">Mar 2024</span>
-                                    <span class="date-time">07:00</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="user-cell">
-                                    <div class="avatar">AT</div>
-                                    <div class="user-info">
-                                        <span class="user-name">Adjoua Thérèse</span>
-                                        <span class="user-phone">+225 05 98 76 54 32</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>Cocody–Plateau Express</td>
-                            <td><span class="badge badge-info">CD-5678-CI</span></td>
-                            <td><span class="seat-badge">05B</span></td>
-                            <td><span class="status status-success">Confirmé</span></td>
-                            <td>
-                                <div class="payment-cell">
-                                    <span class="payment-amount">1 800 FCFA</span>
-                                    <span class="payment-method">MTN MoMo</span>
-                                </div>
-                            </td>
-                            <td class="actions-cell">
-                                <button class="action-icon" title="Détails" data-action="details"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></button>
-                                <button class="action-icon" title="Modifier" data-action="edit"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
-                                <button class="action-icon warning" title="Annuler" data-action="cancel"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M4.93 4.93l14.14 14.14"/></svg></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="date-cell">
-                                    <span class="date-day">27</span>
-                                    <span class="date-month">Mar 2024</span>
-                                    <span class="date-time">06:30</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="user-cell">
-                                    <div class="avatar">TM</div>
-                                    <div class="user-info">
-                                        <span class="user-name">Traoré Mamadou</span>
-                                        <span class="user-phone">+225 07 45 67 89 01</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>Yopougon–Adjamé</td>
-                            <td><span class="badge badge-info">EF-9012-CI</span></td>
-                            <td><span class="seat-badge">22C</span></td>
-                            <td><span class="status status-warning">En attente</span></td>
-                            <td>
-                                <div class="payment-cell">
-                                    <span class="payment-amount">1 500 FCFA</span>
-                                    <span class="payment-status pending">En attente</span>
-                                </div>
-                            </td>
-                            <td class="actions-cell">
-                                <button class="action-icon" title="Détails" data-action="details"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></button>
-                                <button class="action-icon success" title="Confirmer" data-action="confirm"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></button>
-                                <button class="action-icon warning" title="Annuler" data-action="cancel"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M4.93 4.93l14.14 14.14"/></svg></button>
-                            </td>
-                        </tr>
-                        <tr class="row-muted">
-                            <td>
-                                <div class="date-cell">
-                                    <span class="date-day">26</span>
-                                    <span class="date-month">Mar 2024</span>
-                                    <span class="date-time">17:30</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="user-cell">
-                                    <div class="avatar">DK</div>
-                                    <div class="user-info">
-                                        <span class="user-name">Diallo Kadiatou</span>
-                                        <span class="user-phone">+225 05 23 45 67 89</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>Abidjan–Bassam soir</td>
-                            <td><span class="badge">AB-1234-CI</span></td>
-                            <td><span class="seat-badge">08A</span></td>
-                            <td><span class="status status-info">Effectué</span></td>
-                            <td>
-                                <div class="payment-cell">
-                                    <span class="payment-amount">2 500 FCFA</span>
-                                    <span class="payment-method">Carte bancaire</span>
-                                </div>
-                            </td>
-                            <td class="actions-cell">
-                                <button class="action-icon" title="Détails" data-action="details"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></button>
-                            </td>
-                        </tr>
-                        <tr class="row-cancelled">
-                            <td>
-                                <div class="date-cell">
-                                    <span class="date-day">26</span>
-                                    <span class="date-month">Mar 2024</span>
-                                    <span class="date-time">07:15</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="user-cell">
-                                    <div class="avatar">KA</div>
-                                    <div class="user-info">
-                                        <span class="user-name">Koné Aminata</span>
-                                        <span class="user-phone">+225 07 89 01 23 45</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>Marcory–Treichville</td>
-                            <td><span class="badge">GH-3456-CI</span></td>
-                            <td><span class="seat-badge">—</span></td>
-                            <td><span class="status status-error">Annulé</span></td>
-                            <td>
-                                <div class="payment-cell">
-                                    <span class="payment-amount">1 200 FCFA</span>
-                                    <span class="payment-status refunded">Remboursé</span>
-                                </div>
-                            </td>
-                            <td class="actions-cell">
-                                <button class="action-icon" title="Détails" data-action="details"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></button>
-                            </td>
-                        </tr>
+                    <tbody id="reservationsTableBody">
+                        <tr><td colspan="8" style="text-align:center;padding:3rem;color:var(--text-secondary);">
+                            <div style="margin:0 auto 1rem;width:32px;height:32px;border:3px solid var(--border-color);border-top-color:var(--accent-gold);border-radius:50%;animation:spin 0.8s linear infinite;"></div>
+                            Chargement des réservations...
+                        </td></tr>
                     </tbody>
                 </table>
             </div>
 
             <!-- Pagination -->
             <div class="pagination">
-                <span class="pagination-info">Affichage 1-5 sur 231 réservations</span>
-                <div class="pagination-controls">
-                    <button class="pagination-btn" disabled><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15,18 9,12 15,6"/></svg></button>
-                    <button class="pagination-btn active">1</button>
-                    <button class="pagination-btn">2</button>
-                    <button class="pagination-btn">3</button>
-                    <span class="pagination-ellipsis">...</span>
-                    <button class="pagination-btn">47</button>
-                    <button class="pagination-btn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/></svg></button>
-                </div>
+                <span class="pagination-info" id="paginationInfo"></span>
             </div>
         </div>
     </main>
@@ -447,42 +277,167 @@
     </div>
 
     <!-- Scripts -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/supabase-config.js"></script>
-    <script src="js/admin.js"></script>
+    <script src="api-config.js"></script>
+    <script src="auth-api.js"></script>
+    <script src="admin.js"></script>
+    <style>@keyframes spin { to { transform: rotate(360deg); } }</style>
     <script>
-        // Actions sur les boutons
-        document.querySelectorAll('.action-icon').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const action = this.dataset.action;
-                
-                if (action === 'details') {
-                    NXModal.open('reservationModal');
-                } else if (action === 'cancel') {
-                    NXModal.open('cancelModal');
-                } else if (action === 'confirm') {
-                    NXToast.success('Réservation confirmée', 'La réservation a été validée.');
-                } else if (action === 'edit') {
-                    NXToast.info('Modification', 'Ouverture du formulaire de modification...');
+        const API = window.NavetteAuth;
+        const fmt = n => new Intl.NumberFormat('fr-FR').format(n || 0);
+        const statusMap = {
+            active: ['status-success','Actif'],
+            confirmed: ['status-success','Confirmé'],
+            pending: ['status-warning','En attente'],
+            completed: ['status-info','Effectué'],
+            cancelled: ['status-error','Annulé'],
+            expired: ['status-error','Expiré']
+        };
+
+        function statusBadge(s) {
+            const [cls, lbl] = statusMap[s] || ['status-info', s || '–'];
+            return `<span class="status ${cls}">${lbl}</span>`;
+        }
+
+        function initials(name) {
+            if (!name) return '?';
+            return name.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
+        }
+
+        function formatDate(d) {
+            if (!d) return '–';
+            return new Date(d).toLocaleDateString('fr-FR', { day:'2-digit', month:'short', year:'numeric' });
+        }
+
+        let allSubscriptions = [];
+
+        async function loadReservations() {
+            const tbody = document.getElementById('reservationsTableBody');
+            // Load lines for filter
+            const linesResult = await API.apiFetch('/api/lines?limit=100');
+            const lineSelect = document.getElementById('filterLine');
+            (linesResult?.data || []).forEach(l => {
+                if (!lineSelect.querySelector(`option[value="${l.id}"]`)) {
+                    const opt = document.createElement('option');
+                    opt.value = l.id;
+                    opt.textContent = l.name;
+                    lineSelect.appendChild(opt);
                 }
+            });
+
+            // Load subscriptions (= reservations for admin)
+            const result = await API.apiFetch('/api/subscriptions?limit=100');
+            if (!result || !result.success) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:#e74c3c;padding:2rem;">Erreur de chargement</td></tr>';
+                return;
+            }
+
+            allSubscriptions = result.data || [];
+            const today = new Date().toISOString().split('T')[0];
+            const todayRes = allSubscriptions.filter(r => r.created_at?.startsWith(today));
+
+            document.getElementById('kpi-res-total').textContent = fmt(allSubscriptions.length);
+            document.getElementById('kpi-res-confirmed').textContent = fmt(allSubscriptions.filter(r => r.status === 'active').length);
+            document.getElementById('kpi-res-pending').textContent = fmt(allSubscriptions.filter(r => r.status === 'pending').length);
+            document.getElementById('kpi-res-cancelled').textContent = fmt(allSubscriptions.filter(r => r.status === 'cancelled').length);
+
+            // Revenue from dashboard
+            const kpiResult = await API.apiFetch('/api/dashboard/kpis');
+            if (kpiResult?.success && kpiResult.data) {
+                document.getElementById('kpi-res-revenue').textContent = fmt(kpiResult.data.revenue_today || 0);
+            }
+
+            renderSubscriptions(allSubscriptions);
+        }
+
+        function renderSubscriptions(data) {
+            const tbody = document.getElementById('reservationsTableBody');
+            document.getElementById('paginationInfo').textContent = `${data.length} abonnement(s) chargé(s)`;
+            if (!data.length) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:2rem;color:var(--text-secondary);">Aucune réservation</td></tr>';
+                return;
+            }
+            tbody.innerHTML = data.map(r => {
+                const name = r.user_name || r.user?.full_name || '–';
+                const phone = r.user_phone || r.user?.phone || '';
+                const line = r.line_name || r.line?.name || '–';
+                const amount = r.price || 0;
+                const dateStr = formatDate(r.start_date || r.created_at);
+                return `<tr>
+                    <td><div class="date-cell"><span>${dateStr}</span></div></td>
+                    <td>
+                        <div class="user-cell">
+                            <div class="avatar">${initials(name)}</div>
+                            <div class="user-info"><span class="user-name">${name}</span>${phone ? `<span class="user-phone">${phone}</span>` : ''}</div>
+                        </div>
+                    </td>
+                    <td>${line}</td>
+                    <td><span class="badge badge-info">–</span></td>
+                    <td><span class="seat-badge">–</span></td>
+                    <td>${statusBadge(r.status)}</td>
+                    <td><div class="payment-cell">${amount ? `<span class="payment-amount">${fmt(amount)} FCFA</span>` : ''}</div></td>
+                    <td class="actions-cell">
+                        <button class="action-icon" title="Détails" onclick="viewDetail('${r.id}')"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></button>
+                        ${(r.status === 'pending' || r.status === 'active') ? `<button class="action-icon warning" title="Annuler" onclick="cancelSubscription('${r.id}')"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M4.93 4.93l14.14 14.14"/></svg></button>` : ''}
+                    </td>
+                </tr>`;
+            }).join('');
+        }
+
+        function viewDetail(id) {
+            document.getElementById('reservationModal').classList.add('active');
+        }
+
+        async function cancelSubscription(id) {
+            document.getElementById('cancelModal').classList.add('active');
+            document.getElementById('confirmCancelBtn').onclick = async () => {
+                document.getElementById('cancelModal').classList.remove('active');
+                const result = await API.apiFetch(`/api/subscriptions/${id}/cancel`, { method: 'PUT' });
+                if (result && result.success) {
+                    if (window.Toast) window.Toast.success('Annulé', 'Abonnement annulé.');
+                    loadReservations();
+                } else {
+                    if (window.Toast) window.Toast.error('Erreur', result?.error?.message || 'Échec');
+                }
+            };
+        }
+
+        document.querySelectorAll('[data-close]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.closest('.modal').classList.remove('active');
             });
         });
 
-        // Confirmer annulation
         document.getElementById('confirmCancelBtn').addEventListener('click', function() {
-            const refund = document.getElementById('refundCheckbox').checked;
-            NXModal.close('cancelModal');
-            if (refund) {
-                NXToast.success('Réservation annulée', 'La réservation a été annulée et le passager remboursé.');
-            } else {
-                NXToast.success('Réservation annulée', 'La réservation a été annulée sans remboursement.');
-            }
+            document.getElementById('cancelModal').classList.remove('active');
         });
 
-        // Remboursement
         document.getElementById('refundBtn').addEventListener('click', function() {
-            NXModal.close('reservationModal');
-            NXToast.success('Remboursement', 'Le remboursement de 2 500 FCFA a été initié.');
+            document.getElementById('reservationModal').classList.remove('active');
+            if (window.Toast) window.Toast.info('Remboursement', 'Fonction disponible via votre passerelle de paiement.');
         });
 
-        // Expo
+        // Filters
+        const searchEl = document.getElementById('searchReservations');
+        const filterLine = document.getElementById('filterLine');
+        const filterStatus = document.getElementById('filterStatus');
+        const filterDate = document.getElementById('filterDate');
+        function applyFilters() {
+            const q = searchEl?.value.toLowerCase() || '';
+            const line = filterLine?.value || '';
+            const status = filterStatus?.value || '';
+            let filtered = allSubscriptions;
+            if (q) filtered = filtered.filter(r => (r.user_name || r.user?.full_name || r.line_name || r.line?.name || '').toLowerCase().includes(q));
+            if (line) filtered = filtered.filter(r => r.line_id === line);
+            if (status) filtered = filtered.filter(r => r.status === status);
+            renderSubscriptions(filtered);
+        }
+        if (searchEl) searchEl.addEventListener('input', applyFilters);
+        if (filterLine) filterLine.addEventListener('change', applyFilters);
+        if (filterStatus) filterStatus.addEventListener('change', applyFilters);
+
+        document.getElementById('exportBtn').addEventListener('click', function() {
+            if (window.Toast) window.Toast.success('Export', 'Téléchargement initié.');
+        });
+
+        loadReservations();
+    </script>
