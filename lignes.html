@@ -3,821 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Gestion des lignes - Navette Express Admin - JAEBETS HOLDING">
     <meta name="theme-color" content="#1B2A4A">
     <title>Lignes - Navette Express Admin</title>
     <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/png" href="images/logo/logo-jaebets.png">
-    <link rel="apple-touch-icon" href="images/logo/logo-jaebets.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
-    <!-- Sidebar Navigation -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <div class="logo">
-                <svg viewBox="0 0 40 40" class="logo-icon">
-                    <rect x="4" y="12" width="32" height="18" rx="4" fill="#2EC4B6"/>
-                    <circle cx="12" cy="30" r="4" fill="#C8A951"/>
-                    <circle cx="28" cy="30" r="4" fill="#C8A951"/>
-                    <rect x="8" y="16" width="8" height="6" rx="1" fill="#1B2A4A"/>
-                    <rect x="18" y="16" width="8" height="6" rx="1" fill="#1B2A4A"/>
-                    <rect x="28" y="16" width="6" height="6" rx="1" fill="#1B2A4A"/>
-                </svg>
+                <svg viewBox="0 0 40 40" class="logo-icon"><rect x="4" y="12" width="32" height="18" rx="4" fill="#2EC4B6"/><circle cx="12" cy="30" r="4" fill="#C8A951"/><circle cx="28" cy="30" r="4" fill="#C8A951"/><rect x="8" y="16" width="8" height="6" rx="1" fill="#1B2A4A"/><rect x="18" y="16" width="8" height="6" rx="1" fill="#1B2A4A"/><rect x="28" y="16" width="6" height="6" rx="1" fill="#1B2A4A"/></svg>
                 <span class="logo-text">Navette Express</span>
             </div>
-            <button class="sidebar-close" id="sidebarClose" aria-label="Fermer menu">
-                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M18 6L6 18M6 6l12 12"/>
-                </svg>
-            </button>
+            <button class="sidebar-close" id="sidebarClose"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
         </div>
-        
         <nav class="sidebar-nav">
-            <a href="dashboard.html" class="nav-link">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="3" y="3" width="7" height="7" rx="1"/>
-                    <rect x="14" y="3" width="7" height="7" rx="1"/>
-                    <rect x="3" y="14" width="7" height="7" rx="1"/>
-                    <rect x="14" y="14" width="7" height="7" rx="1"/>
-                </svg>
-                <span>Dashboard</span>
-            </a>
-            <a href="utilisateurs.html" class="nav-link">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="9" cy="7" r="4"/>
-                    <path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/>
-                    <circle cx="17" cy="11" r="3"/>
-                    <path d="M21 21v-1.5a3 3 0 00-3-3h-1"/>
-                </svg>
-                <span>Utilisateurs</span>
-            </a>
-            <a href="lignes.html" class="nav-link active">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="5" cy="6" r="3"/>
-                    <circle cx="19" cy="18" r="3"/>
-                    <path d="M7 8l10 8"/>
-                    <path d="M12 12h.01"/>
-                </svg>
-                <span>Lignes</span>
-            </a>
-            <a href="flotte.html" class="nav-link">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="2" y="8" width="20" height="10" rx="2"/>
-                    <circle cx="7" cy="18" r="2"/>
-                    <circle cx="17" cy="18" r="2"/>
-                    <path d="M5 8V6a2 2 0 012-2h10a2 2 0 012 2v2"/>
-                </svg>
-                <span>Flotte</span>
-            </a>
-            <a href="chauffeurs.html" class="nav-link">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="8"/>
-                    <circle cx="12" cy="12" r="3"/>
-                    <path d="M12 4v1M12 19v1M4 12h1M19 12h1"/>
-                </svg>
-                <span>Chauffeurs</span>
-            </a>
-            <a href="dispatch.html" class="nav-link">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="3" y="3" width="6" height="6" rx="1"/>
-                    <rect x="15" y="15" width="6" height="6" rx="1"/>
-                    <path d="M9 6h6l-3 6 6-3v6"/>
-                </svg>
-                <span>Dispatch</span>
-            </a>
-            <a href="reservations.html" class="nav-link">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="3" y="4" width="18" height="18" rx="2"/>
-                    <path d="M16 2v4M8 2v4M3 10h18"/>
-                </svg>
-                <span>Réservations</span>
-            </a>
-            <a href="paiements.html" class="nav-link">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="2" y="4" width="20" height="16" rx="2"/>
-                    <path d="M12 10v6M9 13h6"/>
-                </svg>
-                <span>Paiements</span>
-            </a>
-            <a href="facturation.html" class="nav-link">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
-                    <path d="M14 2v6h6M8 13h8M8 17h8"/>
-                </svg>
-                <span>Facturation</span>
-            </a>
-            <a href="gps.html" class="nav-link">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"/>
-                    <circle cx="12" cy="12" r="3"/>
-                    <path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
-                </svg>
-                <span>GPS</span>
-            </a>
-            <a href="notifications.html" class="nav-link">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                    <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
-                </svg>
-                <span>Notifications</span>
-            </a>
-            <a href="rapports.html" class="nav-link">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M3 3v18h18"/>
-                    <path d="M7 16l4-4 4 4 5-6"/>
-                </svg>
-                <span>Rapports</span>
-            </a>
-            <a href="parametres.html" class="nav-link">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="3"/>
-                    <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
-                </svg>
-                <span>Paramètres</span>
-            </a>
+            <a href="dashboard.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Dashboard</span></a>
+            <a href="utilisateurs.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><circle cx="17" cy="11" r="3"/><path d="M21 21v-1.5a3 3 0 00-3-3h-1"/></svg><span>Utilisateurs</span></a>
+            <a href="lignes.html" class="nav-link active"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="6" r="3"/><circle cx="19" cy="18" r="3"/><path d="M7 8l10 8"/></svg><span>Lignes</span></a>
+            <a href="flotte.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="8" width="20" height="10" rx="2"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/><path d="M5 8V6a2 2 0 012-2h10a2 2 0 012 2v2"/></svg><span>Flotte</span></a>
+            <a href="chauffeurs.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 4v1M12 19v1M4 12h1M19 12h1"/></svg><span>Chauffeurs</span></a>
+            <a href="dispatch.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="15" y="15" width="6" height="6" rx="1"/><path d="M9 6h6l-3 6 6-3v6"/></svg><span>Dispatch</span></a>
+            <a href="reservations.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>Réservations</span></a>
+            <a href="paiements.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M12 10v6M9 13h6"/></svg><span>Paiements</span></a>
+            <a href="facturation.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/></svg><span>Facturation</span></a>
+            <a href="gps.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg><span>GPS</span></a>
+            <a href="notifications.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg><span>Notifications</span></a>
+            <a href="rapports.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 5-6"/></svg><span>Rapports</span></a>
+            <a href="parametres.html" class="nav-link"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg><span>Paramètres</span></a>
         </nav>
-        
         <div class="sidebar-footer">
-            <a href="#" class="nav-link logout" id="logoutBtn">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/>
-                    <polyline points="16,17 21,12 16,7"/>
-                    <line x1="21" y1="12" x2="9" y2="12"/>
-                </svg>
-                <span>Déconnexion</span>
-            </a>
+            <a href="#" class="nav-link logout" id="logoutBtn"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16,17 21,12 16,7"/><line x1="21" y1="12" x2="9" y2="12"/></svg><span>Déconnexion</span></a>
         </div>
     </aside>
 
-    <!-- Main Content -->
     <main class="main-content">
-        <!-- Header -->
         <header class="main-header">
-            <button class="hamburger" id="hamburgerBtn" aria-label="Ouvrir menu">
-                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M3 12h18M3 6h18M3 18h18"/>
-                </svg>
-            </button>
-            
+            <button class="hamburger" id="hamburgerBtn"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
             <div class="header-title">
                 <h1>Gestion des lignes</h1>
                 <p class="breadcrumb">Accueil / Lignes</p>
             </div>
-            
             <div class="header-actions">
                 <a href="creer-ligne.html" class="btn btn-primary">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <path d="M12 8v8M8 12h8"/>
-                    </svg>
-                    <span>Créer une ligne</span>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                    Nouvelle ligne
                 </a>
-                <div class="user-menu">
-                    <div class="user-avatar">
-                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="8" r="4"/>
-                            <path d="M4 20v-1a6 6 0 0112 0v1"/>
-                        </svg>
-                    </div>
-                    <span class="user-name">Admin JAEBETS</span>
-                </div>
             </div>
         </header>
 
-        <!-- Lignes Content -->
-        <div class="content-area">
-            <!-- KPIs lignes -->
-            <section class="kpi-grid small">
-                <div class="kpi-card compact">
-                    <div class="kpi-icon lines">
-                        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="5" cy="6" r="3"/>
-                            <circle cx="19" cy="18" r="3"/>
-                            <path d="M7 8l10 8"/>
-                        </svg>
-                    </div>
-                    <div class="kpi-content">
-                        <span class="kpi-value">42</span>
-                        <span class="kpi-label">Lignes actives</span>
-                    </div>
-                </div>
-                <div class="kpi-card compact">
-                    <div class="kpi-icon warning">
-                        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M12 6v6l4 2"/>
-                        </svg>
-                    </div>
-                    <div class="kpi-content">
-                        <span class="kpi-value">8</span>
-                        <span class="kpi-label">En attente</span>
-                    </div>
-                </div>
-                <div class="kpi-card compact">
-                    <div class="kpi-icon success">
-                        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
-                            <polyline points="22,4 12,14.01 9,11.01"/>
-                        </svg>
-                    </div>
-                    <div class="kpi-content">
-                        <span class="kpi-value">5</span>
-                        <span class="kpi-label">Complet</span>
-                    </div>
-                </div>
-                <div class="kpi-card compact highlight">
-                    <div class="kpi-icon revenue">
-                        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="9" cy="7" r="4"/>
-                            <path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/>
-                            <circle cx="17" cy="11" r="3"/>
-                            <path d="M21 21v-1.5a3 3 0 00-3-3"/>
-                        </svg>
-                    </div>
-                    <div class="kpi-content">
-                        <span class="kpi-value">8 450</span>
-                        <span class="kpi-label">Passagers aujourd'hui</span>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Filtres et recherche -->
-            <div class="table-controls">
-                <div class="search-box">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="11" cy="11" r="8"/>
-                        <path d="M21 21l-4.35-4.35"/>
-                    </svg>
-                    <input type="text" id="searchLines" placeholder="Rechercher une ligne...">
-                </div>
-                <div class="filters">
-                    <select id="filterStatus" class="filter-select">
-                        <option value="">Tous les statuts</option>
-                        <option value="actif">Actif</option>
-                        <option value="attente">En attente</option>
-                        <option value="complet">Complet</option>
-                        <option value="inactif">Inactif</option>
-                    </select>
-                    <select id="filterType" class="filter-select">
-                        <option value="">Tous les types</option>
-                        <option value="30">Bus 30 places</option>
-                        <option value="60">Bus 60 places</option>
-                        <option value="vip">VIP</option>
-                    </select>
-                    <button class="btn btn-secondary" id="exportBtn">
-                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
-                            <polyline points="7,10 12,15 17,10"/>
-                            <line x1="12" y1="15" x2="12" y2="3"/>
-                        </svg>
-                        Exporter
-                    </button>
-                </div>
+        <div class="page-content">
+            <!-- Filtres -->
+            <div class="filters-bar" style="display:flex;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap;align-items:center;">
+                <select id="filterStatus" style="padding:0.5rem 1rem;background:var(--card-bg);border:1px solid var(--border-color);border-radius:8px;color:var(--text-primary);">
+                    <option value="">Tous les statuts</option>
+                    <option value="active">Actives</option>
+                    <option value="inactive">Inactives</option>
+                    <option value="pending">En attente</option>
+                </select>
+                <input type="text" id="searchLine" placeholder="Rechercher une ligne..." style="padding:0.5rem 1rem;background:var(--card-bg);border:1px solid var(--border-color);border-radius:8px;color:var(--text-primary);flex:1;min-width:200px;">
+                <span id="lineCount" style="color:var(--text-secondary);font-size:0.9rem;"></span>
             </div>
 
             <!-- Tableau des lignes -->
-            <div class="table-wrapper">
+            <div class="table-container">
                 <table class="data-table" id="linesTable">
                     <thead>
                         <tr>
-                            <th data-sort="nom">
-                                Nom de ligne
-                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M7 10l5 5 5-5"/>
-                                </svg>
-                            </th>
-                            <th data-sort="depart">Point de départ</th>
-                            <th data-sort="destination">Destination</th>
-                            <th data-sort="horaire">Horaire principal</th>
-                            <th data-sort="capacite">Capacité max.</th>
-                            <th data-sort="remplies">Places remplies</th>
-                            <th data-sort="taux">Taux</th>
-                            <th data-sort="statut">Statut</th>
+                            <th>Ligne</th>
+                            <th>Départ</th>
+                            <th>Destination</th>
+                            <th>Tarif mensuel</th>
+                            <th>Capacité</th>
+                            <th>Horaire départ</th>
+                            <th>Type</th>
+                            <th>Statut</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="line-cell">
-                                    <div class="line-icon">
-                                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
-                                            <circle cx="5" cy="6" r="3"/>
-                                            <circle cx="19" cy="18" r="3"/>
-                                            <path d="M7 8l10 8"/>
-                                        </svg>
-                                    </div>
-                                    <span>Abidjan–Bassam matin</span>
-                                </div>
-                            </td>
-                            <td>Cocody Saint-Jean</td>
-                            <td>Grand-Bassam Centre</td>
-                            <td>
-                                <span class="time-badge">
-                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <path d="M12 6v6l4 2"/>
-                                    </svg>
-                                    06:45 – 08:15
-                                </span>
-                            </td>
-                            <td><span class="capacity-badge">45</span></td>
-                            <td><span class="filled-badge high">42</span></td>
-                            <td>
-                                <div class="progress-bar">
-                                    <div class="progress-fill high" style="width: 93%"></div>
-                                </div>
-                                <span class="progress-text">93%</span>
-                            </td>
-                            <td><span class="status status-success">Actif</span></td>
-                            <td class="actions-cell">
-                                <button class="action-icon" title="Détails" data-action="details">
-                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <path d="M12 16v-4M12 8h.01"/>
-                                    </svg>
-                                </button>
-                                <button class="action-icon" title="Modifier" data-action="edit">
-                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
-                                        <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                                    </svg>
-                                </button>
-                                <button class="action-icon warning" title="Désactiver" data-action="deactivate">
-                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <path d="M4.93 4.93l14.14 14.14"/>
-                                    </svg>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="line-cell">
-                                    <div class="line-icon">
-                                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
-                                            <circle cx="5" cy="6" r="3"/>
-                                            <circle cx="19" cy="18" r="3"/>
-                                            <path d="M7 8l10 8"/>
-                                        </svg>
-                                    </div>
-                                    <span>Cocody–Plateau Express</span>
-                                </div>
-                            </td>
-                            <td>Cocody Riviera 2</td>
-                            <td>Plateau Cité Admin</td>
-                            <td>
-                                <span class="time-badge">
-                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <path d="M12 6v6l4 2"/>
-                                    </svg>
-                                    07:00 – 07:45
-                                </span>
-                            </td>
-                            <td><span class="capacity-badge">60</span></td>
-                            <td><span class="filled-badge high">58</span></td>
-                            <td>
-                                <div class="progress-bar">
-                                    <div class="progress-fill high" style="width: 97%"></div>
-                                </div>
-                                <span class="progress-text">97%</span>
-                            </td>
-                            <td><span class="status status-info">Complet</span></td>
-                            <td class="actions-cell">
-                                <button class="action-icon" title="Détails" data-action="details">
-                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <path d="M12 16v-4M12 8h.01"/>
-                                    </svg>
-                                </button>
-                                <button class="action-icon" title="Modifier" data-action="edit">
-                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
-                                        <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                                    </svg>
-                                </button>
-                                <button class="action-icon warning" title="Désactiver" data-action="deactivate">
-                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <path d="M4.93 4.93l14.14 14.14"/>
-                                    </svg>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="line-cell">
-                                    <div class="line-icon">
-                                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
-                                            <circle cx="5" cy="6" r="3"/>
-                                            <circle cx="19" cy="18" r="3"/>
-                                            <path d="M7 8l10 8"/>
-                                        </svg>
-                                    </div>
-                                    <span>Yopougon–Adjamé</span>
-                                </div>
-                            </td>
-                            <td>Yopougon Maroc</td>
-                            <td>Adjamé Gare Nord</td>
-                            <td>
-                                <span class="time-badge">
-                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <path d="M12 6v6l4 2"/>
-                                    </svg>
-                                    06:30 – 07:30
-                                </span>
-                            </td>
-                            <td><span class="capacity-badge">60</span></td>
-                            <td><span class="filled-badge medium">45</span></td>
-                            <td>
-                                <div class="progress-bar">
-                                    <div class="progress-fill medium" style="width: 75%"></div>
-                                </div>
-                                <span class="progress-text">75%</span>
-                            </td>
-                            <td><span class="status status-success">Actif</span></td>
-                            <td class="actions-cell">
-                                <button class="action-icon" title="Détails" data-action="details">
-                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <path d="M12 16v-4M12 8h.01"/>
-                                    </svg>
-                                </button>
-                                <button class="action-icon" title="Modifier" data-action="edit">
-                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
-                                        <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                                    </svg>
-                                </button>
-                                <button class="action-icon warning" title="Désactiver" data-action="deactivate">
-                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <path d="M4.93 4.93l14.14 14.14"/>
-                                    </svg>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="line-cell">
-                                    <div class="line-icon vip">
-                                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
-                                            <polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/>
-                                        </svg>
-                                    </div>
-                                    <span>VIP Plateau–Aéroport</span>
-                                </div>
-                            </td>
-                            <td>Plateau Centre</td>
-                            <td>Aéroport FHB</td>
-                            <td>
-                                <span class="time-badge">
-                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <path d="M12 6v6l4 2"/>
-                                    </svg>
-                                    08:00 – 09:00
-                                </span>
-                            </td>
-                            <td><span class="capacity-badge vip">20</span></td>
-                            <td><span class="filled-badge low">8</span></td>
-                            <td>
-                                <div class="progress-bar">
-                                    <div class="progress-fill low" style="width: 40%"></div>
-                                </div>
-                                <span class="progress-text">40%</span>
-                            </td>
-                            <td><span class="status status-warning">En attente</span></td>
-                            <td class="actions-cell">
-                                <button class="action-icon" title="Détails" data-action="details">
-                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <path d="M12 16v-4M12 8h.01"/>
-                                    </svg>
-                                </button>
-                                <button class="action-icon" title="Modifier" data-action="edit">
-                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
-                                        <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                                    </svg>
-                                </button>
-                                <button class="action-icon success" title="Activer" data-action="activate">
-                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M20 6L9 17l-5-5"/>
-                                    </svg>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="line-cell">
-                                    <div class="line-icon">
-                                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
-                                            <circle cx="5" cy="6" r="3"/>
-                                            <circle cx="19" cy="18" r="3"/>
-                                            <path d="M7 8l10 8"/>
-                                        </svg>
-                                    </div>
-                                    <span>Marcory–Treichville</span>
-                                </div>
-                            </td>
-                            <td>Marcory Résidentiel</td>
-                            <td>Treichville Gare Sud</td>
-                            <td>
-                                <span class="time-badge">
-                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <path d="M12 6v6l4 2"/>
-                                    </svg>
-                                    07:15 – 07:45
-                                </span>
-                            </td>
-                            <td><span class="capacity-badge">30</span></td>
-                            <td><span class="filled-badge medium">22</span></td>
-                            <td>
-                                <div class="progress-bar">
-                                    <div class="progress-fill medium" style="width: 73%"></div>
-                                </div>
-                                <span class="progress-text">73%</span>
-                            </td>
-                            <td><span class="status status-success">Actif</span></td>
-                            <td class="actions-cell">
-                                <button class="action-icon" title="Détails" data-action="details">
-                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <path d="M12 16v-4M12 8h.01"/>
-                                    </svg>
-                                </button>
-                                <button class="action-icon" title="Modifier" data-action="edit">
-                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
-                                        <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                                    </svg>
-                                </button>
-                                <button class="action-icon warning" title="Désactiver" data-action="deactivate">
-                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <path d="M4.93 4.93l14.14 14.14"/>
-                                    </svg>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="line-cell">
-                                    <div class="line-icon">
-                                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
-                                            <circle cx="5" cy="6" r="3"/>
-                                            <circle cx="19" cy="18" r="3"/>
-                                            <path d="M7 8l10 8"/>
-                                        </svg>
-                                    </div>
-                                    <span>Abobo–Adjamé Express</span>
-                                </div>
-                            </td>
-                            <td>Abobo Banco</td>
-                            <td>Adjamé Liberté</td>
-                            <td>
-                                <span class="time-badge">
-                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <path d="M12 6v6l4 2"/>
-                                    </svg>
-                                    06:00 – 06:45
-                                </span>
-                            </td>
-                            <td><span class="capacity-badge">60</span></td>
-                            <td><span class="filled-badge high">55</span></td>
-                            <td>
-                                <div class="progress-bar">
-                                    <div class="progress-fill high" style="width: 92%"></div>
-                                </div>
-                                <span class="progress-text">92%</span>
-                            </td>
-                            <td><span class="status status-success">Actif</span></td>
-                            <td class="actions-cell">
-                                <button class="action-icon" title="Détails" data-action="details">
-                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <path d="M12 16v-4M12 8h.01"/>
-                                    </svg>
-                                </button>
-                                <button class="action-icon" title="Modifier" data-action="edit">
-                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
-                                        <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                                    </svg>
-                                </button>
-                                <button class="action-icon warning" title="Désactiver" data-action="deactivate">
-                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <path d="M4.93 4.93l14.14 14.14"/>
-                                    </svg>
-                                </button>
-                            </td>
-                        </tr>
+                    <tbody id="linesTableBody">
+                        <tr><td colspan="9" style="text-align:center;padding:3rem;color:var(--text-secondary);">
+                            <div class="spinner" style="margin:0 auto 1rem;width:32px;height:32px;border:3px solid var(--border-color);border-top-color:var(--accent-gold);border-radius:50%;animation:spin 0.8s linear infinite;"></div>
+                            Chargement des lignes...
+                        </td></tr>
                     </tbody>
                 </table>
-            </div>
-
-            <!-- Pagination -->
-            <div class="pagination">
-                <span class="pagination-info">Affichage 1-6 sur 55 lignes</span>
-                <div class="pagination-controls">
-                    <button class="pagination-btn" disabled>
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="15,18 9,12 15,6"/>
-                        </svg>
-                    </button>
-                    <button class="pagination-btn active">1</button>
-                    <button class="pagination-btn">2</button>
-                    <button class="pagination-btn">3</button>
-                    <span class="pagination-ellipsis">...</span>
-                    <button class="pagination-btn">10</button>
-                    <button class="pagination-btn">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="9,18 15,12 9,6"/>
-                        </svg>
-                    </button>
-                </div>
             </div>
         </div>
     </main>
 
-    <!-- Modal Détails Ligne -->
-    <div class="modal" id="lineDetailsModal">
-        <div class="modal-overlay"></div>
-        <div class="modal-content large">
-            <div class="modal-header">
-                <h3>Détails de la ligne</h3>
-                <button class="modal-close" data-close>
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M18 6L6 18M6 6l12 12"/>
-                    </svg>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="line-detail-header">
-                    <div class="line-detail-icon">
-                        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="5" cy="6" r="3"/>
-                            <circle cx="19" cy="18" r="3"/>
-                            <path d="M7 8l10 8"/>
-                        </svg>
-                    </div>
-                    <div class="line-detail-info">
-                        <h4>Abidjan–Bassam matin</h4>
-                        <span class="status status-success">Actif</span>
-                    </div>
-                </div>
-                
-                <div class="detail-grid cols-2">
-                    <div class="detail-section">
-                        <h5>Trajet</h5>
-                        <div class="route-visual">
-                            <div class="route-point start">
-                                <svg viewBox="0 0 24 24" width="16" height="16" fill="#2EC4B6" stroke="#2EC4B6">
-                                    <circle cx="12" cy="12" r="8"/>
-                                </svg>
-                                <span>Cocody Saint-Jean</span>
-                            </div>
-                            <div class="route-line"></div>
-                            <div class="route-point end">
-                                <svg viewBox="0 0 24 24" width="16" height="16" fill="#C8A951" stroke="#C8A951">
-                                    <circle cx="12" cy="12" r="8"/>
-                                </svg>
-                                <span>Grand-Bassam Centre</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="detail-section">
-                        <h5>Informations</h5>
-                        <div class="detail-list">
-                            <div class="detail-item">
-                                <span class="detail-label">Horaire</span>
-                                <span class="detail-value">06:45 – 08:15</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">Durée estimée</span>
-                                <span class="detail-value">1h30</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">Distance</span>
-                                <span class="detail-value">42 km</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">Tarif standard</span>
-                                <span class="detail-value currency">500 FCFA</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <style>
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .badge-active   { background: rgba(46,204,113,0.15); color:#2ecc71; padding:4px 10px; border-radius:20px; font-size:0.8rem; font-weight:600; }
+        .badge-inactive { background: rgba(149,165,166,0.15); color:#95a5a6; padding:4px 10px; border-radius:20px; font-size:0.8rem; font-weight:600; }
+        .badge-pending  { background: rgba(241,196,15,0.15); color:#f1c40f; padding:4px 10px; border-radius:20px; font-size:0.8rem; font-weight:600; }
+        .toggle-btn { padding:4px 12px; border-radius:20px; border:none; cursor:pointer; font-size:0.8rem; font-weight:600; transition:all 0.2s; }
+        .toggle-btn.activate { background:rgba(46,204,113,0.2); color:#2ecc71; }
+        .toggle-btn.deactivate { background:rgba(231,76,60,0.2); color:#e74c3c; }
+    </style>
 
-                <div class="detail-grid cols-2">
-                    <div class="detail-section">
-                        <h5>Capacité</h5>
-                        <div class="capacity-visual">
-                            <div class="capacity-bar">
-                                <div class="capacity-fill" style="width: 93%"></div>
-                            </div>
-                            <div class="capacity-stats">
-                                <span><strong>42</strong> / 45 places</span>
-                                <span class="capacity-percent">93%</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="detail-section">
-                        <h5>Bus & Chauffeur assignés</h5>
-                        <div class="assigned-info">
-                            <div class="assigned-item">
-                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
-                                    <rect x="2" y="8" width="20" height="10" rx="2"/>
-                                    <circle cx="7" cy="18" r="2"/>
-                                    <circle cx="17" cy="18" r="2"/>
-                                </svg>
-                                <span>AB-1234-CI (Bus 45 places)</span>
-                            </div>
-                            <div class="assigned-item">
-                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="12" cy="8" r="4"/>
-                                    <path d="M4 20v-1a6 6 0 0112 0v1"/>
-                                </svg>
-                                <span>Touré Karim (4.8 ⭐)</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="detail-section full">
-                    <h5>Statistiques du mois</h5>
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <span class="stat-value">2 340</span>
-                            <span class="stat-label">Passagers</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-value">52</span>
-                            <span class="stat-label">Trajets effectués</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-value currency">1 170 000</span>
-                            <span class="stat-label">Revenus (FCFA)</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-value">91%</span>
-                            <span class="stat-label">Taux remplissage moy.</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" data-close>Fermer</button>
-                <button class="btn btn-primary">
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
-                        <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                    </svg>
-                    Modifier
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Scripts -->
-    <script src="js/admin.js"></script>
+    
+    
+    <script src="api-config.js"></script>
+    <script src="auth-api.js"></script>
+    <script src="admin.js"></script>
     <script>
-        // Actions sur les boutons
-        document.querySelectorAll('.action-icon').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const action = this.dataset.action;
-                
-                if (action === 'details') {
-                    NXModal.open('lineDetailsModal');
-                } else if (action === 'edit') {
-                    window.location.href = 'creer-ligne.html?edit=1';
-                } else if (action === 'deactivate') {
-                    NXToast.warning('Ligne désactivée', 'La ligne a été temporairement mise hors service.');
-                } else if (action === 'activate') {
-                    NXToast.success('Ligne activée', 'La ligne est maintenant en service.');
-                }
+        const fmt = n => new Intl.NumberFormat('fr-FR').format(n || 0);
+        const API = window.NavetteAuth;
+        let allLines = [];
+
+        function statusBadge(s) {
+            const map = { active: ['badge-active','Actif'], inactive: ['badge-inactive','Inactif'], pending: ['badge-pending','En attente'], full: ['badge-pending','Complet'], suspended: ['badge-inactive','Suspendu'] };
+            const [cls, label] = map[s] || ['badge-inactive', s];
+            return `<span class="${cls}">${label}</span>`;
+        }
+
+        function renderLines(lines) {
+            const tbody = document.getElementById('linesTableBody');
+            const countEl = document.getElementById('lineCount');
+            if (countEl) countEl.textContent = `${lines.length} ligne(s)`;
+            if (!lines.length) {
+                tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:2rem;color:var(--text-secondary);">Aucune ligne trouvée</td></tr>';
+                return;
+            }
+            tbody.innerHTML = lines.map(l => `
+                <tr>
+                    <td><strong>${l.code || ''}</strong> ${l.name}</td>
+                    <td>${l.origin}</td>
+                    <td>${l.destination}</td>
+                    <td><strong style="color:var(--accent-gold)">${fmt(l.price_monthly)} FCFA</strong><br><small style="color:var(--text-secondary)">Aller-Retour</small></td>
+                    <td>${l.capacity || 60} places</td>
+                    <td>${l.departure_time || '–'}</td>
+                    <td>${l.type || 'standard'}</td>
+                    <td>${statusBadge(l.status)}</td>
+                    <td style="display:flex;gap:6px;flex-wrap:wrap;">
+                        ${l.status !== 'active'
+                            ? `<button class="toggle-btn activate" onclick="toggleStatus('${l.id}','active')">Activer</button>`
+                            : `<button class="toggle-btn deactivate" onclick="toggleStatus('${l.id}','inactive')">Désactiver</button>`
+                        }
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        async function loadLines() {
+            const tbody = document.getElementById('linesTableBody');
+            if (tbody) tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:2rem;">Chargement...</td></tr>';
+            const result = await API.apiFetch('/api/lines?limit=100');
+            if (!result || !result.success) {
+                if (tbody) tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;color:#e74c3c;padding:2rem;">Erreur de chargement</td></tr>';
+                return;
+            }
+            allLines = result.data || [];
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const statusEl = document.getElementById('filterStatus');
+            const searchEl = document.getElementById('searchLine');
+            const status = statusEl ? statusEl.value : '';
+            const search = searchEl ? searchEl.value.toLowerCase() : '';
+            let filtered = allLines;
+            if (status) filtered = filtered.filter(l => l.status === status);
+            if (search) filtered = filtered.filter(l =>
+                (l.name || '').toLowerCase().includes(search) ||
+                (l.origin || '').toLowerCase().includes(search) ||
+                (l.destination || '').toLowerCase().includes(search)
+            );
+            filtered.sort((a, b) => {
+                if (a.status === 'active' && b.status !== 'active') return -1;
+                if (b.status === 'active' && a.status !== 'active') return 1;
+                return (a.code || '').localeCompare(b.code || '');
             });
-        });
+            renderLines(filtered);
+        }
 
-        // Recherche
-        document.getElementById('searchLines').addEventListener('input', NXUtils.debounce(function(e) {
-            console.log('Recherche:', e.target.value);
-        }, 300));
+        async function toggleStatus(lineId, newStatus) {
+            const result = await API.apiFetch(`/api/lines/${lineId}/status`, {
+                method: 'PUT',
+                body: JSON.stringify({ status: newStatus })
+            });
+            if (result && result.success) {
+                if (window.Toast) window.Toast.success(
+                    newStatus === 'active' ? 'Ligne activée ✓' : 'Ligne désactivée',
+                    newStatus === 'active' ? 'La ligne est maintenant active pour les passagers.' : 'La ligne est désactivée.'
+                );
+                loadLines();
+            } else {
+                if (window.Toast) window.Toast.error('Erreur', result?.error?.message || 'Échec de la mise à jour');
+            }
+        }
 
-        // Export
-        document.getElementById('exportBtn').addEventListener('click', function() {
-            NXToast.success('Export lancé', 'Le fichier sera téléchargé dans quelques instants.');
-        });
+        const filterEl = document.getElementById('filterStatus');
+        const searchEl = document.getElementById('searchLine');
+        if (filterEl) filterEl.addEventListener('change', applyFilters);
+        if (searchEl) searchEl.addEventListener('input', applyFilters);
+
+        loadLines();
     </script>
 </body>
 </html>
