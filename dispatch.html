@@ -229,42 +229,79 @@
             return name.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
         }
 
+        let selectedDriver = null;
+
+        function doAssign(lineCard, driverCard) {
+            const lineName = lineCard.querySelector('.line-name').textContent;
+            const driverName = driverCard.querySelector('.driver-name').textContent;
+            pendingList.insertAdjacentHTML('beforeend', `
+                <div class="assignment-item" data-id="assign-${Date.now()}">
+                    <div class="assignment-info">
+                        <span class="assignment-line">${lineName}</span>
+                        <span class="assignment-arrow">→</span>
+                        <span class="assignment-driver">${driverName}</span>
+                    </div>
+                    <button class="btn btn-sm btn-danger" data-action="cancel">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                    </button>
+                </div>`);
+            noAssignments.style.display = 'none';
+            lineCard.querySelector('.status').className = 'status status-success';
+            lineCard.querySelector('.status').textContent = 'Assigné';
+            driverCard.classList.add('assigned');
+            driverCard.draggable = false;
+            driverCard.classList.remove('selected');
+            selectedDriver = null;
+            document.querySelectorAll('.dispatch-card.driver.selected').forEach(d => d.classList.remove('selected'));
+            window.Toast && window.Toast.success('Assignation', `${driverName} assigné à ${lineName}`);
+        }
+
         function bindDragDrop() {
             document.querySelectorAll('.dispatch-card.driver').forEach(driver => {
+                if (driver.classList.contains('assigned')) return;
+
+                // Drag & drop
                 driver.addEventListener('dragstart', function(e) {
                     e.dataTransfer.setData('text/plain', this.dataset.id);
                     this.classList.add('dragging');
                 });
                 driver.addEventListener('dragend', function() { this.classList.remove('dragging'); });
+
+                // Clic : sélectionner/désélectionner
+                driver.addEventListener('click', function() {
+                    if (this.classList.contains('assigned')) return;
+                    const isSelected = this.classList.contains('selected');
+                    document.querySelectorAll('.dispatch-card.driver.selected').forEach(d => d.classList.remove('selected'));
+                    selectedDriver = isSelected ? null : this;
+                    if (!isSelected) this.classList.add('selected');
+                });
             });
-            document.querySelectorAll('.drop-zone').forEach(zone => {
+
+            document.querySelectorAll('.drop-zone, .dispatch-card.line').forEach(el => {
+                const zone = el.classList.contains('drop-zone') ? el : el.querySelector('.drop-zone');
+                const lineCard = el.classList.contains('line') ? el : el.closest('.dispatch-card.line');
+                if (!zone || !lineCard) return;
+
+                // Drag over/drop
                 zone.addEventListener('dragover', function(e) { e.preventDefault(); this.classList.add('drag-over'); });
                 zone.addEventListener('dragleave', function() { this.classList.remove('drag-over'); });
                 zone.addEventListener('drop', function(e) {
                     e.preventDefault();
                     this.classList.remove('drag-over');
                     const driverId = e.dataTransfer.getData('text/plain');
-                    const driver = document.querySelector(`[data-id="${driverId}"]`);
-                    const lineCard = this.closest('.dispatch-card.line');
-                    const lineName = lineCard.querySelector('.line-name').textContent;
-                    const driverName = driver.querySelector('.driver-name').textContent;
-                    pendingList.insertAdjacentHTML('beforeend', `
-                        <div class="assignment-item" data-id="assign-${Date.now()}">
-                            <div class="assignment-info">
-                                <span class="assignment-line">${lineName}</span>
-                                <span class="assignment-arrow">→</span>
-                                <span class="assignment-driver">${driverName}</span>
-                            </div>
-                            <button class="btn btn-sm btn-danger" data-action="cancel">
-                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-                            </button>
-                        </div>`);
-                    noAssignments.style.display = 'none';
-                    lineCard.querySelector('.status').className = 'status status-success';
-                    lineCard.querySelector('.status').textContent = 'Assigné';
-                    driver.classList.add('assigned');
-                    driver.draggable = false;
-                    window.Toast && window.Toast.success('Assignation', `${driverName} assigné à ${lineName}`);
+                    const driverCard = document.querySelector(`[data-id="${driverId}"]`);
+                    if (driverCard) doAssign(lineCard, driverCard);
+                });
+
+                // Clic sur la ligne : assigne le chauffeur sélectionné
+                lineCard.addEventListener('click', function(e) {
+                    if (e.target.closest('.drop-zone') || e.target.closest('button')) {
+                        if (selectedDriver && e.target.closest('.drop-zone')) {
+                            doAssign(this, selectedDriver);
+                        }
+                        return;
+                    }
+                    if (selectedDriver) doAssign(this, selectedDriver);
                 });
             });
         }
