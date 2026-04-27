@@ -178,12 +178,11 @@
     </main>
 
     <!-- Modal Détails Réservation -->
-    <div class="modal" id="reservationModal">
-        <div class="modal-overlay"></div>
-        <div class="modal-content">
+    <div class="modal-overlay" id="reservationModal">
+        <div class="modal">
             <div class="modal-header">
                 <h3>Détail de la réservation</h3>
-                <button class="modal-close" data-close><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+                <button class="modal-close"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
             </div>
             <div class="modal-body">
                 <div class="reservation-detail">
@@ -243,19 +242,18 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" data-close>Fermer</button>
+                <button class="btn btn-secondary modal-close">Fermer</button>
                 <button class="btn btn-warning" id="refundBtn">Rembourser</button>
             </div>
         </div>
     </div>
 
     <!-- Modal Confirmation Annulation -->
-    <div class="modal" id="cancelModal">
-        <div class="modal-overlay"></div>
-        <div class="modal-content small">
+    <div class="modal-overlay" id="cancelModal">
+        <div class="modal">
             <div class="modal-header">
                 <h3>Confirmer l'annulation</h3>
-                <button class="modal-close" data-close><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+                <button class="modal-close"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
             </div>
             <div class="modal-body">
                 <div class="confirm-icon warning">
@@ -270,7 +268,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" data-close>Non, garder</button>
+                <button class="btn btn-secondary modal-close">Non, garder</button>
                 <button class="btn btn-danger" id="confirmCancelBtn">Oui, annuler</button>
             </div>
         </div>

@@ -807,12 +807,11 @@
     </main>
 
     <!-- Modal Détails Utilisateur -->
-    <div class="modal" id="userDetailsModal">
-        <div class="modal-overlay"></div>
-        <div class="modal-content">
+    <div class="modal-overlay" id="userDetailsModal">
+        <div class="modal">
             <div class="modal-header">
                 <h3>Détails utilisateur</h3>
-                <button class="modal-close" data-close>
+                <button class="modal-close">
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M18 6L6 18M6 6l12 12"/>
                     </svg>
@@ -855,19 +854,18 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" data-close>Fermer</button>
+                <button class="btn btn-secondary modal-close">Fermer</button>
                 <button class="btn btn-warning">Désactiver</button>
             </div>
         </div>
     </div>
 
     <!-- Modal Confirmation Suppression -->
-    <div class="modal" id="deleteConfirmModal">
-        <div class="modal-overlay"></div>
-        <div class="modal-content small">
+    <div class="modal-overlay" id="deleteConfirmModal">
+        <div class="modal">
             <div class="modal-header">
                 <h3>Confirmer la suppression</h3>
-                <button class="modal-close" data-close>
+                <button class="modal-close">
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M18 6L6 18M6 6l12 12"/>
                     </svg>
@@ -884,7 +882,7 @@
                 <p>Êtes-vous sûr de vouloir supprimer cet utilisateur ? Cette action est irréversible.</p>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" data-close>Annuler</button>
+                <button class="btn btn-secondary modal-close">Annuler</button>
                 <button class="btn btn-danger" id="confirmDeleteBtn">Supprimer</button>
             </div>
         </div>
