@@ -89,26 +89,26 @@
                         </div>
                         <div class="revenue-content">
                             <span class="revenue-label">Revenus du mois (FCFA)</span>
-                            <span class="revenue-value">8 750 000</span>
-                            <span class="revenue-trend positive">+12.3% vs mois dernier</span>
+                            <span class="revenue-value" id="rev-month">–</span>
+                            <span class="revenue-trend positive" id="rev-trend"></span>
                         </div>
                     </div>
                 </div>
                 <div class="revenue-stats">
                     <div class="revenue-stat">
-                        <span class="stat-value">578 500</span>
+                        <span class="stat-value" id="rev-today">–</span>
                         <span class="stat-label">Aujourd'hui</span>
                     </div>
                     <div class="revenue-stat">
-                        <span class="stat-value">2 145 000</span>
+                        <span class="stat-value" id="rev-week">–</span>
                         <span class="stat-label">Cette semaine</span>
                     </div>
                     <div class="revenue-stat">
-                        <span class="stat-value">1 247</span>
+                        <span class="stat-value" id="rev-count">–</span>
                         <span class="stat-label">Transactions</span>
                     </div>
                     <div class="revenue-stat warning">
-                        <span class="stat-value">12</span>
+                        <span class="stat-value" id="rev-pending">–</span>
                         <span class="stat-label">En attente</span>
                     </div>
                 </div>
@@ -236,218 +236,158 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="date-cell compact">
-                                        <span>27/03/2024</span>
-                                        <span class="time">14:32</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="user-cell compact">
-                                        <span class="user-name">Kouamé Jean-Baptiste</span>
-                                    </div>
-                                </td>
-                                <td><span class="amount">2 500</span></td>
-                                <td>
-                                    <span class="method-badge orange">
-                                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
-                                        Orange Money
-                                    </span>
-                                </td>
-                                <td><code>TXN-2024032700145</code></td>
-                                <td><span class="status status-success">Succès</span></td>
-                                <td class="actions-cell">
-                                    <button class="action-icon" title="Détails"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="date-cell compact">
-                                        <span>27/03/2024</span>
-                                        <span class="time">14:28</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="user-cell compact">
-                                        <span class="user-name">Adjoua Thérèse</span>
-                                    </div>
-                                </td>
-                                <td><span class="amount">1 800</span></td>
-                                <td>
-                                    <span class="method-badge yellow">
-                                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
-                                        MTN MoMo
-                                    </span>
-                                </td>
-                                <td><code>TXN-2024032700144</code></td>
-                                <td><span class="status status-success">Succès</span></td>
-                                <td class="actions-cell">
-                                    <button class="action-icon" title="Détails"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="date-cell compact">
-                                        <span>27/03/2024</span>
-                                        <span class="time">14:15</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="user-cell compact">
-                                        <span class="user-name">SODECI (Entreprise)</span>
-                                    </div>
-                                </td>
-                                <td><span class="amount highlight">1 250 000</span></td>
-                                <td>
-                                    <span class="method-badge orange">
-                                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
-                                        Orange Money
-                                    </span>
-                                </td>
-                                <td><code>TXN-2024032700143</code></td>
-                                <td><span class="status status-success">Succès</span></td>
-                                <td class="actions-cell">
-                                    <button class="action-icon" title="Détails"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></button>
-                                </td>
-                            </tr>
-                            <tr class="row-warning">
-                                <td>
-                                    <div class="date-cell compact">
-                                        <span>27/03/2024</span>
-                                        <span class="time">14:05</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="user-cell compact">
-                                        <span class="user-name">Traoré Mamadou</span>
-                                    </div>
-                                </td>
-                                <td><span class="amount">1 500</span></td>
-                                <td>
-                                    <span class="method-badge yellow">
-                                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
-                                        MTN MoMo
-                                    </span>
-                                </td>
-                                <td><code>TXN-2024032700142</code></td>
-                                <td><span class="status status-warning">En attente</span></td>
-                                <td class="actions-cell">
-                                    <button class="action-icon" title="Détails"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></button>
-                                    <button class="action-icon success" title="Valider"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="date-cell compact">
-                                        <span>27/03/2024</span>
-                                        <span class="time">13:52</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="user-cell compact">
-                                        <span class="user-name">Diallo Kadiatou</span>
-                                    </div>
-                                </td>
-                                <td><span class="amount">2 500</span></td>
-                                <td>
-                                    <span class="method-badge blue">
-                                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
-                                        Carte bancaire
-                                    </span>
-                                </td>
-                                <td><code>TXN-2024032700141</code></td>
-                                <td><span class="status status-success">Succès</span></td>
-                                <td class="actions-cell">
-                                    <button class="action-icon" title="Détails"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></button>
-                                </td>
-                            </tr>
-                            <tr class="row-error">
-                                <td>
-                                    <div class="date-cell compact">
-                                        <span>27/03/2024</span>
-                                        <span class="time">13:45</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="user-cell compact">
-                                        <span class="user-name">Koné Aminata</span>
-                                    </div>
-                                </td>
-                                <td><span class="amount">1 200</span></td>
-                                <td>
-                                    <span class="method-badge orange">
-                                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
-                                        Orange Money
-                                    </span>
-                                </td>
-                                <td><code>TXN-2024032700140</code></td>
-                                <td><span class="status status-error">Échec</span></td>
-                                <td class="actions-cell">
-                                    <button class="action-icon" title="Détails"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></button>
-                                    <button class="action-icon" title="Réessayer"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg></button>
-                                </td>
-                            </tr>
+                        <tbody id="txTableBody">
+                            <tr><td colspan="7" style="text-align:center;padding:3rem;color:var(--text-secondary);">
+                                <div style="margin:0 auto 1rem;width:32px;height:32px;border:3px solid var(--border-color);border-top-color:var(--accent-gold);border-radius:50%;animation:spin 0.8s linear infinite;"></div>
+                                Chargement des transactions...
+                            </td></tr>
                         </tbody>
                     </table>
                 </div>
 
-                <!-- Pagination -->
                 <div class="pagination">
-                    <span class="pagination-info">Affichage 1-6 sur 1 247 transactions</span>
-                    <div class="pagination-controls">
-                        <button class="pagination-btn" disabled><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15,18 9,12 15,6"/></svg></button>
-                        <button class="pagination-btn active">1</button>
-                        <button class="pagination-btn">2</button>
-                        <button class="pagination-btn">3</button>
-                        <span class="pagination-ellipsis">...</span>
-                        <button class="pagination-btn">208</button>
-                        <button class="pagination-btn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/></svg></button>
-                    </div>
+                    <span class="pagination-info" id="txPaginationInfo"></span>
                 </div>
             </section>
         </div>
     </main>
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/supabase-config.js"></script>
-    <script src="js/admin.js"></script>
-    <script src="js/charts.js"></script>
+    <script src="api-config.js"></script>
+    <script src="auth-api.js"></script>
+    <script src="admin.js"></script>
+    <script src="charts.js"></script>
+    <style>@keyframes spin { to { transform: rotate(360deg); } }</style>
     <script>
-        // Graphique revenus
-        NXCharts.create('area', 'revenueChart', {
-            labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Déc'],
-            datasets: [{
-                label: 'Revenus (millions FCFA)',
-                data: [5.2, 5.8, 6.1, 6.5, 7.2, 7.8, 8.1, 7.9, 8.3, 8.5, 8.7, 8.75],
-                color: '#C8A951'
-            }]
-        });
+        const API = window.NavetteAuth;
+        const fmt = n => new Intl.NumberFormat('fr-FR').format(n || 0);
+        const methodColors = { orange_money:'orange', mtn_momo:'yellow', wave:'blue', moov_money:'gray', card:'blue', cash:'gray' };
+        const methodLabels = { orange_money:'Orange Money', mtn_momo:'MTN MoMo', wave:'Wave', moov_money:'Moov Money', card:'Carte', cash:'Espèces' };
+        const statusCls = { success:'status-success', pending:'status-warning', failed:'status-error', refunded:'status-info' };
+        const statusLbl = { success:'Succès', pending:'En attente', failed:'Échec', refunded:'Remboursé' };
 
-        // Graphique méthodes
-        NXCharts.create('donut', 'methodsChart', {
-            labels: ['Orange Money', 'MTN MoMo', 'Carte bancaire', 'Espèces'],
-            data: [45, 32, 15, 8],
-            colors: ['#FF6B00', '#FFCC00', '#3498DB', '#7F8C8D']
-        });
+        async function loadPayments() {
+            const result = await API.apiFetch('/api/payments/history?limit=100');
+            if (!result || !result.success) {
+                document.getElementById('txTableBody').innerHTML = '<tr><td colspan="7" style="text-align:center;color:#e74c3c;padding:2rem;">Erreur de chargement des transactions</td></tr>';
+                return;
+            }
+            const txAll = result.data || [];
+            const now = new Date();
+            const today = now.toISOString().split('T')[0];
+            const monday = new Date(now); monday.setDate(now.getDate() - now.getDay() + 1);
+            const mondayStr = monday.toISOString().split('T')[0];
+            const firstOfMonth = today.substring(0, 7) + '-01';
 
-        // Actions
+            const todayTx = txAll.filter(t => t.created_at?.startsWith(today) && t.status === 'success');
+            const weekTx = txAll.filter(t => t.created_at >= mondayStr && t.status === 'success');
+            const monthTx = txAll.filter(t => t.created_at >= firstOfMonth && t.status === 'success');
+            const pendingTx = txAll.filter(t => t.status === 'pending');
+
+            document.getElementById('rev-today').textContent = fmt(todayTx.reduce((s,t) => s+(t.amount||0), 0));
+            document.getElementById('rev-week').textContent = fmt(weekTx.reduce((s,t) => s+(t.amount||0), 0));
+            document.getElementById('rev-month').textContent = fmt(monthTx.reduce((s,t) => s+(t.amount||0), 0));
+            document.getElementById('rev-count').textContent = fmt(txAll.length);
+            document.getElementById('rev-pending').textContent = fmt(pendingTx.length);
+            document.getElementById('rev-trend').textContent = txAll.length > 0 ? `${txAll.length} transaction(s)` : '';
+
+            // Method breakdown
+            const methodCount = {};
+            txAll.filter(t => t.status === 'success').forEach(t => {
+                const m = t.payment_method || 'other';
+                methodCount[m] = (methodCount[m] || 0) + (t.amount || 0);
+            });
+            const methodKeys = Object.keys(methodCount);
+            const methodVals = methodKeys.map(k => methodCount[k]);
+
+            // Monthly revenue chart
+            const monthlyRevenue = {};
+            txAll.filter(t => t.status === 'success').forEach(t => {
+                if (!t.created_at) return;
+                const m = t.created_at.substring(0, 7);
+                monthlyRevenue[m] = (monthlyRevenue[m] || 0) + (t.amount || 0);
+            });
+            const months = Object.keys(monthlyRevenue).sort().slice(-12);
+            if (typeof NXCharts !== 'undefined') {
+                NXCharts.create('area', 'revenueChart', {
+                    labels: months.map(m => { const d = new Date(m+'-01'); return d.toLocaleDateString('fr-FR',{month:'short',year:'2-digit'}); }),
+                    datasets: [{ label: 'Revenus (FCFA)', data: months.map(m => monthlyRevenue[m] || 0), color: '#C8A951' }]
+                });
+                NXCharts.create('donut', 'methodsChart', {
+                    labels: methodKeys.map(k => methodLabels[k] || k),
+                    data: methodVals,
+                    colors: ['#FF6B00', '#FFCC00', '#3498DB', '#7F8C8D', '#2EC4B6', '#E74C3C']
+                });
+            }
+
+            // Update method legend
+            const legendEl = document.querySelector('.payment-methods-legend');
+            if (legendEl && methodKeys.length > 0) {
+                const total = methodVals.reduce((s,v) => s+v, 0);
+                legendEl.innerHTML = methodKeys.map((k, i) => {
+                    const pct = total > 0 ? Math.round(methodVals[i] / total * 100) : 0;
+                    return `<div class="method-item"><span class="method-name">${methodLabels[k] || k}</span><span class="method-percent">${pct}%</span><span class="method-amount">${fmt(methodVals[i])} FCFA</span></div>`;
+                }).join('');
+            }
+
+            // Reconciliation stats
+            const reconcileStats = document.querySelectorAll('.reconcile-stat');
+            if (reconcileStats[0]) reconcileStats[0].querySelector('.reconcile-value').textContent = fmt(txAll.filter(t => t.status === 'success').length);
+            if (reconcileStats[1]) reconcileStats[1].querySelector('.reconcile-value').textContent = fmt(txAll.filter(t => t.status === 'pending').length);
+
+            // Table
+            const tbody = document.getElementById('txTableBody');
+            document.getElementById('txPaginationInfo').textContent = `${txAll.length} transaction(s) chargée(s)`;
+            if (!txAll.length) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--text-secondary);">Aucune transaction</td></tr>';
+                return;
+            }
+            tbody.innerHTML = txAll.map(t => {
+                const dt = t.created_at ? new Date(t.created_at) : null;
+                const dateStr = dt ? dt.toLocaleDateString('fr-FR') : '–';
+                const timeStr = dt ? dt.toLocaleTimeString('fr-FR', {hour:'2-digit',minute:'2-digit'}) : '';
+                const user = t.user_name || t.user?.full_name || '–';
+                const method = t.payment_method || '';
+                const cls = statusCls[t.status] || 'status-info';
+                const lbl = statusLbl[t.status] || t.status;
+                return `<tr>
+                    <td><div class="date-cell compact"><span>${dateStr}</span>${timeStr ? `<span class="time">${timeStr}</span>` : ''}</div></td>
+                    <td>${user}</td>
+                    <td>${fmt(t.amount)}</td>
+                    <td><span class="method-badge ${methodColors[method] || 'gray'}">${methodLabels[method] || method || '–'}</span></td>
+                    <td><code>${t.reference || (t.id || '').substring(0,16) || '–'}</code></td>
+                    <td><span class="status ${cls}">${lbl}</span></td>
+                    <td class="actions-cell"><button class="action-icon" title="Détails"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></button></td>
+                </tr>`;
+            }).join('');
+        }
+
+        loadPayments();
+
         document.getElementById('reconcileBtn').addEventListener('click', function() {
-            NXToast.info('Réconciliation', 'Synchronisation avec FineoPay en cours...');
-            setTimeout(() => {
-                NXToast.success('Réconciliation terminée', '12 transactions en attente de validation.');
-            }, 2000);
+            if (window.Toast) window.Toast.info('Réconciliation', 'Synchronisation en cours...');
         });
-
         document.getElementById('exportBtn').addEventListener('click', function() {
-            NXToast.success('Export comptable', 'Le fichier Excel sera téléchargé dans quelques instants.');
+            if (window.Toast) window.Toast.success('Export comptable', 'Téléchargement initié.');
+        });
+        document.getElementById('downloadReconcileBtn').addEventListener('click', function() {
+            if (window.Toast) window.Toast.success('Téléchargement', 'Fichier de rapprochement en cours de génération...');
         });
 
-        document.getElementById('downloadReconcileBtn').addEventListener('click', function() {
-            NXToast.success('Téléchargement', 'Fichier de rapprochement en cours de génération...');
-        });
+        const filterMethod = document.getElementById('filterMethod');
+        const filterTxStatus = document.getElementById('filterTxStatus');
+        function applyTxFilters() {
+            const method = filterMethod?.value || '';
+            const status = filterTxStatus?.value || '';
+            document.querySelectorAll('#txTableBody tr').forEach(row => {
+                const text = row.textContent.toLowerCase();
+                const mOk = !method || text.includes((methodLabels[method] || method).toLowerCase());
+                const sOk = !status || text.includes((statusLbl[status] || status).toLowerCase());
+                row.style.display = (mOk && sOk) ? '' : 'none';
+            });
+        }
+        if (filterMethod) filterMethod.addEventListener('change', applyTxFilters);
+        if (filterTxStatus) filterTxStatus.addEventListener('change', applyTxFilters);
     </script>
 </body>
 </html>
