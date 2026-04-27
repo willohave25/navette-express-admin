@@ -152,10 +152,22 @@
     }
   };
 
+  // ─── Bouton déconnexion ───────────────────────────────
+  function hookLogout() {
+    document.querySelectorAll('#logoutBtn, .nav-link.logout').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        clearSession();
+        window.location.href = 'index.html';
+      });
+    });
+  }
+
   // ─── Init ─────────────────────────────────────────────
   document.addEventListener('DOMContentLoaded', function () {
     checkSession();
     hookLoginForm();
+    hookLogout();
   });
 
 })();
